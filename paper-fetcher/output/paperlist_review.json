@@ -1,0 +1,210 @@
+[
+  {
+    "kind": "title",
+    "title": "Starlink Constellation: Deployment, Configuration, and Dynamics",
+    "top_score": 0.333,
+    "candidates": [
+      {
+        "doi": "10.36227/techrxiv.174431804.42339700/v1",
+        "title": "Starlink: Satellite Constellation",
+        "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+        "score": 31.81982
+      },
+      {
+        "doi": "10.1007/s42064-025-0293-1",
+        "title": "Analysis of deployment and operational strategies for Starlink Stage I LEO constellation based on TLE",
+        "publisher": "Springer Science and Business Media LLC",
+        "score": 27.75807
+      },
+      {
+        "doi": "10.33012/2024.19940",
+        "title": "Analogue Beamforming Antenna for Tracking Starlink Constellation",
+        "publisher": "Institute of Navigation",
+        "score": 27.38673
+      }
+    ],
+    "_manual": "no good CrossRef match; likely a recent paper not yet indexed"
+  },
+  {
+    "kind": "title",
+    "title": "Measuring Weather Effects and Link Quality Dynamics in LEO Satellite Networks",
+    "top_score": 0.417,
+    "candidates": [
+      {
+        "doi": "10.23919/ifipnetworking62109.2024.10619789",
+        "title": "Weather-Based Link Prediction for LEO-Satellite Networks using the WetLinks Dataset",
+        "publisher": "IEEE",
+        "score": 35.634975
+      },
+      {
+        "doi": "10.1109/access.2019.2930626",
+        "title": "Satellite-Ground Link Planning for LEO Satellite Navigation Augmentation Networks",
+        "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+        "score": 32.771393
+      },
+      {
+        "doi": "10.1109/ictc66702.2025.11388042",
+        "title": "Feeder Link Constraints-Aware Inter-Satellite Routing for LEO Satellite Networks",
+        "publisher": "IEEE",
+        "score": 31.780708
+      }
+    ],
+    "_manual": "no good match; possibly IMC 2024 'WetLinks' paper — user to verify"
+  },
+  {
+    "kind": "title",
+    "title": "CrowdLink: Unlocking Idle LEO Network Capacity with User Terminals",
+    "top_score": 0.417,
+    "candidates": [
+      {
+        "doi": "10.1109/acssc.2000.911008",
+        "title": "Capacity study of a LEO satellite link with multiple antennas user terminals",
+        "publisher": "IEEE",
+        "score": 31.273987
+      },
+      {
+        "doi": "10.23919/jcc.2022.02.019",
+        "title": "Reliability evaluation of all-user terminals in LEO satellite communication network based on modular reduction",
+        "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+        "score": 27.259296
+      },
+      {
+        "doi": "10.33012/2024.19780",
+        "title": "New Generation of PNT User Terminals Exploiting Hybridization with LEO Constellations",
+        "publisher": "Institute of Navigation",
+        "score": 25.911541
+      }
+    ],
+    "_manual": "no good match; appears to be a recent paper not yet indexed"
+  },
+  {
+    "kind": "title",
+    "title": "LEO Topology Design Under Real-World Deployment Constraints",
+    "top_score": 0.5,
+    "candidates": [
+      {
+        "doi": "10.1016/b978-0-12-407684-6.00009-7",
+        "title": "Real-World Design Constraints",
+        "publisher": "Elsevier",
+        "score": 31.129557
+      },
+      {
+        "doi": "10.1109/vtcfall.2015.7390840",
+        "title": "An Integrated Framework for Topology Design of CAN Networks under Real-Time Constraints",
+        "publisher": "IEEE",
+        "score": 28.202736
+      },
+      {
+        "doi": "10.1007/s00158-018-2045-9",
+        "title": "Topology optimization for microstructural design under stress constraints",
+        "publisher": "Springer Science and Business Media LLC",
+        "score": 27.493402
+      }
+    ],
+    "_manual": "no good match; recent paper"
+  },
+  {
+    "kind": "title",
+    "title": "Routing and Dimensioning in Satellite Networks with Dynamic Topology",
+    "top_score": 0.556,
+    "candidates": [
+      {
+        "doi": "10.1109/wocc.2010.5510627",
+        "title": "Robust dimensioning and routing for dynamic WDM networks",
+        "publisher": "IEEE",
+        "score": 33.53858
+      },
+      {
+        "doi": "10.1109/tnet.2024.3397613",
+        "title": "Dynamic Discrete Topology Design and Routing for Satellite-Terrestrial Integrated Networks",
+        "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+        "score": 33.285328
+      },
+      {
+        "doi": "10.1109/glocom.2002.1189161",
+        "title": "Capacity dimensioning and routing for hybrid satellite and terrestrial networks",
+        "publisher": "IEEE",
+        "score": 32.611248
+      }
+    ],
+    "_manual": "candidates are about WDM / hybrid networks, not the satellite paper user meant"
+  },
+  {
+    "kind": "title",
+    "title": "Optimal Oblivious Load-Balancing for Sparse Traffic in Large-Scale Satellite Networks",
+    "top_score": 0.583,
+    "candidates": [
+      {
+        "doi": "10.1109/icccn.1998.998776",
+        "title": "Traffic load balancing in low Earth orbit satellite networks",
+        "publisher": "IEEE Comput. Soc",
+        "score": 36.734436
+      },
+      {
+        "doi": "10.1109/iccc68654.2025.11437869",
+        "title": "DCLB: A Distributed Cooperative Load-Balancing Mechanism for Large-Scale Satellite Networks",
+        "publisher": "IEEE",
+        "score": 36.72851
+      },
+      {
+        "doi": "10.1016/j.comnet.2024.110236",
+        "title": "Latency guaranteed joint optimal traffic intelligent scheduling in large-scale satellite networks",
+        "publisher": "Elsevier BV",
+        "score": 35.357407
+      }
+    ],
+    "_manual": "no candidate matches the title"
+  },
+  {
+    "kind": "title",
+    "title": "Unlocking the Performance Potential of Mega-Constellation Networks: An Exploration of Structure-Building Paradigms",
+    "top_score": 0.308,
+    "candidates": [
+      {
+        "doi": "10.1109/ictc58733.2023.10392358",
+        "title": "On Architecting LEO Mega-Constellation Networks",
+        "publisher": "IEEE",
+        "score": 30.65672
+      },
+      {
+        "doi": "10.1109/icc51166.2024.10622264",
+        "title": "Systematic Performance Evaluation Framework for LEO Mega-Constellation Satellite Networks",
+        "publisher": "IEEE",
+        "score": 30.537392
+      },
+      {
+        "doi": "10.1109/jiot.2025.3550920",
+        "title": "Topology Dynamic of Mega-Constellation Networks",
+        "publisher": "Institute of Electrical and Electronics Engineers (IEEE)",
+        "score": 30.43578
+      }
+    ],
+    "_manual": "no candidate matches; recent paper"
+  },
+  {
+    "kind": "title",
+    "title": "A Technical Evaluation of Integrating Optical Inter-Satellite Links into Proliferated Polar LEO Constellations",
+    "top_score": 0.5,
+    "candidates": [
+      {
+        "doi": "10.1016/j.optcom.2009.05.058",
+        "title": "Doppler characterization of laser inter-satellite links for optical LEO satellite constellations",
+        "publisher": "Elsevier BV",
+        "score": 49.118774
+      },
+      {
+        "doi": "10.1145/3614454.3622999",
+        "title": "Energy-Efficient Connectivity Planning of Inter-Satellite Links for LEO Satellite Constellations",
+        "publisher": "ACM",
+        "score": 43.644978
+      },
+      {
+        "doi": "10.1002/(sici)1099-1247(199901/02)17:1<51::aid-sat638>3.0.co;2-c",
+        "title": "Performance evaluation of LEO satellite constellations with inter-satellite links under self-similar and Poisson traffic",
+        "publisher": "Wiley",
+        "score": 42.82319
+      }
+    ],
+    "_manual": "no candidate matches the title"
+  }
+]

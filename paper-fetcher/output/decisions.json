@@ -1,0 +1,112 @@
+{
+  "accepts": [
+    {
+      "match": "CMAP: Certificate-less",
+      "tag": "ieee",
+      "title": "CMAP: Certificateless MQTT-Based Authentication Protocol for Medical IoT",
+      "doi": "10.1109/access.2026.3684371"
+    },
+    {
+      "match": "A Networking Perspective on Starlink",
+      "tag": "acm",
+      "title": "A Networking Perspective on Starlink's Self-Driving LEO Mega-Constellation",
+      "doi": "10.1145/3570361.3592519"
+    },
+    {
+      "match": "Hybrid 10/100 Gbps laser inter-satellite linkplanning",
+      "tag": "optica",
+      "title": "Hybrid 10/100 Gbps laser inter-satellite link planning in optical satellite networks",
+      "doi": "10.1364/jocn.583119"
+    },
+    {
+      "match": "A Review on All-Optical Switching inIntersatellite Laser Communication",
+      "tag": "science-partner",
+      "title": "A Review on All-Optical Switching in Intersatellite Laser Communication",
+      "doi": "10.34133/adi.0097"
+    },
+    {
+      "match": "Analysis of Inter-Satellite Link Paths for LEOMega-Constellation",
+      "tag": "ieee",
+      "title": "Analysis of Inter-Satellite Link Paths for LEO Mega-Constellation Networks",
+      "doi": "10.1109/tvt.2021.3058126"
+    },
+    {
+      "match": "High Fidelity and Efficiency Simulator for 6G",
+      "tag": "elsevier",
+      "title": "A High-Fidelity and High-Efficiency Simulator for 6G-Integrated Space-Ground Networks",
+      "doi": "10.1016/j.eng.2025.08.042"
+    },
+    {
+      "match": "Analysis of Laser Intersatellite Links and TopologyDesign",
+      "tag": "ieee",
+      "title": "Analysis of Laser Intersatellite Links and Topology Design for Mega-Constellation Networks",
+      "doi": "10.1109/jiot.2024.3452787"
+    },
+    {
+      "match": "Interruption Tolerance Strategy for LEOConstellation",
+      "tag": "ieee",
+      "title": "Interruption Tolerance Strategy for LEO Constellation With Optical Inter-Satellite Link",
+      "doi": "10.1109/tnsm.2023.3274638"
+    },
+    {
+      "match": "On the Impact of Intrinsic DelayVariation Sources on Iridium",
+      "tag": "springer",
+      "title": "On the Impact of Intrinsic Delay Variation Sources on Iridium LEO Constellation",
+      "doi": "10.1007/978-3-030-69069-4_18"
+    },
+    {
+      "match": "Deep reinforcement learning with evolutionary algorithm-guided imitationfor capacitated",
+      "tag": "elsevier",
+      "title": "Deep reinforcement learning with evolutionary algorithm-guided imitation for capacitated vehicle routing problems",
+      "doi": "10.1016/j.asoc.2025.113705"
+    }
+  ],
+  "noise": [
+    { "match": "en.wikipedia.org/wiki/Guowang" },
+    { "match": "MDAxNTExMjA3NzAwMDU4" },
+    { "match": "MDAxNTExMjA3NzAwMDA3" },
+    { "match": "MDAxNTExMjA3NzAwMDI3" },
+    { "match": "bilibili.com/video/BV1PasQegEiY" },
+    { "match": "github.com/SpaceLearner/Awesome-DynamicGraphLearning" },
+    { "match": "notion.so/12e6be5f47f080679464f8adce16d6c4" },
+    { "match": "notion.so/3276be5f47f08046bc71c98da1461030" },
+    { "match": "L Liu, J Zhang, B You, Y Chen" },
+    { "match": "L Liu, J Lan, B You, Y Li" },
+    { "match": "W Liu, J Lan, Y Li, B Sun" },
+    { "match": "DeploymentConstraints" }
+  ],
+  "manual": [
+    {
+      "match": "Starlink Constellation: Deployment, Configuration",
+      "reason": "no good CrossRef match; likely a recent paper not yet indexed"
+    },
+    {
+      "match": "Measuring Weather Effects and Link Quality Dynamics",
+      "reason": "no good match; possibly IMC 2024 'WetLinks' paper — user to verify"
+    },
+    {
+      "match": "CrowdLink: Unlocking Idle LEO Network Capacity",
+      "reason": "no good match; appears to be a recent paper not yet indexed"
+    },
+    {
+      "match": "LEO Topology Design Under Real-World Deployment Constraints",
+      "reason": "no good match; recent paper"
+    },
+    {
+      "match": "Routing and Dimensioning in Satellite Networks with Dynamic Topology",
+      "reason": "candidates are about WDM / hybrid networks, not the satellite paper user meant"
+    },
+    {
+      "match": "Optimal Oblivious Load-Balancing for Sparse Traffic",
+      "reason": "no candidate matches the title"
+    },
+    {
+      "match": "Unlocking the Performance Potential of Mega-Constellation Networks: An Exploration of Structure-Building Paradigms",
+      "reason": "no candidate matches; recent paper"
+    },
+    {
+      "match": "A Technical Evaluation of Integrating Optical Inter-Satellite Links into Proliferated Polar LEO Constellations",
+      "reason": "no candidate matches the title"
+    }
+  ]
+}

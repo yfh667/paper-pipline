@@ -1,0 +1,16 @@
+{
+  "mineru_exe": "C:\\ProgramData\\miniconda3\\envs\\mineru\\Scripts\\mineru.exe",
+  "zotero_storage": "C:\\Users\\Administrator\\Zotero\\storage",
+  "mirror_dir": "C:\\Users\\Administrator\\Zotero\\mineru-mirror",
+  "state_file": "C:\\Users\\Administrator\\zotero-mineru\\state.json",
+  "log_dir": "C:\\Users\\Administrator\\zotero-mineru\\logs",
+  "mineru_extra_args": [],
+  "max_retries": 3,
+  "stable_seconds": 10,
+  "convert_timeout_seconds": 1800,
+  "max_pages": 200,
+  "split_chunk_pages": 200,
+  "skip_trashed": true,
+  "zotero_api_base": "http://localhost:23119",
+  "zotero_library_id": 12146168
+}

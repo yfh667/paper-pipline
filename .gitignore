@@ -1,0 +1,42 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+
+# --- paper-fetcher runtime ---
+paper-fetcher/input/*
+!paper-fetcher/input/.gitkeep
+paper-fetcher/output/ieee/
+paper-fetcher/output/acm/
+paper-fetcher/output/sd/
+paper-fetcher/output/manual/
+paper-fetcher/output/logs/
+paper-fetcher/output/_acm_dl_tmp/
+paper-fetcher/output/*.log
+# Keep curated examples committed (small + useful as reference):
+#   output/paperlist_clean.txt
+#   output/paperlist_review.json
+#   output/decisions.json
+
+# --- zotero-mineru runtime ---
+zotero-mineru/logs/
+zotero-mineru/state.json
+zotero-mineru/state.json.tmp
+
+# --- scratch / probes ---
+_smoke_pdfs/
+_probe_*
+_zotero_probe*
+*.tmp
+
+# --- editor / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
