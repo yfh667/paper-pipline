@@ -28,9 +28,11 @@ sys.path.insert(0, str(Path(__file__).parent))
 from zotero_query import load_index  # noqa: E402
 from export_md import copy_flat, copy_perdoc  # noqa: E402
 
-DEFAULT_INDEX = Path(r"C:\Users\Administrator\Zotero\mineru-mirror\index.json")
-STATE_FILE = Path(r"C:\Users\Administrator\zotero-mineru\state.json")
-MIRROR_ROOT = Path(r"C:\Users\Administrator\Zotero\mineru-mirror")
+CONFIG_FILE = Path(__file__).with_name("config.json")
+CONFIG = json.loads(CONFIG_FILE.read_text(encoding="utf-8")) if CONFIG_FILE.exists() else {}
+MIRROR_ROOT = Path(CONFIG.get("mirror_dir", r"C:\Users\Administrator\Zotero\mineru-mirror"))
+DEFAULT_INDEX = Path(CONFIG.get("index_file", str(MIRROR_ROOT / "index.json")))
+STATE_FILE = Path(CONFIG.get("state_file", str(Path(__file__).with_name("state.json"))))
 
 
 def _load_state() -> dict:

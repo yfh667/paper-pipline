@@ -8,6 +8,7 @@ import json
 import logging
 import os
 import re
+import signal
 import shutil
 import subprocess
 import sys
@@ -19,7 +20,7 @@ import warnings
 from datetime import datetime
 from pathlib import Path
 
-from pypdf import PdfReader
+from pypdf import PdfReader, PdfWriter
 
 logging.getLogger("pypdf").setLevel(logging.ERROR)
 logging.getLogger("pypdf._reader").setLevel(logging.ERROR)
@@ -97,6 +98,274 @@ def save_state(state_file: Path, state: dict) -> None:
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(state, f, indent=2, ensure_ascii=False)
     os.replace(tmp, state_file)
+
+
+_ZOTERO_KEY_RE = re.compile(r"^[A-Z0-9]{8}$", re.IGNORECASE)
+
+
+def index_file_from_config(config: dict) -> Path:
+    """Return the configured index path, defaulting to mirror_dir/index.json."""
+    if config.get("index_file"):
+        return Path(config["index_file"])
+    return Path(config["mirror_dir"]) / "index.json"
+
+
+def _safe_remove_tree(root: Path, target: Path, logger: logging.Logger) -> bool:
+    """Remove target only if it resolves inside root."""
+    root_resolved = root.resolve(strict=False)
+    target_resolved = target.resolve(strict=False)
+    try:
+        target_resolved.relative_to(root_resolved)
+    except ValueError:
+        logger.warning("refusing to remove path outside mirror_dir: %s", target_resolved)
+        return False
+    if target_resolved == root_resolved:
+        logger.warning("refusing to remove mirror_dir itself: %s", target_resolved)
+        return False
+    if not target_resolved.exists():
+        return False
+    shutil.rmtree(target_resolved)
+    logger.info("removed mirror output: %s", target_resolved)
+    return True
+
+
+def remove_outputs_for_key(
+    key: str,
+    config: dict,
+    state: dict | None,
+    logger: logging.Logger,
+) -> bool:
+    """Remove state entry and converted mirror output for one Zotero attachment key."""
+    changed = False
+    if state is not None and key in state:
+        state.pop(key, None)
+        logger.info("[%s] removed from state.json", key)
+        changed = True
+
+    if config.get("remove_mirror_on_delete", True):
+        mirror_dir = Path(config["mirror_dir"])
+        changed = _safe_remove_tree(mirror_dir, mirror_dir / key, logger) or changed
+    return changed
+
+
+def scan_storage_by_key(storage_dir: Path) -> dict[str, list[Path]]:
+    """Return current Zotero storage PDFs grouped by attachment key."""
+    out: dict[str, list[Path]] = {}
+    for key, pdf in scan_storage(storage_dir):
+        out.setdefault(key, []).append(pdf)
+    return out
+
+
+def cleanup_deleted_outputs(
+    config: dict,
+    state: dict,
+    logger: logging.Logger,
+    state_file: Path | None = None,
+    keys: set[str] | list[str] | tuple[str, ...] | None = None,
+    check_zotero: bool | None = None,
+    clean_orphan_mirror: bool = True,
+) -> list[str]:
+    """Delete state/mirror outputs for PDFs no longer live in Zotero.
+
+    This is intentionally conservative: Zotero API transport errors do not
+    delete anything. Physical absence from Zotero/storage does.
+    """
+    if not config.get("cleanup_deleted", True):
+        return []
+
+    storage = Path(config["zotero_storage"])
+    live_by_key = scan_storage_by_key(storage) if storage.exists() else {}
+    target_keys = {k for k in (keys or state.keys()) if k}
+
+    if keys is None and clean_orphan_mirror:
+        mirror_dir = Path(config["mirror_dir"])
+        if mirror_dir.exists():
+            for sub in mirror_dir.iterdir():
+                if sub.is_dir() and _ZOTERO_KEY_RE.match(sub.name):
+                    target_keys.add(sub.name)
+
+    do_zotero_check = config.get("cleanup_check_zotero", True) if check_zotero is None else check_zotero
+    removed: list[str] = []
+    state_changed = False
+    api_transport_errors = 0
+
+    for key in sorted(target_keys):
+        reason: str | None = None
+        live_pdfs = live_by_key.get(key, [])
+        if not live_pdfs:
+            reason = "no PDF remains in Zotero storage"
+        elif do_zotero_check and config.get("skip_trashed", True):
+            if api_transport_errors < 3:
+                trashed, detail = zotero_trashed_status(key, config)
+                if trashed is True:
+                    reason = "item is in Zotero trash"
+                elif detail == "item not in Zotero DB":
+                    reason = detail
+                elif trashed is None and detail.startswith("transport"):
+                    api_transport_errors += 1
+                    if api_transport_errors == 3:
+                        logger.warning("stopping Zotero cleanup checks after 3 API transport errors")
+
+        if not reason:
+            continue
+
+        had_state = key in state
+        if remove_outputs_for_key(key, config, state, logger):
+            logger.info("[%s] cleaned deleted output (%s)", key, reason)
+            removed.append(key)
+        if had_state:
+            state_changed = True
+
+    if state_changed and state_file is not None:
+        save_state(state_file, state)
+    return removed
+
+
+def rebuild_index(config: dict, logger: logging.Logger) -> bool:
+    """Rebuild index.json using the current Python executable."""
+    if not config.get("rebuild_index_on_change", True):
+        return False
+
+    script = Path(__file__).with_name("build_index.py")
+    state_file = Path(config["state_file"])
+    index_file = index_file_from_config(config)
+    cmd = [
+        sys.executable,
+        str(script),
+        "--state", str(state_file),
+        "--out", str(index_file),
+        "--api-base", str(config.get("zotero_api_base", "http://localhost:23119")),
+        "--library-id", str(config.get("zotero_library_id", "")),
+    ]
+    logger.info("rebuilding index: %s", index_file)
+    try:
+        proc = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=config.get("index_rebuild_timeout_seconds", 900),
+        )
+    except subprocess.TimeoutExpired:
+        logger.error("index rebuild timed out: %s", index_file)
+        return False
+
+    output = (proc.stdout or "") + ("\n" + proc.stderr if proc.stderr else "")
+    tail = output.strip()[-4000:]
+    if proc.returncode != 0:
+        logger.error("index rebuild failed with exit %d:\n%s", proc.returncode, tail)
+        return False
+    if tail:
+        logger.info("index rebuild output:\n%s", tail)
+    logger.info("index rebuilt: %s", index_file)
+    return True
+
+
+# ---------------------------------------------------------------------------
+# mineru-api lifecycle management
+# ---------------------------------------------------------------------------
+
+def _api_base_url(config: dict) -> str:
+    host = config.get("api_host", "127.0.0.1")
+    port = config.get("api_port", 8000)
+    return f"http://{host}:{port}"
+
+
+def _api_healthy(config: dict) -> bool:
+    url = _api_base_url(config) + "/health"
+    try:
+        with urllib.request.urlopen(url, timeout=3) as r:
+            return r.status == 200
+    except Exception:
+        return False
+
+
+def start_mineru_api(config: dict, logger: logging.Logger) -> subprocess.Popen | None:
+    if not config.get("use_api", False):
+        return None
+
+    if _api_healthy(config):
+        logger.info("[api] existing mineru-api is healthy: %s", _api_base_url(config))
+        return None
+
+    api_exe = Path(config.get("mineru_api_exe", ""))
+    if not api_exe.exists():
+        logger.warning("[api] mineru-api exe not found: %s; falling back to legacy mode", api_exe)
+        config["use_api"] = False
+        return None
+
+    host = config.get("api_host", "127.0.0.1")
+    port = str(config.get("api_port", 8000))
+
+    env = os.environ.copy()
+    env["MINERU_API_MAX_CONCURRENT_REQUESTS"] = str(config.get("api_concurrency", 4))
+    env["MINERU_PDF_RENDER_THREADS"] = str(config.get("api_render_threads", 16))
+    env["MINERU_PROCESSING_WINDOW_SIZE"] = str(config.get("api_processing_window_size", 32))
+
+    cmd = [str(api_exe), "--host", host, "--port", port]
+    if config.get("api_preload", True):
+        cmd += ["--enable-vlm-preload", "true"]
+
+    log_dir = Path(config.get("log_dir", "."))
+    log_dir.mkdir(parents=True, exist_ok=True)
+    api_log = log_dir / "mineru-api.log"
+
+    logger.info("[api] starting: %s", " ".join(cmd))
+    log_file = api_log.open("a", encoding="utf-8", buffering=1)
+    creationflags = 0
+    if os.name == "nt":
+        creationflags = subprocess.CREATE_NEW_PROCESS_GROUP
+
+    proc = subprocess.Popen(
+        cmd,
+        env=env,
+        stdout=log_file,
+        stderr=subprocess.STDOUT,
+        stdin=subprocess.DEVNULL,
+        shell=False,
+        creationflags=creationflags,
+    )
+
+    deadline = time.time() + config.get("api_start_timeout_seconds", 300)
+    while time.time() < deadline:
+        if _api_healthy(config):
+            logger.info("[api] ready: %s (pid=%d)", _api_base_url(config), proc.pid)
+            return proc
+        if proc.poll() is not None:
+            logger.error("[api] mineru-api exited during startup (rc=%d)", proc.returncode)
+            config["use_api"] = False
+            return None
+        time.sleep(2)
+
+    logger.error("[api] mineru-api did not become healthy in time; falling back to legacy")
+    stop_mineru_api(proc, logger)
+    config["use_api"] = False
+    return None
+
+
+def stop_mineru_api(proc: subprocess.Popen | None, logger: logging.Logger) -> None:
+    if proc is None:
+        return
+    if proc.poll() is not None:
+        return
+    logger.info("[api] stopping mineru-api (pid=%d)", proc.pid)
+    try:
+        if os.name == "nt":
+            proc.send_signal(signal.CTRL_BREAK_EVENT)
+            try:
+                proc.wait(timeout=10)
+                return
+            except subprocess.TimeoutExpired:
+                proc.terminate()
+        else:
+            proc.terminate()
+        proc.wait(timeout=20)
+    except Exception:
+        try:
+            proc.kill()
+        except Exception:
+            pass
 
 
 def scan_storage(storage_dir: Path) -> list[tuple[str, Path]]:
@@ -180,6 +449,8 @@ def convert_one(
             "-o", str(tmp_out),
             *config.get("mineru_extra_args", []),
         ]
+        if config.get("use_api") and _api_healthy(config):
+            cmd.extend(["--api-url", _api_base_url(config)])
         logger.info("[%s] running: %s", key, " ".join(cmd))
         try:
             proc = subprocess.run(
@@ -297,6 +568,27 @@ def _merge_parts(part_md_files: list[Path], target_dir: Path, name: str, logger)
     return merged_md if merged_md.exists() else None
 
 
+def _split_pdf_physically(pdf_path: Path, chunk_pages: int, out_dir: Path,
+                          logger: logging.Logger) -> list[Path]:
+    """Split a PDF into chunk_pages-sized files. Returns list of chunk paths."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    with contextlib.redirect_stderr(io.StringIO()):
+        reader = PdfReader(str(pdf_path), strict=False)
+    total = len(reader.pages)
+    chunks: list[Path] = []
+    for idx, start in enumerate(range(0, total, chunk_pages), 1):
+        end = min(start + chunk_pages, total)
+        chunk_path = out_dir / f"chunk_{idx:03d}_p{start+1:04d}-{end:04d}.pdf"
+        writer = PdfWriter()
+        for i in range(start, end):
+            writer.add_page(reader.pages[i])
+        with chunk_path.open("wb") as f:
+            writer.write(f)
+        logger.info("  split chunk %d: pages %d-%d (%d pages)", idx, start + 1, end, end - start)
+        chunks.append(chunk_path)
+    return chunks
+
+
 def convert_large_pdf(
     key: str,
     pdf_path: Path,
@@ -304,8 +596,8 @@ def convert_large_pdf(
     page_count: int,
     logger: logging.Logger,
 ) -> tuple[bool, str, Path | None]:
-    """Run mineru in page-range chunks, then merge the parts into one MD folder.
-    Returns (ok, message, md_path)."""
+    """Split PDF into small chunks, run mineru on each (via API if available),
+    then merge the parts into one MD folder. Returns (ok, message, md_path)."""
     mineru = Path(config["mineru_exe"])
     if not mineru.exists():
         return False, f"mineru exe missing: {mineru}", None
@@ -313,30 +605,33 @@ def convert_large_pdf(
     mirror_dir = Path(config["mirror_dir"])
     target_dir = mirror_dir / key
 
-    split_pages = int(config.get("split_chunk_pages", 200))
-    ranges = page_ranges(page_count, split_pages)
-    logger.info("[%s] LARGE (%d pages): splitting into %d part(s) of <= %d pages",
-                key, page_count, len(ranges), split_pages)
+    split_pages = int(config.get("split_chunk_pages", 40))
+    logger.info("[%s] LARGE (%d pages): physically splitting into %d-page chunks",
+                key, page_count, split_pages)
+
+    use_api = config.get("use_api") and _api_healthy(config)
+    api_url_args = ["--api-url", _api_base_url(config)] if use_api else []
 
     with tempfile.TemporaryDirectory(prefix=f"mineru_large_{key}_") as tmpd:
         tmp_root = Path(tmpd)
-        # Same short-name trick to avoid Windows MAX_PATH problems.
-        short_pdf = tmp_root / f"{key}.pdf"
-        shutil.copy2(pdf_path, short_pdf)
+        chunks_dir = tmp_root / "chunks"
+        chunk_files = _split_pdf_physically(pdf_path, split_pages, chunks_dir, logger)
+        logger.info("[%s] split into %d chunk(s)", key, len(chunk_files))
 
         part_md_files: list[Path] = []
-        for i, (start, end) in enumerate(ranges, start=1):
+        for i, chunk_pdf in enumerate(chunk_files, start=1):
             part_dir = tmp_root / f"part_{i:03d}"
             part_dir.mkdir(parents=True, exist_ok=True)
+            short_pdf = part_dir / f"{key}.pdf"
+            shutil.copy2(chunk_pdf, short_pdf)
             cmd = [
                 str(mineru),
                 "-p", str(short_pdf),
                 "-o", str(part_dir),
-                "--start", str(start),
-                "--end", str(end),
+                *api_url_args,
                 *config.get("mineru_extra_args", []),
             ]
-            logger.info("[%s] part %d/%d pages %d-%d", key, i, len(ranges), start, end)
+            logger.info("[%s] part %d/%d (%s)", key, i, len(chunk_files), chunk_pdf.name)
             try:
                 proc = subprocess.run(
                     cmd,
@@ -347,7 +642,7 @@ def convert_large_pdf(
                     timeout=config.get("convert_timeout_seconds", 1800),
                 )
             except subprocess.TimeoutExpired:
-                return False, f"part {i} timeout (pages {start}-{end})", None
+                return False, f"part {i} timeout ({chunk_pdf.name})", None
             if proc.returncode != 0:
                 tail = (proc.stderr or proc.stdout or "")[-2000:]
                 return False, f"part {i} mineru exit {proc.returncode}: {tail}", None
@@ -359,7 +654,7 @@ def convert_large_pdf(
         merged = _merge_parts(part_md_files, target_dir, key, logger)
         if not merged:
             return False, "merge produced no md", None
-        return True, f"ok-split-{len(ranges)}parts", merged
+        return True, f"ok-split-{len(chunk_files)}parts", merged
 
 
 def process_pdf(
@@ -385,17 +680,10 @@ def process_pdf(
         fp = pdf_fingerprint(pdf_path)
     except FileNotFoundError:
         # Zotero may relocate/rename a PDF mid-import; the file we scanned
-        # at the top of the run no longer exists. Skip without crashing.
+        # at the top of the run no longer exists. Remove stale outputs.
         logger.warning("[%s] PDF vanished between scan and process: %s", key, pdf_path)
-        state[key] = {
-            "pdf_path": str(pdf_path),
-            "status": "vanished",
-            "md_path": None,
-            "attempts": 0,
-            "last_error": "file not found at process time",
-            "last_run": datetime.now().isoformat(timespec="seconds"),
-        }
-        save_state(state_file, state)
+        if remove_outputs_for_key(key, config, state, logger):
+            save_state(state_file, state)
         return False
 
     # Trash gate: skip items currently in Zotero's Trash. Transport errors do
@@ -403,18 +691,9 @@ def process_pdf(
     if config.get("skip_trashed", True):
         trashed, detail = zotero_trashed_status(key, config)
         if trashed is True:
-            logger.info("[%s] SKIP (in Zotero Trash): %s", key, pdf_path.name)
-            state[key] = {
-                "pdf_path": str(pdf_path),
-                "pdf_mtime": fp["mtime"],
-                "pdf_size": fp["size"],
-                "status": "skipped_trashed",
-                "md_path": None,
-                "attempts": 0,
-                "last_error": None,
-                "last_run": datetime.now().isoformat(timespec="seconds"),
-            }
-            save_state(state_file, state)
+            logger.info("[%s] CLEANUP (in Zotero Trash): %s", key, pdf_path.name)
+            if remove_outputs_for_key(key, config, state, logger):
+                save_state(state_file, state)
             return False
         if trashed is None and detail != "ok":
             logger.warning("[%s] trash check failed (%s); proceeding anyway", key, detail)

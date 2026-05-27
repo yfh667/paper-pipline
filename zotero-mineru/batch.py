@@ -13,14 +13,18 @@ import sys
 from pathlib import Path
 
 from common import (
+    cleanup_deleted_outputs,
     get_pdf_page_count,
     load_config,
     load_state,
     needs_conversion,
     process_pdf,
+    rebuild_index,
     save_state,
     scan_storage,
     setup_logging,
+    start_mineru_api,
+    stop_mineru_api,
 )
 
 
@@ -122,6 +126,10 @@ def main() -> int:
         logger.info("LARGE-PDF processing: DISABLED (PDFs > %d pages will be marked skipped_too_large)",
                     int(config.get("max_pages", 0)))
 
+    cleanup_removed: list[str] = []
+    if not args.dry_run:
+        cleanup_removed = cleanup_deleted_outputs(config, state, logger, state_file, check_zotero=True)
+
     pdfs = scan_storage(storage)
     if args.key:
         pdfs = [(k, p) for k, p in pdfs if k == args.key]
@@ -141,20 +149,30 @@ def main() -> int:
             logger.info("[dry-run] %s -> %s%s", k, p.name, tag)
         return 0
 
+    # Start mineru-api if configured (model loads once, reused for all PDFs).
+    api_proc = start_mineru_api(config, logger)
+
     converted = 0
     errored = 0
-    for k, p in pending:
-        if args.limit and converted >= args.limit:
-            logger.info("hit --limit %d, stopping", args.limit)
-            break
-        try:
-            if process_pdf(k, p, config, state, logger, state_file):
-                converted += 1
-        except Exception:
-            errored += 1
-            logger.exception("[%s] unhandled error; continuing with next PDF", k)
+    attempted = 0
+    try:
+        for k, p in pending:
+            if args.limit and converted >= args.limit:
+                logger.info("hit --limit %d, stopping", args.limit)
+                break
+            try:
+                attempted += 1
+                if process_pdf(k, p, config, state, logger, state_file):
+                    converted += 1
+            except Exception:
+                errored += 1
+                logger.exception("[%s] unhandled error; continuing with next PDF", k)
+    finally:
+        stop_mineru_api(api_proc, logger)
 
     logger.info("done: %d converted, %d errored", converted, errored)
+    if cleanup_removed or attempted or config.get("rebuild_index_after_batch", True):
+        rebuild_index(config, logger)
     return 0
 
 

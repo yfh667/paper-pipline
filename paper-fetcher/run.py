@@ -8,17 +8,18 @@ Usage:
 The list file format (produced upstream by some cleaning step) is:
     [tag] Paper title  (doi=10.xxxx/yyyy)
     [tag] Paper title  (doi=)            # no DOI -> goes to needs_manual
-    [other-tag] ...                       # not ieee/acm/elsevier -> goes to needs_manual
+    [other-tag] ...                       # not a known publisher -> goes to needs_manual
 
 Tags handled by this fetcher:
     [ieee]     -> output/ieee/
     [acm]      -> output/acm/
     [elsevier] -> output/sd/
+    [optica]   -> output/optica/
 
 Everything else gets appended to output/manual/needs_manual.txt for the user
 to handle by hand.
 
-Three handlers run in parallel (different publishers), each handler's queue
+Four handlers run in parallel (different publishers), each handler's queue
 serial with a per-publisher polite gap.
 """
 from __future__ import annotations
@@ -44,6 +45,7 @@ OUT_DIRS = {
     "ieee": OUTPUT_ROOT / "ieee",
     "acm": OUTPUT_ROOT / "acm",
     "elsevier": OUTPUT_ROOT / "sd",
+    "optica": OUTPUT_ROOT / "optica",
 }
 MANUAL_FILE = OUTPUT_ROOT / "manual" / "needs_manual.txt"
 LOG_DIR = OUTPUT_ROOT / "logs"

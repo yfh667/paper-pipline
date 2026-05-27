@@ -1,0 +1,3582 @@
+[
+    {
+        "type": "text",
+        "text": "Modeling and Analysis for Multiple-Layer LEO Satellite Internet of Things Constellations ",
+        "text_level": 1,
+        "bbox": [
+            109,
+            66,
+            887,
+            135
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ming Ying , Graduate Student Member, IEEE, Xiaoming Chen , Senior Member, IEEE, Qiao Qi , Member, IEEE, and Yichao Xu, Graduate Student Member, IEEE ",
+        "bbox": [
+            163,
+            152,
+            831,
+            186
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Abstract—To provide multiple-satellite coverage for global Internet of Things (IoT), a low Earth orbit (LEO) satellite IoT constellation usually contains multiple-layer orbits with different altitudes. However, the performance of multiple-layer LEO satellite IoT constellations under practical Rician fading satellite channels remains unknown due to complex theoretical modeling and intractable mathematical analysis. To address these challenges, this paper proposes a stochastic geometrybased modeling and analysis framework for multiple-layer LEO satellite IoT constellations, integrating Rician channel modeling and Cox point processes. Specifically, we introduce a novel channel approximation method to overcome the intractable expressions caused by the Rician fading. Building on this method, we derive exact closed-form expressions for key performance metrics, including connectivity probability, coverage probability, and transmission rate, especially in the case of IoT shortpacket transmission. Extensive simulation results validate the accuracy and effectiveness of the proposed model and reveal significant design insights. The results not only provide new theoretical perspectives for modeling and analysis of LEO satellite IoT constellations but also offer practical guidance for system deployment and optimization. ",
+        "bbox": [
+            73,
+            222,
+            491,
+            501
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Index Terms—Internet of Things, low Earth orbit satellite, performance analysis, system modeling, multiple-layer architecture. ",
+        "bbox": [
+            73,
+            506,
+            491,
+            532
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "I. INTRODUCTION ",
+        "text_level": 1,
+        "bbox": [
+            215,
+            554,
+            351,
+            568
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "NTERNET of Things (IoT) has witnessed exponential I growth, enabling ubiquitous connectivity across diverse applications, such as intelligent transportation, precision agriculture, and environmental monitoring [1], [2], [3]. These applications increasingly demand ubiquitous, reliable, and low-latency connectivity, especially in scenarios involving mobile or geographically isolated devices. However, terrestrial networks often struggle to meet these requirements due to limitations in infrastructure deployment and geographical reach. In particular, vast regions such as oceans, and deserts ",
+        "bbox": [
+            73,
+            573,
+            490,
+            724
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Received 5 August 2025; revised 17 November 2025 and 14 January 2026; accepted 4 March 2026. Date of current version 17 March 2026. This work was supported in part by Zhejiang Provincial Natural Science Foundation of China under Grant LZ26F010002 and Grant LQN25F010014 and in part by the Natural Science Foundation of China under Grant U21A20443 and Grant 62501222. The associate editor coordinating the review of this article and approving it for publication was H. Zhang. (Corresponding author: Xiaoming Chen.) ",
+        "bbox": [
+            73,
+            734,
+            491,
+            825
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Ming Ying, Xiaoming Chen, and Yichao Xu are with the College of Information Science and Electronic Engineering, Zhejiang University, Hangzhou 310027, China (e-mail: ming ying@zju.edu.cn; chen xiaoming@zju.edu.cn; yichao xu@zju.edu.cn). ",
+        "bbox": [
+            73,
+            825,
+            491,
+            872
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Qiao Qi is with the School of Information Science and Technology, Hangzhou Normal University, Hangzhou 311121, China (e-mail: qiqiao@hznu.edu.cn). ",
+        "bbox": [
+            73,
+            872,
+            491,
+            906
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Digital Object Identifier 10.1109/TWC.2026.3672191 ",
+        "bbox": [
+            88,
+            906,
+            377,
+            917
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "remain underserved by ground-based systems, where deploying cellular IoT infrastructure is neither economically viable nor technically feasible [4]. To address this gap, low Earth orbit (LEO) satellite networks have emerged as a promising complementary solution, offering global coverage, reduced latency, and robust connectivity for distributed IoT devices [5]. Unlike geostationary systems, LEO satellites operate at lower altitudes, which significantly cuts propagation delay and power consumption, offering key advantages for energy-constrained IoT deployments [6]. Nevertheless, the dynamic characteristic of LEO constellations introduces challenges such as intermittent visibility and complex handover management, necessitating carefully designed multi-layer architectures to ensure seamless service continuity. ",
+        "bbox": [
+            501,
+            222,
+            921,
+            431
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Given the substantial investment and strategic importance of LEO satellite IoT constellations, accurate performance modeling and prediction become prerequisites for viable system design and commercialization. A rigorous theoretical framework is therefore essential to guide constellation design and optimize resource allocation [8]. In this context, stochastic geometry has been proven to be a powerful tool for modeling large-scale wireless networks, providing tractable expressions for key performance indicators such as coverage, capacity, and reliability. Its ability to capture spatial randomness makes it particularly suitable for analyzing LEO satellite IoT constellations. ",
+        "bbox": [
+            503,
+            433,
+            921,
+            613
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "In recent years, there have been growing researches on applying stochastic geometry to analyze the performance of LEO satellite networks, with the Poisson point process (PPP) emerging as a predominant modeling approach in LEO satellite IoT [9], [10], [11], [12], [13], [14]. Building on this foundation, [9] introduced an equivalent two-dimensional PPP model incorporating Nakagami-m fading channels to streamline performance analysis for LEO satellite constellations. Subsequent studies extended this framework to evaluate critical performance metrics. In [10], the authors derived outage probability and ergodic capacity for uplink transmission by utilizing PPP models with standard antenna patterns. Moreover, the authors in [11] characterized user fairness and reliability via the distribution and moments of conditional coverage probability under a homogeneous PPP. For mega LEO satellite constellation design, the authors in [12] proposed a theoretical PPP-based framework for capacity analysis and presented an optimal constellation design algorithm minimizing the satellite constellation costs while ensuring global coverage. Complementing these efforts, the authors in [13] developed an analytical PPP framework specifically for LEO satellite network backhaul performance evaluation. To better capture the real-world spatial distribution of LEO satellites across varying latitudes, [14] employed a non-homogeneous PPP with an appropriately defined intensity function. Subsequently, the researchers have advanced binomial point process (BPP) modeling for multiple-layer LEO satellite constellations, with [15] pioneering closed-form coverage and rate expressions while introducing the concept of effective satellite counts to connect theoretical models with practical design considerations. This foundation has spurred numerous BPP-based investigations [16], [17], [18], [19], [20]. In [16], the authors validated the accuracy of BPP modeling for LEO satellite constellations by establishing the statistical equivalence between BPP-modeled LEO constellations and Fibonacci lattice distributions. Moreover, [17] proposed a stochastic geometry-based framework modeling the LEO satellite constellation as a BPP model on a spherical surface. By approximating satellite distances and incorporating shadowed-Rician (SR) fading channels, the closed-form expressions for transmission success probability were derived. Similarly, [18] established an exact BPP-based framework for LEO satellite downlink systems and derived outage probability and throughput maximization solutions through the innovative Poisson approximation and iterative optimization. Since oversimplified assumptions like infinite terrestrial areas and omnidirectional coverage often employed in LEO satellite IoT, a BPP-based framework incorporating finite-area effects, Earth curvature, and duallink Nakagami-m/SR fading was proposed in [19] to enable realistic performance evaluation under operational constraints. Moreover, a BPP framework for multi-altitude LEO satellite constellations was developed in [20] and revealed diminishing returns from constellation overprovisioning. Beyond connectivity, the BPP framework has also been extended to specialized domains such as reliability, security, and heterogeneous communications. For instance, [21] quantified multi-hop connection reliability in hybrid satellite-terrestrial networks under different relay strategies. In security analysis, [22] employed a BPP to model node locations and study covert communication under adversarial detection, while [23] derived tractable physical-layer security metrics using a BPPbased constellation model. The versatility of BPP is further demonstrated in heterogeneous systems, where [24] applied it to jointly optimize coverage and rate in terahertz/RF multiband satellite networks. ",
+        "bbox": [
+            503,
+            614,
+            921,
+            917
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            76,
+            35,
+            462,
+            46
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "page_number",
+        "text": "13729 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "1536-1276 © 2026 IEEE. All rights reserved, including rights for text and data mining, and training of artificial intelligence and similar technologies. Personal use is permitted, but republication/redistribution requires IEEE permission. ",
+        "bbox": [
+            148,
+            924,
+            846,
+            948
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "See https://www.ieee.org/publications/rights/index.html for more information. ",
+        "bbox": [
+            290,
+            949,
+            705,
+            960
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            138,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            70,
+            491,
+            750
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Although both PPP and BPP models have advanced LEO satellite network analysis, they fundamentally overlook critical geometric constraints, particularly the predetermined orbital paths governing each satellite’s operation. Fortunately, recent works in [26], [27], [28], and [29] address this issue through a satellite Cox point process (CPP) that jointly models satellites and their exclusive orbits via Cox structures. However, current researches still exhibit several critical limitations. Firstly, the analysis of [26], [27], [28], and [29] is mainly based on Nakagami-m channel with m = 1, i.e., Rayleigh fading model, which fails to capture the dominant line-of-sight (LoS) components inherent in LEO satellite communication channels. The Rician fading model, which properly accounts for both LoS and scattered components, introduces significant mathematical complexity that remains largely unaddressed in the existing literature. This gap fundamentally limits the accuracy of performance analysis for LEO satellite IoT constellations operating under realistic channel conditions. Secondly, while existing researches mainly focus on single-layer LEO satellite IoT constellation, practical operational networks increasingly adopt multiple-layer architectures to achieve global coverage and enhanced capacity. This critical gap between theoretical models and real-world deployments leads to significant inaccuracies in performance evaluation, particularly in characterizing inter-layer interference and handover dynamics. Thirdly, current approaches predominantly address satellite constellation properties while overlooking inherent characteristics of IoT devices. Specifically, IoT devices typically employ short-packet communications, fundamentally limiting their achievable transmission rates below the Shannon capacity bound. Motivated by these research deficiencies, this paper establishes a comprehensive modeling and analysis framework for LEO satellite IoT constellations. ",
+        "bbox": [
+            73,
+            750,
+            491,
+            946
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            70,
+            921,
+            372
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Beyond spatial modeling considerations, significant efforts have also been made to incorporate more realistic channel models into the stochastic geometry analysis of satellite networks. Notably, several recent studies have employed SR fading model to better capture the signal fluctuations in realistic LEO satellite channels. Specifically, [18] derived outage probability and optimized throughput for LEO satellite systems under SR fading using stochastic geometry. Moreover, [30] developed an analytical framework for multi-beam LEO satellite downlink transmission, simplifying SINR analysis under correlated SR channels. For non-orthogonal multiple access (NOMA) in satellite networks, [31] analyzed outage behaviors and revealed the critical impact of imperfect interference cancellation over SR links. Furthermore, [32] applied the large deviations principle to obtain concise outage probability bounds for SR-faded satellite-terrestrial channels. These contributions are crucial for advancing the field and demonstrate the importance of accurate channel characterization. Motivated by these works but focusing on the specific deployment scenarios considered herein, we note that while the SR model offers a more general characterization for scenarios with LoS fluctuation, the Rician model provides a tractable and accurate approximation for IoT devices deployed in open environments (e.g., farmland, deserts, oceans) where a stable LoS path is predominant. Therefore, this work adopts the Rician channel model to maintain analytical tractability while capturing the essential propagation characteristics relevant to our target application scenarios. ",
+        "bbox": [
+            503,
+            373,
+            921,
+            794
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Specifically, the contributions are listed as below: ",
+        "bbox": [
+            519,
+            796,
+            857,
+            810
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "1) We provide a novel channel approximation method for Rician channel modeling by using finite General Dirichlet series, enabling tractable performance analysis while maintaining high accuracy. Simulation results demonstrate that our method achieves excellent matching with the actual Rician channel characteristics, providing a valuable tool for channel modeling of LEO satellite IoT constellations. ",
+        "bbox": [
+            521,
+            827,
+            921,
+            948
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "page_number",
+        "text": "13730 ",
+        "bbox": [
+            78,
+            36,
+            109,
+            45
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            138,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "table",
+        "img_path": "images/eb59010821fc23fbefad5e8464a2a5599b299b1b0310717ec16e2cb04a6e771b.jpg",
+        "table_caption": [
+            "TABLE I NOTATIONS OF THIS PAPER "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Symbol</td><td>Description</td></tr><tr><td> $\\mathbb{E}[X]$ </td><td>Expectation of random variable  $X$ </td></tr><tr><td> $\\Pr(X > x)$ </td><td>Complementary cumulative distribution function of  $X$ </td></tr><tr><td> $\\bigcup$ </td><td>Union operator</td></tr><tr><td> $Q_1(a, b)$ </td><td>First-order Marcum  $Q$ -function with parameters  $a$  and  $b$ </td></tr><tr><td> $I_0(\\cdot)$ </td><td>Modified Bessel function of the first kind</td></tr></table>",
+        "bbox": [
+            98,
+            99,
+            470,
+            169
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/a77aaadbfdda3b70a77aceaa5673aba5750010cf4e254f77d6ad7e9fc9f29edd.jpg",
+        "image_caption": [
+            "Fig. 1. System model of multiple-layer LEO satellite IoT constellation. "
+        ],
+        "image_footnote": [],
+        "content": "```mermaid\ngraph TD\n    A[\"LEO satellite\"] -->|Communication link| B[\"Layer 1\"]\n    C[\"IoT device\"] -->|Communication link| B\n    B --> D[\"Layer l\"]\n    style A fill:#f9f,stroke:#333\n    style C fill:#f9f,stroke:#333\n    style B fill:#ccf,stroke:#333\n```",
+        "sub_type": "flowchart",
+        "bbox": [
+            81,
+            172,
+            483,
+            349
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "2) We develop an analytical framework to evaluate the performance of multi-layer LEO satellite constellations in IoT scenarios, where each device can potentially access any satellite across different orbital layers. Specifically, we derive key performance metrics, including connectivity probability, coverage probability and transmission rate, by utilizing a geometry-based model that incorporates the Laplace transform of the aggregate interference power. ",
+            "3) We conduct extensive simulations to verify the accuracy of the derived expressions and quantitatively analyze the impacts of key parameters on the performance of the LEO satellite IoT constellation, including satellite densities, orbit densities, and the orbit altitudes. Furthermore, we demonstrate the geometric accuracy of the proposed model by comparing its predictions with realistic constellation deployments, showing strong agreement between theoretical and practical scenarios. "
+        ],
+        "bbox": [
+            89,
+            391,
+            491,
+            662
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The remainder of this paper is organized as follows. In Section II, we introduce the system model of LEO satellite IoT constellations, including the orbital elements, channel model and transmission model. In Section III, we first derive the distance distribution between the LEO satellite and IoT devices under CPP model. Based on this, we present the expressions of connectivity probability, coverage probability and transmission rate of LEO satellite IoT constellations. Next, extensive simulation results are provided in Section IV to verify the accuracy of the derived expressions and investigate the effects of key parameters on the performance of the LEO satellite IoT constellations. Finally, Section V concludes the paper. ",
+        "bbox": [
+            73,
+            666,
+            490,
+            861
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Specifically, the notations of this paper are listed in Table I. ",
+        "bbox": [
+            89,
+            862,
+            488,
+            877
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "II. SYSTEM MODEL ",
+        "text_level": 1,
+        "bbox": [
+            210,
+            897,
+            356,
+            911
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "This paper considers a multiple-layer LEO satellite IoT constellation where a massive number of IoT devices are deployed within open or rural environments [33], typically characterized by a dominant and stable line-of-sight (LoS) path to the satellites, as illustrated in Fig. 1. To provide multiplesatellite coverage, LEO satellites are deployed in L layers with different orbit altitudes. Each IoT device communicates with one LEO satellite which provides the maximum received signal power. In what follows, we introduce orbital elements, geometric model, and channel model, for the multiple-layer LEO satellite IoT constellation.1 ",
+        "bbox": [
+            73,
+            917,
+            491,
+            948
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/1e447c57f4a1be2ef228dc93446aef86849a8087799ef0fb654b97a617cd8f8a.jpg",
+        "image_caption": [
+            "Fig. 2. Illustration of orbital elements of LEO satellite IoT constellation. "
+        ],
+        "image_footnote": [],
+        "content": "z-axis\nLEO Satellite (r, Ω, φ, ω)\nOrbital plane\no(r, Ω, φ)\nx-axis\nEquatorial plane\nvernal Equinox node\nAscending node\ny-axis",
+        "sub_type": "text_image",
+        "bbox": [
+            524,
+            71,
+            906,
+            287
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            339,
+            921,
+            474
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "A. Orbital Elements ",
+        "text_level": 1,
+        "bbox": [
+            503,
+            497,
+            645,
+            511
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "To precisely characterize the positions of LEO satellites in space, we employ the six classical orbital elements within the Earth-Centered Inertial (ECI) reference frame. Specifically, the six orbital elements are defined as follows: ",
+        "bbox": [
+            503,
+            517,
+            919,
+            575
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) Semi-major $a _ { s } \\mathrm { : }$ Half the length of the orbit’s major axis. ",
+            "2) Eccentricity $e \\mathrm { : }$ The eccentricity of the orbital ellipse. ",
+            "3) Inclination angle $\\varphi \\mathrm { : }$ The angle measured counterclockwise from the equatorial plane to the satellite orbital plane at the ascending node. An inclination angle of more than $9 0 ^ { \\circ }$ indicates a retrograde orbit. ",
+            "4) Right ascension of ascending node Ω: Angle measured counterclockwise from the vernal equinox node to the ascending node in the equatorial plane. ",
+            "5) Argument of Periapsis $\\omega _ { p } { \\mathrm { : } }$ : Angle measured counterclockwise from the ascending node to the perigee, i.e., the point when the satellite operates closest to Earth, measured along the orbital plane. ",
+            "6) True anomaly υ: Angle measured counterclockwise from the perigee to the satellite position. "
+        ],
+        "bbox": [
+            521,
+            580,
+            921,
+            806
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "With these six orbit elements, the position of each satellite can be accurately described. For analytical tractability, we adopt the commonly used circular orbit assumption [36], [37], as visualized in Fig. 2. Under this circular orbit assumption, the semi-major $a _ { s }$ of the LEO satellites in layer l is equal to the orbit radius, i.e., $a _ { s } = r _ { l }$ , where $r _ { l }$ denotes the orbit radius ",
+        "bbox": [
+            501,
+            809,
+            921,
+            898
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "1The large carrier frequency offset (CFO) caused by high mobility of the LEO satellite is compensated in advance according to the deterministic trajectory of the LEO satellite [34], [35]. ",
+        "bbox": [
+            503,
+            912,
+            921,
+            949
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "page_number",
+        "text": "13731 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "of layer l. Moreover, the eccentricity of the orbit is $e = 0 ,$ . Under such an assumption, the orbit in layer l can be uniquely represented by three parameters $o ( r _ { l } , \\Omega , \\varphi )$ . Furthermore, the angular position of a satellite relative to the ascending node ω is determined by $\\omega = \\omega _ { p } + v$ . Based on these relationships, the Cartesian coordinates of a LEO satellite in layer l can be expressed as [38] ",
+        "bbox": [
+            73,
+            71,
+            491,
+            176
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\left( \\begin{array}{c} x _ {\\mathrm{sat}} \\\\ y _ {\\mathrm{sat}} \\\\ z _ {\\mathrm{sat}} \\end{array} \\right) = r _ {l} \\left( \\begin{array}{c} \\cos \\omega \\cos \\Omega - \\sin \\omega \\sin \\Omega \\cos \\varphi \\\\ \\cos \\omega \\sin \\Omega + \\sin \\omega \\cos \\Omega \\cos \\varphi \\\\ \\sin \\omega \\sin \\varphi \\end{array} \\right). \\tag {1}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            116,
+            181,
+            491,
+            239
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Consequently, the spatial position of LEO satellite m in layer l can be uniquely characterized by the quadruple $\\left( r _ { l } , \\Omega _ { m } , \\varphi _ { m } , \\omega _ { m } \\right)$ , where $\\Omega _ { m } , \\varphi _ { m } .$ , and $\\omega _ { m }$ represent the right ascension of ascending node of satellite $m ,$ , inclination angle of $m ,$ and the angular position of satellite m relative to the ascending node, respectively. ",
+        "bbox": [
+            73,
+            242,
+            491,
+            335
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "B. Geometric Model ",
+        "text_level": 1,
+        "bbox": [
+            73,
+            353,
+            220,
+            366
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Then, we study the geometric model for the distribution of LEO satellites. According to the characteristics of multiplelayer LEO satellite constellations [26], [27], [28], [29], we use CPP to model the LEO satellite IoT constellation. Based on this, we firstly characterize the orbital distribution of layer l by utilizing a rectangular parameter space defined as $\\mathcal { C } _ { l } =$ $r _ { l } \\times [ 0 , \\pi ) \\times [ 0 , \\pi )$ . Thus, the satellite orbits are modeled as a PPP $\\mathcal { Z } _ { l }$ with an intensity function given by λl sin ϕ , where λ $\\frac { \\lambda _ { l } \\sin \\varphi } { 2 \\pi }$ 2π $\\lambda _ { l }$ denotes the average number of orbits in layer l. ",
+        "bbox": [
+            73,
+            371,
+            491,
+            507
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "For each point $Z _ { l , i } = ( r _ { l } , \\Omega _ { i } , \\varphi _ { i } ) \\in \\mathcal { Z } _ { l }$ , it can be mapped to an orbit $o ( r _ { l } , \\Omega _ { i } , \\varphi _ { i } )$ in the Euclidean space $\\mathbb { R } ^ { 3 }$ . Then, an orbit process $\\mathcal { O } _ { l }$ of layer l can be constructed based on $\\mathcal { Z } _ { l }$ as ",
+        "bbox": [
+            73,
+            507,
+            491,
+            554
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {O} _ {l} = \\bigcup_ {Z _ {l, i} \\in \\mathcal {Z} _ {l}} o \\left(r _ {l}, \\Omega_ {i}, \\varphi_ {i}\\right). \\tag {2}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            192,
+            559,
+            488,
+            593
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Building upon the orbital model, we characterize the satellite distribution within each orbit. Conditioned on the orbit process $\\mathcal { O } _ { l } .$ , the spatial distribution of satellites along a given orbit $o ( r _ { l } , \\Omega _ { i } , \\varphi _ { i } )$ follows a homogeneous PPP (HPPP) $\\psi _ { i }$ with intensity $\\frac { \\mu _ { l } } { 2 \\pi r _ { l } }$ , where $\\mu _ { l }$ represents the satellite density in layer l. Under the assumption of independent orbital distributions across layers, the process of the whole LEO satellite IoT constellation can be represented as ",
+        "bbox": [
+            73,
+            598,
+            491,
+            719
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\Psi = \\sum_ {l = 1} ^ {L} \\Psi_ {l} = \\sum_ {l = 1} ^ {L} \\sum_ {Z _ {l, i} \\in \\mathcal {Z} _ {l}} \\psi_ {i}. \\tag {3}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            183,
+            724,
+            488,
+            768
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "where $\\Psi _ { l }$ denotes the process for LEO satellite IoT constellation of layer l. For the distributions of IoT devices, we assume that the IoT devices are uniformly distributed on the surface of Earth $\\{ ( x _ { \\mathrm { d e v } } , y _ { \\mathrm { d e v } } , z _ { \\mathrm { d e v } } ) | x _ { \\mathrm { d e v } } ^ { 2 } + \\dot { y } _ { \\mathrm { d e v } } ^ { 2 } + z _ { \\mathrm { d e v } } ^ { 2 } = r _ { e } ^ { 2 } \\} ~ [ 2 6 ]$ , where $x _ { \\mathrm { d e v } } , ~ y _ { \\mathrm { d e v } } ,$ and ${ \\it z } _ { \\mathrm { d e v } }$ denote the Cartesian coordinates of the IoT devices, $r _ { e }$ is the radius of Earth. Notice that the locations of IoT devices are independent of those of LEO satellites. ",
+        "bbox": [
+            73,
+            773,
+            491,
+            881
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "C. Channel Model ",
+        "text_level": 1,
+        "bbox": [
+            75,
+            898,
+            207,
+            912
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "According to the propagation characteristics, the LEO satellite channel usually includes two components, namely LoS and non-line of sight (NLoS) [39], [41]. This work specifically adopts the Rician fading model for its applicability to open-area IoT deployment scenarios. In such environments, IoT devices typically experience a dominant and stable LoS component with minimal shadowing effects. Specifically, the large-scale fading factor $g _ { l , m }$ of the satellite channel between the LEO satellite m in layer l and IoT device $X _ { U }$ can be expressed as ",
+        "bbox": [
+            73,
+            917,
+            491,
+            950
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            70,
+            921,
+            191
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\ng _ {l, m} = \\sqrt {\\left(\\frac {c}{4 \\pi f d _ {l , m}}\\right) ^ {2} G _ {l} G _ {\\mathrm{dev}} \\frac {1}{r _ {0}}} = g _ {t} \\sqrt {G _ {l} d _ {l , m} ^ {- 2}}, \\tag {4}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            531,
+            196,
+            921,
+            239
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "where $\\left( \\frac { c } { 4 \\pi f d _ { l , m } } \\right) ^ { 2 }$ 4πfdl,m denotes the free space loss of the channel with c being the light speed, f being the carrier frequency, and $d _ { l , m }$ being the distance between the satellite m of layer l and the device $X _ { U }$ . For clarity, $\\begin{array} { r } { g _ { t } = \\sqrt { \\left( \\frac { c } { 4 \\pi f } \\right) ^ { 2 } G _ { \\mathrm { d e v } } \\frac { 1 } { r _ { 0 } } } } \\end{array}$ Gdev 1r0 is adopted to simplify the expressions. Without loss of generality, we consider the device $X _ { U }$ at the north pole as a typical device, then $d _ { l , m }$ can be further derived as ",
+        "bbox": [
+            503,
+            244,
+            921,
+            372
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} d _ {l, m} = \\sqrt {r _ {l} ^ {2} + r _ {e} ^ {2} - 2 r _ {l} r _ {e} \\sin \\varphi_ {m} \\sin \\omega_ {m}} \\\\ = \\sqrt {r _ {l} ^ {2} + r _ {e} ^ {2} - 2 r _ {l} r _ {e} \\cos \\overline {{\\varphi}} _ {m} \\cos \\overline {{\\omega}} _ {m}} = f _ {l, \\overline {{\\varphi}} _ {m}} (\\overline {{\\omega}} _ {m}), (5) \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            511,
+            378,
+            921,
+            433
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "where $\\overline { { \\varphi } } _ { m } = \\frac { \\pi } { 2 } - \\varphi _ { m }$ and $\\overline { { \\omega } } _ { m } = \\begin{array} { r } { \\frac { \\pi } { 2 } - \\omega _ { m } } \\end{array}$ are denoted as the complementary angles of $\\varphi _ { m }$ and $\\omega _ { m } ,$ respectively. $G _ { \\mathrm { s a t } , l }$ represents the transmit antenna gain of the LEO satellites in layer l, which can be expressed as ",
+        "bbox": [
+            503,
+            436,
+            919,
+            500
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\nG _ {l} = \\left\\{ \\begin{array}{l l} G _ {\\text { sat }, l}, & \\theta_ {l, m} \\leq \\beta_ {l} \\\\ 1, & \\theta_ {l, m} > \\beta_ {l} \\end{array} \\right. \\tag {6}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            609,
+            503,
+            919,
+            546
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "where $\\theta _ { l , m }$ is defined as the angle-of-departure (AoD) for the link between the satellite m and the IoT device $X _ { U } , \\beta _ { l }$ denotes the maximum coverage angle of satellites in layer l. The transmit antenna gain $G _ { l } = G _ { \\mathrm { s a t } , l }$ if the IoT device is in the coverage area of the LEO satellite, otherwise $G _ { l } = 1$ . $G _ { \\mathrm { d e v } }$ denotes the receive gain of the devices, and $r _ { 0 }$ denotes the rain attenuation coefficient of the channel whose power gain ini.e., ln $r _ { 0 } ^ { \\mathrm { d B } } = 2 0 \\log _ { 1 0 } r _ { 0 }$ follows log-normal distribution, $( r _ { 0 } ^ { \\mathrm { d B } } ) \\sim \\mathcal N ( \\mu _ { r } , \\sigma _ { r } ^ { 2 } )$ ",
+        "bbox": [
+            503,
+            550,
+            921,
+            686
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "For the small scale fading, the probability density function (PDF) and the complementary cumulative distribution function (CCDF) of Rician distributed $| h _ { l , m } | ^ { 2 }$ can be expressed respectively as ",
+        "bbox": [
+            503,
+            686,
+            921,
+            747
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} f _ {| h _ {l, m} | ^ {2}} (x) = \\frac {1 + K}{\\Omega_ {s}} \\exp \\left(- K - \\frac {(1 + K) x}{\\Omega_ {s}}\\right) \\\\ \\times I _ {0} \\left(2 \\sqrt {\\frac {K (1 + K) x}{\\Omega_ {s}}}\\right), \\tag {7} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            553,
+            752,
+            921,
+            835
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "and ",
+        "bbox": [
+            504,
+            840,
+            535,
+            853
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {F} _ {\\left| h _ {l, m} \\right| ^ {2}} ^ {\\prime} (x) = Q _ {1} \\left(\\sqrt {2 K}, \\sqrt {\\frac {2 (1 + K) x}{\\Omega_ {s}}}\\right), \\tag {8}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            562,
+            849,
+            919,
+            898
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "where K denotes the Rician factor which corresponds to the ratio of LoS component and NLoS component, $\\Omega _ { s }$ represents the average channel gain calculated as $\\Omega _ { s } ~ = ~ \\mathbb { E } [ | h _ { l , m } | ^ { 2 } ]$ , $\\begin{array} { r } { Q _ { 1 } ( a , b ) = \\int _ { b } ^ { \\infty } x \\exp \\left( \\frac { x ^ { 2 } + a ^ { 2 } } { 2 } \\right) I _ { 0 } ( a x ) d x } \\end{array}$ is Marcum-Q function. For clarity, the average channel gain $\\Omega _ { s }$ is usually adopted for 1 [42]. ",
+        "bbox": [
+            503,
+            902,
+            921,
+            950
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "page_number",
+        "text": "13732 ",
+        "bbox": [
+            76,
+            35,
+            109,
+            46
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            47
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            960,
+            854,
+            974
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            66,
+            491,
+            117
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Under the maximum received power criterion for satellite selection, the signal to interference plus noise ratio (SINR) $\\gamma _ { l , m }$ at the typical device $X _ { U }$ when connected to satellite m in layer l is given by ",
+        "bbox": [
+            73,
+            118,
+            491,
+            178
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\gamma_ {l, m} = \\frac {p _ {l} g _ {l , m} ^ {2} \\left| h _ {l , m} \\right| ^ {2}}{I _ {m} + \\sigma_ {0} ^ {2}}, \\tag {9}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            204,
+            181,
+            491,
+            217
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where $p _ { l }$ denotes the transmit power of LEO satellites in layer $l , \\ \\sigma _ { 0 } ^ { 2 }$ denotes the variance of additive white Gaussian noise (AWGN), $I _ { m }$ denotes the total interference from the other satellites. In the following, we propose a modeling and analysis framework to evaluate the performance of the multiple-layer LEO satellite IoT constellation. ",
+        "bbox": [
+            73,
+            219,
+            491,
+            309
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "III. COVERAGE AND RATE ANALYSIS ",
+        "text_level": 1,
+        "bbox": [
+            148,
+            318,
+            416,
+            330
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "In this section, we develop a modeling and analysis framework for evaluating the performance of LEO satellite IoT constellation. Firstly, we derive the distance distribution between IoT devices and their serving satellites, accounting for multiple-layer orbital geometries. Then, we establish the connectivity probability considering both spatial distributions and channel conditions. Building on these, we formulate comprehensive coverage probability and transmission rate expressions that capture the essential characteristics of LEO satellite IoT transmission, including interference patterns and fading effects across the constellation. ",
+        "bbox": [
+            73,
+            337,
+            491,
+            501
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Given the satellite selection criterion that IoT devices connect to the LEO satellite offering maximum received signal power, the derivation of coverage probability becomes computationally intractable due to the complex spatial distribution of satellite distances. To overcome this challenge, we employ the law of total probability to decompose the coverage probability into tractable components, yielding ",
+        "bbox": [
+            73,
+            503,
+            491,
+            609
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {F} _ {\\gamma_ {\\star}} ^ {\\prime} (\\gamma_ {\\mathrm{th}}) = \\operatorname * {P r} (\\gamma_ {\\star} > \\gamma_ {\\mathrm{th}}) \\\\ = \\sum_ {l = 1} ^ {L} \\operatorname * {P r} \\left(\\gamma_ {\\star} > \\gamma_ {\\mathrm{th}} \\mid \\mathcal {A} _ {l}\\right) \\operatorname * {P r} \\left(\\mathcal {A} _ {l}\\right), \\tag {10} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            138,
+            613,
+            491,
+            674
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where $\\gamma _ { \\star }$ denotes the SINR of the link between the IoT device and the connected LEO satellite, $\\gamma _ { \\mathrm { t h } }$ denotes the SINR threshold, and $\\mathbf { \\mathcal { A } } _ { l }$ presents the event that the connected satellite is in layer l. Then, the connectivity probability $\\mathrm { P r } ( \\mathcal { A } _ { l } )$ can be derived as ",
+        "bbox": [
+            73,
+            676,
+            491,
+            751
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\operatorname * {P r} (\\mathcal {A} _ {l}) = \\operatorname * {P r} (p _ {i} g _ {i} > p _ {l} g _ {l}, \\forall i \\in [ L ] / l) \\\\ = \\operatorname * {P r} (D _ {i} > \\sqrt {\\tau_ {i , l}} D _ {l}, \\forall i \\in [ L ] / l) \\\\ = \\mathbb {E} _ {D _ {l}} \\left[ \\operatorname * {P r} \\left(D _ {i} > \\sqrt {\\tau_ {i , l}} v, \\forall i \\in [ L ] / l \\mid D _ {l} = v\\right) \\right], \\tag {11} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            88,
+            757,
+            491,
+            813
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where $\\tau _ { i , l } ~ = ~ p _ { i } G _ { i } / p _ { l } G _ { l } , ~ D _ { l }$ denotes the shortest distance between the LEO satellite of layer l and the IoT devices, [L] denotes the set of integers smaller than L. Noticing that the process of the constellation in each layer $\\Psi _ { 1 } , \\Psi _ { 2 } , \\cdots , \\Psi _ { L }$ are independent, we have ",
+        "bbox": [
+            73,
+            816,
+            491,
+            892
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\Pr (\\mathcal {A} _ {l}) = \\mathbb {E} _ {D _ {l}} \\left[ \\prod_ {\\substack {m = 1 \\\\ m \\neq l}} ^ {L} \\Pr (D _ {m} > \\sqrt {\\tau_ {m , l}} v) \\right]. \\tag{12}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            135,
+            895,
+            491,
+            952
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Building on this foundation, we need to derive the distance distribution under specific layer l. ",
+        "bbox": [
+            503,
+            71,
+            919,
+            102
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "A. Distance Distribution ",
+        "text_level": 1,
+        "bbox": [
+            503,
+            132,
+            674,
+            145
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "In layer l, the connected satellite is the nearest satellite to the IoT devices, i.e., no other LEO satellites in layer l can be closer than $D _ { l }$ . Note that when the nearest satellite is in the serving area of layer l, we have $r _ { l , \\mathrm { m i n } } ~ < ~ D _ { l } ~ <$ < $r _ { l , \\mathrm { m a x } } ,$ where $r _ { l , \\mathrm { m i n } } ~ = ~ r _ { l } - r _ { e } ,$ and $r _ { l , \\mathrm { m a x } } ~ = ~ r _ { l } \\cos \\beta _ { l } ~ -$ $\\sqrt { r _ { 1 } ^ { 2 } \\cos ^ { 2 } \\beta _ { l } - r _ { l } ^ { 2 } + r _ { e } ^ { 2 } }$ . From this foundation, we analyze the distribution of distance $\\operatorname* { P r } \\left( D _ { l } > d \\right)$ . Specifically, for $d \\digamma <$ $r _ { l , \\mathrm { m i n } }$ , Pr $( D _ { l } > d ) \\ = \\ 1$ as the minimum communication distance between the LEO satellite in layer l and the IoT devices is $r _ { \\mathrm { m i n } }$ . Then, for $r _ { l , \\mathrm { m a x } } > d > r _ { l , \\mathrm { m i n } } ,$ according to the properties of CPP [26], the distribution of $D _ { l }$ can be obtained as ",
+        "bbox": [
+            503,
+            152,
+            921,
+            334
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\operatorname * {P r} \\left(D _ {l} > d\\right) \\stackrel {(a)} {=} \\operatorname * {P r} \\left(D _ {l, j} > d, \\forall X _ {j} \\in \\Psi_ {l}\\right) \\\\ \\stackrel {(b)} {=} \\operatorname * {P r} \\left(D _ {l, j} > d, \\forall X _ {j} \\in \\psi_ {i}, \\forall Z _ {i} \\in \\mathcal {Z} _ {l}\\right) \\\\ = \\operatorname * {P r} \\left(\\prod_ {Z _ {i} \\in \\mathcal {Z} _ {l}} \\operatorname * {P r} \\left(\\prod_ {X _ {j} \\in \\psi_ {i}} D _ {l, j} > d \\mid \\mathcal {Z} _ {l}\\right)\\right), \\tag {13} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            524,
+            345,
+            921,
+            455
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where (a) is derived from the fact that all the distances should be larger than d for all the LEO satellites in layer l, and (b) is derived according to the CPP in (3). As $\\psi _ { i }$ follows HPPP, we have ",
+        "bbox": [
+            501,
+            468,
+            919,
+            527
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\operatorname * {P r} \\left(\\prod_ {X _ {j} \\in \\psi_ {i}} D _ {l, j} > d \\mid \\mathcal {Z} _ {l}\\right) = e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\csc^ {2} \\varphi_ {i}}\\right)}. \\tag {14}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            508,
+            537,
+            919,
+            597
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where $\\xi _ { l } ( d )$ is given by ",
+        "bbox": [
+            504,
+            598,
+            669,
+            613
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\xi_ {l} (d) = \\arccos \\left(\\frac {r _ {e} ^ {2} + r _ {l} ^ {2} - d ^ {2}}{2 r _ {e} r _ {l}}\\right). \\tag {15}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            598,
+            623,
+            919,
+            657
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "Based on (14) and probability generating functional (PGFL) of the PPP [43], (13) can be further calculated as ",
+        "bbox": [
+            503,
+            669,
+            919,
+            699
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\operatorname * {P r} \\left(D _ {l} > d\\right) \\\\ = \\operatorname * {P r} \\left(\\prod_ {Z _ {i} \\in \\mathcal {Z} _ {l}} e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin (\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\csc^ {2} \\varphi_ {i}})}\\right) \\\\ = e ^ {- \\lambda_ {l} \\int_ {0} ^ {\\xi_ {l} (d)} \\left(1 - e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\sec^ {2} \\overline {{\\varphi}}}\\right)}\\right) \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}}, \\tag {16} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            521,
+            713,
+            921,
+            804
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "When the distance d exceeds the maximum coverage boundary $r _ { l , \\mathrm { m a x } }$ , indicating no visible satellites within the serving area of layer l, the corresponding probability is given by ",
+        "bbox": [
+            503,
+            818,
+            919,
+            864
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathrm{P} _ {l} ^ {\\text { nosat }} = \\operatorname * {P r} \\left(D _ {l} > d\\right) \\\\ = e ^ {- \\lambda_ {l} \\int_ {0} ^ {\\xi_ {\\beta , l}} \\left(1 - e ^ {- \\frac {\\mu_ {1}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {\\beta , l} \\sec^ {2} \\overline {{\\varphi}}}\\right)}\\right) \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}}, \\tag {17} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            511,
+            876,
+            921,
+            946
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "page_number",
+        "text": "13733 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where $\\xi _ { \\beta , l } ~ =$ arccos $\\left( \\frac { r _ { e } ^ { 2 } + r _ { l } ^ { 2 } - r _ { l , \\mathrm { { m a x } } } ^ { 2 } } { 2 r _ { e } r _ { l } } \\right)$ Based on the above analysis, the CCDF of $\\mathcal { \\dot { D } } _ { l }$ can be expressed as ",
+        "bbox": [
+            73,
+            64,
+            491,
+            103
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} F _ {D _ {l}} ^ {\\prime} (d) = \\operatorname * {P r} \\left(D _ {l} > d\\right) \\\\ = \\left\\{ \\begin{array}{l l} 1 & d <   r _ {l, \\min} \\\\ \\exp \\left(- \\lambda_ {l} \\int_ {0} ^ {\\xi_ {l} (d)} (1 - \\right. & \\\\ e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\sec^ {2} \\overline {{\\varphi}}}\\right)} \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}) & r _ {l, \\min} <   d \\\\ & <   r _ {l, \\max} \\\\ \\mathrm{P} _ {l} ^ {\\text { nosat }} & d > r _ {l, \\max}. \\end{array} \\right. \\tag {18} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            80,
+            109,
+            491,
+            244
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "To obtain the connectivity probability in (12), we should derive the PDF of the distance distribution $D _ { l }$ . Based on (18), the PDF of distance distribution $D _ { l }$ can be derived as ",
+        "bbox": [
+            73,
+            251,
+            491,
+            296
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} f _ {D _ {l}} (d) = \\frac {\\partial}{\\partial d} \\operatorname * {P r} (D \\leq d) = \\frac {\\partial}{\\partial d} \\left(1 - F _ {D _ {l}} (d)\\right) \\\\ = \\frac {\\partial}{\\partial d} \\left(\\exp \\left(- \\lambda_ {l} \\int_ {0} ^ {\\xi_ {l} (d)} (1 - \\right. \\right. \\\\ \\left. e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\sec^ {2} \\overline {{\\varphi}}}\\right)}\\right) \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}\\left. \\right), \\tag {19} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            91,
+            301,
+            491,
+            407
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "According to the chain rule and Leibniz integral rule, (19) can be calculated as ",
+        "bbox": [
+            73,
+            412,
+            491,
+            441
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\nf _ {D _ {l}} (d) = \\lambda_ {l} F _ {D _ {l}} (d) g _ {l} (d), \\tag {20}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            194,
+            452,
+            488,
+            469
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "where $g _ { l } ( d )$ is expressed as ",
+        "bbox": [
+            75,
+            477,
+            266,
+            493
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\ng _ {l} (d) = \\frac {\\mu_ {l} d}{\\pi r _ {e} r _ {l}} \\int_ {0} ^ {\\xi_ {l} (d)} \\frac {e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\sec^ {2} \\overline {{{\\varphi}}}}\\right)}}{\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\sec^ {2} \\overline {{{\\varphi}}}}} d \\overline {{{\\varphi}}}. \\tag {21}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            89,
+            500,
+            488,
+            553
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "By substituting (18) and (20) into (12), the connectivity probability $\\mathrm { P r } ( \\mathcal { A } _ { l } )$ can be further calculated as ",
+        "bbox": [
+            73,
+            554,
+            488,
+            584
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\operatorname * {P r} (\\mathcal {A} _ {l}) \\\\ = \\int_ {r _ {l, \\min}} ^ {r _ {l, \\max}} \\lambda_ {l} g _ {l} (v) F _ {D _ {l}} (v) \\left(\\prod_ {\\substack {m = 1 \\\\ m \\neq l}} ^ {L} \\Pr \\left(D _ {m} > \\sqrt {\\tau_ {m , l}} v\\right)\\right) d v. \\tag{22} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            89,
+            593,
+            488,
+            683
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "B. Coverage Analysis ",
+        "text_level": 1,
+        "bbox": [
+            75,
+            703,
+            227,
+            718
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Then, we analyze the coverage probability conditionally on the connected satellite of layer $l \\mathrm { P r } ( \\gamma _ { \\star } > \\gamma _ { \\mathrm { t h } } | { \\mathcal { A } } _ { l } )$ . For simplicity, we omit the subscript of $d _ { l , m }$ as d. With (8), the coverage probability can be further obtained as ",
+        "bbox": [
+            73,
+            722,
+            491,
+            782
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {F} _ {\\gamma_ {\\star} | \\mathcal {A} _ {l}} ^ {\\prime} (\\gamma_ {\\mathrm{th}}) \\\\ = \\mathbb {E} _ {d, \\mathcal {Z}, Z _ {\\star}} \\left[ Q _ {1} \\left(\\sqrt {2 K}, \\sqrt {\\frac {2 (1 + K) \\left(I ^ {\\star} + \\sigma_ {0} ^ {2}\\right) \\gamma_ {\\mathrm{th}}}{\\Omega_ {s} g _ {t} p _ {l} G _ {\\mathrm{sat} , 1} d ^ {- 2}}}\\right) \\right], \\tag {23} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            96,
+            790,
+            488,
+            867
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "where $I ^ { \\star }$ denotes the interference signal power received by the device $X _ { U }$ , which can be expressed as ",
+        "bbox": [
+            73,
+            875,
+            491,
+            905
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\nI ^ {\\star} = \\sum_ {k = 1} ^ {L} I _ {k}, \\tag {24}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            236,
+            912,
+            490,
+            953
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "image",
+        "img_path": "images/d26062d3b9d08a13f00ca86d3b24774f3fb1680252145f433086860384769e6c.jpg",
+        "image_caption": [
+            "Fig. 3. Coverage model of a LEO satellite. "
+        ],
+        "image_footnote": [],
+        "content": "LEO satellite\nβk\nService Area Sk\nInterference Area Ik\nr_l\nLayer l\nInterference Area Ik\nre\nφl\nφl",
+        "sub_type": "text_image",
+        "bbox": [
+            522,
+            75,
+            913,
+            263
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "where $I _ { k }$ denotes the interference from the satellites of layer k. Specifically, the interference $I _ { k }$ is composed of two parts, the signal from the interference area $I _ { k } ^ { \\mathrm { I n f } }$ and the service area $I _ { k } ^ { \\mathrm { S e v } }$ . As illustrated in Fig. 3, $\\mathcal { T } _ { k }$ is the interference area of layer k, which contains satellites that exclusively contribute to interference and $S _ { k }$ is the serving area where IoT devices may establish connections with satellites. This spatial decomposition enables precise evaluation of both desired signal and interference components. In other words, $\\scriptstyle { S _ { k } }$ is defined by the maximum coverage angle $\\beta _ { l }$ and $\\mathcal { T } _ { k }$ comprises all complementary satellite positions within the orbital plane. Such interference analysis maintains full consideration of antenna patterns, propagation losses, atmospheric effects, and other potential factors that may influence transmission performance. In this context, $I _ { k } ^ { \\mathrm { I n f } }$ f and I Sev $I _ { k } ^ { \\mathrm { S e v } }$ can be expressed respectively as ",
+        "bbox": [
+            503,
+            315,
+            921,
+            544
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} I _ {k} ^ {\\mathrm{Sev}} = \\sum_ {m ^ {\\prime} \\in \\mathcal {S} _ {k}} p _ {k} g _ {k, m ^ {\\prime}} ^ {2} | h _ {k, m ^ {\\prime}} | ^ {2} \\\\ = g _ {t} p _ {k} G _ {\\text { sat }, k} \\sum_ {m ^ {\\prime} \\in \\mathcal {S} _ {k}} \\left| h _ {k, m ^ {\\prime}} \\right| ^ {2} d _ {k, m ^ {\\prime}} ^ {- 2}, \\tag {25} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            576,
+            549,
+            921,
+            618
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "and ",
+        "bbox": [
+            504,
+            625,
+            535,
+            636
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\nI _ {k} ^ {\\text {Inf}} = \\sum_ {m ^ {\\prime} \\in \\mathcal {I} _ {k}} p _ {k} g _ {k, m ^ {\\prime}} ^ {2} \\left| h _ {k, m ^ {\\prime}} \\right| ^ {2} = g _ {t} p _ {k} \\sum_ {m ^ {\\prime} \\in \\mathcal {I} _ {k}} \\left| h _ {k, m ^ {\\prime}} \\right| ^ {2} d _ {k, m ^ {\\prime}} ^ {- 2}. \\tag {26}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            516,
+            643,
+            919,
+            688
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Noticeably, it is difficult to calculate the expectation in (12) due to the complex expression of Marcum Q-function, which motivates us to use the finite General Dirichlet series to approximate it [44]. Specifically, the CCDF of Rician distributed $| h _ { l , m } | ^ { 2 }$ can be approximated as ",
+        "bbox": [
+            503,
+            689,
+            919,
+            765
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {F} _ {\\left| h _ {l, m} \\right| ^ {2}} ^ {\\prime} (x) \\approx \\sum_ {n = 1} ^ {N} \\chi_ {n} \\exp (- \\eta_ {n} x) = \\widetilde {\\mathcal {F}} _ {\\left| h _ {l, m} \\right| ^ {2}} ^ {\\prime} (x), \\tag {27}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            532,
+            772,
+            919,
+            813
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "where the value of N is the number of General Dirichlet series terms where a large number of N yields a higher accuracy of approximation. $\\chi _ { n }$ and $\\eta _ { n }$ are parameters, such that $\\eta _ { n } \\mathrm { ~ > ~ }$ er, we obtain. To evaluate $\\textstyle \\sum _ { n = 1 } ^ { N } \\dot { \\chi } _ { n } \\ = \\ 1$ N from tion er $\\mathcal { F } _ { | h _ { l , m } | ^ { 2 } } ^ { \\prime } ( 0 ) =$ $\\mathcal { \\widetilde { F } } _ { | h _ { l , m } | ^ { 2 } } ^ { \\prime } ( 0 )$ ${ \\mathcal { E } } ( K )$ ",
+        "bbox": [
+            503,
+            819,
+            921,
+            915
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {E} (K) = \\int_ {0} ^ {\\infty} \\left(\\mathcal {F} _ {| h _ {l, m} | ^ {2}} ^ {\\prime} (x) - \\widetilde {\\mathcal {F}} _ {| h _ {l, m} | ^ {2}} ^ {\\prime} (x)\\right) ^ {2} d x. \\tag {28}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            537,
+            921,
+            919,
+            954
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "page_number",
+        "text": "13734 ",
+        "bbox": [
+            78,
+            36,
+            109,
+            45
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "It can be found in (28) that the integration is difficult to be calculated, and thus we adopt a numerical approach that the approximation error is expressed as ",
+        "bbox": [
+            73,
+            71,
+            491,
+            116
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\widehat {\\mathcal {E}} (K) = \\delta \\sum_ {i = 0} ^ {\\infty} \\left(\\mathcal {F} _ {| h _ {l, m} | ^ {2}} ^ {\\prime} (i \\delta) - \\widetilde {\\mathcal {F}} _ {| h _ {l, m} | ^ {2}} ^ {\\prime} (i \\delta)\\right) ^ {2}, \\tag {29}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            111,
+            119,
+            491,
+            159
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "where $\\delta$ is a small number and ${ \\widehat { \\mathcal { E } } } ( K ) \\to { \\mathcal { E } } ( K )$ as $\\delta  0$ . Based on (29), the appropriate parameters $\\chi _ { n }$ and $\\eta _ { n }$ are determined by solving the following optimization problem formulated as ",
+        "bbox": [
+            73,
+            166,
+            491,
+            227
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\nQ 1: \\underset {\\chi_ {n}, \\eta_ {n}} {\\text { minimize }} \\quad \\widehat {\\mathcal {E}} (K) \\tag {30a}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            119,
+            231,
+            491,
+            257
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\text { s.t. } \\quad \\sum_ {n = 1} ^ {N} \\chi_ {n} = 1, \\tag {30b}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            168,
+            258,
+            490,
+            299
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\eta_ {n} > 0. \\quad \\forall n \\in \\{1, 2, \\dots , N \\}. \\tag {30c}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            200,
+            301,
+            490,
+            319
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "It is obvious that the optimization problem Q1 is a non-convex problem, for which obtaining the global optimization solution in polynomial time seems to be impossible. Fortunately, intelligent optimization techniques can be applied to solve such problems. Specifically, we utilize the genetic algorithm (GA), a classical intelligent optimization method to solve the problems under several values of K. Given that the objective function (30a) involves an infinite summation, its exact computation is prohibitively resource-intensive while contributing minimally to accuracy improvements. Recognizing that the Marcum Q-function $Q _ { 1 } ( a , b )$ decays exponentially with $b ,$ we truncate the summation by discarding terms beyond values of x upper than several $x _ { \\mathrm { m a x } }$ in order to facilitate optimization. Thus, the upper limit of the summation is replaced by $i _ { \\operatorname* { m a x } } = x _ { \\operatorname* { m a x } } / \\delta$ . For parameter settings, we set $\\delta = 1 0 ^ { - 4 } , N = 4 , \\Omega _ { s } = 1$ and $x _ { \\mathrm { m a x } } = 1 0 .$ . In general, the Rician factor K is $1 \\leq K \\leq 1 0$ [45]. Specifically, the effectiveness and accuracy of the proposed approximation method is given out in Section ${ \\mathrm { V } } , { \\mathrm { A } } ,$ . ",
+        "bbox": [
+            73,
+            324,
+            491,
+            595
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "With the proposed approximation method (27), (23) can be further expressed as ",
+        "bbox": [
+            73,
+            595,
+            491,
+            626
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {F} _ {\\gamma_ {m}} ^ {\\prime} (\\gamma_ {\\mathrm{th}}) \\\\ = \\mathbb {E} _ {d, \\mathcal {Z}, Z _ {\\star}} \\left[ \\sum_ {n = 1} ^ {N} \\chi_ {n} e ^ {- \\eta_ {n} \\frac {(I ^ {\\star} + \\sigma_ {0} ^ {2}) \\gamma_ {\\mathrm{th}}}{g _ {t} p _ {l} G _ {\\mathrm{sat} , l} d - 2}} \\right] \\\\ = \\sum_ {n = 1} ^ {N} \\chi_ {n} \\cdot \\mathbb {E} _ {d, \\mathcal {Z}, Z _ {\\star}} \\left[ e ^ {- \\frac {\\eta_ {n} \\sigma_ {0} ^ {2} \\gamma_ {\\mathrm{th}} d ^ {2}}{g _ {t} p _ {l} G _ {\\mathrm{sat}, l}}} \\mathcal {L} _ {I ^ {\\star}} \\left(\\frac {\\eta_ {n} \\gamma_ {\\mathrm{th}} d ^ {2}}{g _ {t} p _ {l} G _ {\\mathrm{sat}, l}}\\right) \\right], \\tag {31} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            84,
+            632,
+            491,
+            736
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "where $\\mathcal { L } _ { I ^ { \\star } } ( s )$ represents the Laplace transform of the total interference $I ^ { \\star }$ evaluated at s conditionally on $d , { \\mathcal { Z } }$ and $Z _ { \\star }$ . Based on (24), $\\mathcal { L } _ { I ^ { \\star } } ( s )$ can be further decomposed according to the corresponding layers, which is expressed as ",
+        "bbox": [
+            73,
+            739,
+            491,
+            801
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {L} _ {I ^ {\\star}} (s) = \\prod_ {k = 1} ^ {L} \\mathcal {L} _ {I _ {k}} (s), \\tag {32}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            205,
+            805,
+            490,
+            845
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "where $\\mathcal { L } _ { I _ { k } } ( s )$ denotes the Laplace transform of the interference of layer k. By making use of the properties of CPP and HPPP, we can obtain the following proposition: ",
+        "bbox": [
+            73,
+            849,
+            491,
+            897
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Proposition 1: The Laplace transform of the interference of layer $k \\mathcal { L } _ { I _ { k } } ( s )$ can be calculated as (33), shown at the bottom of the next page. ",
+        "bbox": [
+            73,
+            904,
+            491,
+            950
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Proof: See Appendix A. ",
+        "bbox": [
+            519,
+            71,
+            687,
+            85
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "By using the Fubini’s theorem, we first unfold the expectation of $d$ in (31). Thereby, the coverage probability can be further derived as ",
+        "bbox": [
+            503,
+            93,
+            919,
+            138
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {F} _ {\\gamma_ {\\star} | \\mathcal {A} _ {l}} ^ {\\prime} (\\gamma_ {\\mathrm{th}}) \\\\ = \\sum_ {n = 1} ^ {N} \\chi_ {n} \\cdot \\int_ {r _ {l, \\min}} ^ {r _ {l, \\max}} e ^ {- \\frac {\\eta_ {n} \\sigma_ {0} ^ {2} \\gamma_ {\\mathrm{th}} r ^ {2}}{g _ {t} p _ {l} G _ {\\mathrm{sat} , l}}} \\\\ \\cdot \\mathbb {E} _ {\\mathcal {Z}} \\left[ \\mathbb {E} _ {Z _ {\\star}} \\left[ \\mathcal {L} _ {I _ {l} ^ {\\star}} \\left(\\frac {\\eta_ {n} \\gamma_ {\\mathrm{th}} r ^ {2}}{g _ {t} p _ {l} G _ {\\mathrm{sat} , l}}\\right) f _ {D _ {l} | Z _ {\\star}, \\mathcal {Z}} (r) \\right] \\right] d r, \\tag {34} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            521,
+            147,
+            921,
+            246
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "where $f _ { D _ { l } | Z _ { \\star } , \\mathcal { Z } } ( r )$ denotes the PDF of $D _ { l }$ conditionally on $Z _ { \\star }$ and ${ \\mathcal { Z } } ,$ , which can be derived as ",
+        "bbox": [
+            503,
+            251,
+            919,
+            281
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} f _ {D _ {l} | Z _ {\\star}, \\mathcal {Z}} (d) \\\\ = \\partial_ {d} \\operatorname * {P r} (D \\leq d | \\mathcal {Z}, Z _ {\\star}) \\\\ = \\partial_ {d} \\left(1 - \\operatorname * {P r} \\left(D _ {j} > d \\mid X _ {j} \\in \\psi_ {\\star}\\right)\\right) \\\\ \\cdot \\left(\\operatorname * {P r} \\left(D _ {j} > d \\mid X _ {j} \\in \\psi_ {i}, Z _ {i} \\in \\mathcal {Z} _ {l}\\right)\\right) \\\\ \\cdot \\prod_ {k \\neq l} \\left(\\operatorname * {P r} \\left(D _ {j} > d \\mid X _ {j} \\in \\psi_ {i}, Z _ {i} \\in \\mathcal {Z} _ {k}\\right)\\right) \\\\ = \\frac {\\mu_ {l} d | \\csc \\varphi_ {\\star} | e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin (\\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\csc^ {2} \\varphi_ {\\star}})}}{\\pi r _ {l} r _ {e} \\sqrt {1 - \\cos^ {2} \\xi_ {l} (d) \\csc^ {2} \\varphi_ {\\star}}} \\\\ \\cdot \\prod_ {k = 1} ^ {L} \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} ^ {| \\varphi_ {i} - \\pi / 2 | <   \\xi_ {k}} e ^ {- \\frac {\\mu_ {k}}{\\pi} \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\left(\\xi_ {k} (d)\\right) \\csc^ {2} \\left(\\varphi_ {i}\\right)}\\right)}. \\tag {35} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            516,
+            291,
+            921,
+            487
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "By substituting (12), (32)-(35) in (10), we can obtain the expression for coverage probability by calculating the integration of $Z _ { \\star }$ and $\\mathcal { Z } _ { l }$ , which can be expressed as (36), shown at the bottom of the next page. Hence, the performance of the coverage probability can be evaluated directly. ",
+        "bbox": [
+            503,
+            494,
+            919,
+            569
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "C. Rate Analysis ",
+        "text_level": 1,
+        "bbox": [
+            504,
+            592,
+            624,
+            606
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Herein, we analyze the transmission rate of LEO satellite IoT constellations under two different transmission situations, i.e., infinite block-length packet transmission and finite blocklength packet transmission. Firstly, we introduce the following lemma. ",
+        "bbox": [
+            503,
+            611,
+            919,
+            685
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Lemma 1: For a non-negative random variable X, the expectation of X can be calculated as $\\begin{array} { r } { \\mathbb { E } [ X ] = \\int _ { 0 } ^ { \\infty } \\operatorname* { P r } { ( X > x ) } \\bar { d x } . } \\end{array}$ . ",
+        "bbox": [
+            503,
+            686,
+            919,
+            718
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Proof: We use $f ( x )$ to denote the PDF of X. Then we have ",
+        "bbox": [
+            519,
+            718,
+            919,
+            732
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathbb {E} [ X ] = \\int_ {0} ^ {\\infty} y f (y) d y = \\int_ {0} ^ {\\infty} \\int_ {0} ^ {x} f (y) d x d y \\\\ = \\int_ {0} ^ {\\infty} \\int_ {x} ^ {\\infty} f (y) d y d x = \\int_ {0} ^ {\\infty} \\operatorname * {P r} (X > x) d x. \\tag {37} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            524,
+            738,
+            919,
+            806
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "The proof is completed. ",
+        "bbox": [
+            504,
+            811,
+            669,
+            825
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Based on the above lemma, we analyze the transmission rate of LEO satellite IoT constellation under situations of infinite block length and finite block length, respectively. ",
+        "bbox": [
+            503,
+            827,
+            919,
+            871
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "A) Infinite Block-Length Packet Transmission: In the case of infinite block-length packet transmission, the transmission rate can be computed according to the shannon capacity, which is given by ",
+        "bbox": [
+            503,
+            872,
+            921,
+            931
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {I} _ {m} = \\mathbb {E} _ {\\gamma_ {m}} \\left[ \\log_ {2} \\left(1 + \\gamma_ {m}\\right) \\right]. \\tag {38}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            617,
+            933,
+            919,
+            950
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "page_number",
+        "text": "13735 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Then, based on (36) and Lemma 1, the transmission rate can be further calculated as ",
+        "bbox": [
+            73,
+            71,
+            491,
+            99
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {I} _ {m} = \\mathbb {E} _ {\\gamma_ {m}} \\left[ \\log_ {2} \\left(1 + \\gamma_ {m}\\right) \\right] \\\\ = \\int_ {0} ^ {\\infty} \\operatorname * {P r} \\left(\\log_ {2} (1 + \\gamma_ {m}) > t\\right) d t \\\\ = \\int_ {0} ^ {\\infty} \\operatorname * {P r} \\left(\\gamma_ {m} > 2 ^ {t} - 1\\right) d t. \\tag {39} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            158,
+            108,
+            491,
+            193
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "B) Finite Block-Length Packet Transmission: In the context of LEO satellite IoT, devices typically operate under finite block-length transmission regimes due to the short-packet nature of IoT traffic. Within this framework, communication is organized in discrete time slots, with each transmission block comprising M channel uses, defining the block length. Unlike conventional scenarios where Shannon capacity provides the fundamental limit, the finite block-length regime requires alternative performance metrics. Following the approach in [46], we adopt a more accurate approximation of the achievable rate that properly captures the fundamental trade-offs in short-packet communications. Particularly, given a target error probability $\\delta _ { \\mathrm { t h } } .$ , the approximated transmission rate can be expressed as ",
+        "bbox": [
+            73,
+            198,
+            491,
+            409
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {I} _ {m} ^ {\\mathrm{FBL}} = \\mathbb {E} _ {\\gamma_ {m}} \\left[ \\log_ {2} (1 + \\gamma_ {m}) - \\sqrt {\\frac {V (\\gamma_ {m})}{M}} \\frac {Q ^ {- 1} \\left(\\delta_ {\\mathrm{th}}\\right)}{\\ln 2} \\right], \\tag {40}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            81,
+            415,
+            491,
+            457
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "where $Q ^ { - 1 } ( \\cdot )$ refers to the inverse standard Gaussian $Q$ function, $V ( \\gamma _ { m } ) ~ = ~ \\left( 1 - ( 1 + \\gamma _ { m } ) ^ { - 2 } \\right) ( \\log _ { 2 } e ) ^ { 2 }$ stands for channel dispersion, which measures the stochastic channel variability with respect to a deterministic channel with the same channel capacity. Then, based on the (36) and the Lemma above, the transmission rate can be further calculated as ",
+        "bbox": [
+            73,
+            460,
+            491,
+            501
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            71,
+            921,
+            145
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {I} _ {m} ^ {\\mathrm{FBL}} \\\\ = \\mathbb {E} _ {\\gamma_ {m}} \\left[ \\log_ {2} \\left(1 + \\gamma_ {m}\\right) \\right] - \\frac {Q ^ {- 1} (\\delta_ {\\mathrm{th}})}{\\ln 2 \\sqrt {M}} \\mathbb {E} _ {\\gamma_ {m}} [ \\sqrt {V (\\gamma_ {m})} ] \\\\ = \\mathcal {I} _ {m} - \\frac {Q ^ {- 1} (\\delta_ {\\mathrm{th}})}{\\ln 2 \\sqrt {M}} \\\\ \\cdot \\int_ {0} ^ {\\infty} \\operatorname * {P r} \\left(\\sqrt {\\left(1 - \\left(1 + \\gamma_ {m}\\right) ^ {- 2}\\right) (\\log_ {2} e) ^ {2}} > t\\right) d t \\\\ = \\mathcal {I} _ {m} - \\frac {Q ^ {- 1} \\left(\\delta_ {\\mathrm{th}}\\right)}{\\ln 2 \\sqrt {M}} \\cdot \\int_ {0} ^ {\\log_ {2} e} \\operatorname * {P r} \\left(\\gamma_ {m} > \\frac {\\log_ {2} e}{\\sqrt {\\left(\\log_ {2} e\\right) ^ {2} - t ^ {2}}} - 1\\right) d t \\\\ = \\mathcal {I} _ {m} - - \\frac {Q ^ {- 1} \\left(\\delta_ {\\mathrm{th}}\\right)}{\\ln 2 \\sqrt {M}} \\int_ {0} ^ {\\log_ {2} e} \\mathcal {F} _ {\\gamma_ {m}} ^ {\\prime} \\left(\\frac {\\log_ {2} e}{\\sqrt {\\left(\\log_ {2} e\\right) ^ {2} - t ^ {2}}} - 1\\right) d t. \\tag {41} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            506,
+            169,
+            926,
+            396
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Now, we have obtained the expressions for transmission rate in the cases of infinite block-length packet transmission and finite block-length packet transmission. Hence, we can evaluate the performance of transmission rate according to the parameters of LEO satellite IoT constellation. ",
+        "bbox": [
+            501,
+            421,
+            921,
+            496
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {L} _ {I _ {k}} (s) = \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} e ^ {- \\frac {\\mu_ {k}}{\\pi} \\left(\\int_ {w _ {k, \\varphi_ {i}, 1}} ^ {w _ {k, \\varphi_ {i}, 2}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k} G _ {\\mathrm{sat} , k}}{f _ {k , \\varphi_ {i}} ^ {2} (w)}\\right) d w + \\int_ {w _ {k, \\varphi_ {i}, 2}} ^ {w _ {k, \\varphi_ {i}, 3}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k}}{f _ {k , \\varphi_ {i}} ^ {2} (w)}\\right) d w\\right)} \\\\ \\cdot \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} e ^ {\\xi_ {k} \\leq | \\varphi_ {i} - \\pi / 2 | \\leq \\overline {{\\varphi}} _ {\\beta , k}} - \\frac {\\mu_ {k}}{\\pi} \\left(\\int_ {0} ^ {w _ {k, \\varphi_ {i}, 2}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k} G _ {\\mathrm{sat} , k}}{f _ {k , \\varphi_ {i}} ^ {2} (w)}\\right) d w + \\int_ {w _ {k, \\varphi_ {i}, 2}} ^ {w _ {k, \\varphi_ {i}, 3}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k}}{f _ {k , \\varphi_ {i}} ^ {2} (w)}\\right) d w\\right) \\\\ \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} e ^ {- \\frac {\\mu_ {k}}{\\pi} \\int_ {0} ^ {w _ {k, \\varphi_ {i}, 3}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k}}{f _ {k , \\varphi_ {i}} ^ {2} (w)}\\right) d w}. \\tag {33} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            169,
+            525,
+            921,
+            674
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {F} _ {\\gamma_ {\\star}} ^ {\\prime} (\\gamma_ {\\mathrm{th}}) = \\sum_ {l = 1} ^ {L} \\operatorname * {P r} (\\mathcal {A} _ {l}) \\sum_ {n = 1} ^ {N} \\chi_ {n} \\cdot \\int_ {r _ {l, \\min}} ^ {r _ {l, \\max}} \\frac {\\lambda_ {l} \\mu_ {l} r}{\\pi r _ {l} r _ {e}} e ^ {- \\frac {\\eta_ {n} \\sigma_ {0} ^ {2} \\gamma_ {\\mathrm{th}} r ^ {2}}{g _ {t} p _ {l} G _ {\\mathrm{sat} , l}}}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            76,
+            704,
+            452,
+            742
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\left(\\int_ {0} ^ {\\xi_ {l} (r)} \\frac {e ^ {- \\frac {\\mu_ {l}}{\\pi} \\arcsin (\\sqrt {1 - \\cos^ {2} \\xi_ {l} (r) \\sec^ {2} v}) - \\frac {\\mu_ {l}}{\\pi} \\left(\\int_ {w _ {l , v , 1}} ^ {w _ {l , v , 2}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {l} G _ {\\mathrm{sat} , l}}{f _ {l , v} ^ {2} (w)}\\right) d w + \\int_ {w _ {l , v , 2}} ^ {w _ {l , v , 3}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {1}}{f _ {l , v} ^ {2} (w)}\\right) d w\\right)}}{\\sqrt {1 - \\cos^ {2} \\xi_ {l} (r) \\sec^ {2} v}} d v\\right)\n$$",
+        "text_format": "latex",
+        "bbox": [
+            106,
+            743,
+            776,
+            801
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\prod_ {k = 1} ^ {L} \\exp \\left(- \\lambda_ {k} \\int_ {0} ^ {\\xi_ {k} (r)} 1 - e ^ {- \\frac {\\mu_ {k}}{\\pi} \\left(\\arcsin (\\sqrt {1 - \\cos^ {2} \\xi_ {k} (r) \\sec^ {2} \\overline {{\\varphi}}}) + \\int_ {w _ {k, \\overline {{\\varphi}}}, 1} ^ {w _ {k, \\overline {{\\varphi}}}, 2} 1 - \\mathcal {L} _ {| h | 2} \\left(\\frac {s g _ {t} p _ {k} G _ {\\mathrm{sat} , k}}{f _ {k , \\overline {{\\varphi}}} ^ {2} (w)}\\right) d w + \\int_ {w _ {k, \\overline {{\\varphi}}}, 2} ^ {w _ {k, \\overline {{\\varphi}}}, 3} 1 - \\mathcal {L} _ {| h | 2} \\left(\\frac {s g _ {t} p _ {k}}{f _ {k , \\varphi} ^ {2} (w)}\\right) d w\\right)} \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}\\right)\n$$",
+        "text_format": "latex",
+        "bbox": [
+            102,
+            803,
+            923,
+            847
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\prod_ {k = 1} ^ {L} \\exp \\left(- \\lambda_ {k} \\int_ {\\xi_ {k} (r)} ^ {\\overline {{\\varphi}} _ {\\beta , k}} 1 - e ^ {- \\frac {\\mu_ {k}}{\\pi} \\left(\\int_ {0} ^ {w _ {k}, \\overline {{\\varphi}}, 2} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k} G _ {\\mathrm{sat} , k}}{f _ {k , \\overline {{\\varphi}}} ^ {2} (w)}\\right) d w + \\int_ {w _ {k}, \\overline {{\\varphi}}, 2} ^ {w _ {k}, \\overline {{\\varphi}}, 3} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k}}{f _ {k , \\overline {{\\varphi}}} ^ {2} (w)}\\right) d w\\right)} \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}\\right)\n$$",
+        "text_format": "latex",
+        "bbox": [
+            102,
+            848,
+            756,
+            893
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\prod_ {k = 1} ^ {L} \\exp \\left(- \\lambda_ {k} \\int_ {\\overline {{\\varphi}} _ {\\beta , k}} ^ {\\overline {{\\varphi}} _ {k}} 1 - e ^ {- \\frac {\\mu_ {k}}{\\pi} \\left(\\int_ {0} ^ {w _ {k}, \\overline {{\\varphi}} _ {k} 3} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k}}{f _ {k} ^ {2} , \\overline {{\\varphi}} ^ {(w)}}\\right) d w\\right)} \\cos \\overline {{\\varphi}} d \\overline {{\\varphi}}\\right) d r. \\tag {36}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            102,
+            893,
+            921,
+            938
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "page_number",
+        "text": "13736 ",
+        "bbox": [
+            78,
+            36,
+            109,
+            45
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "table",
+        "img_path": "images/a5a96c0511d295f5b50612b80b62443984cfbf7ea565404505d315d2b22e5520.jpg",
+        "table_caption": [
+            "TABLE II MAIN SYSTEM PARAMETERS FOR LEO SATELLITE IOT CONSTELLATION "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Parameter</td><td>Value</td></tr><tr><td>Earth&#x27;s radius  $r_e$ </td><td>6378.14 km</td></tr><tr><td>Carrier frequency  $f$ </td><td>5 GHz</td></tr><tr><td>Carrier bandwidth  $B$ </td><td>250 MHz</td></tr><tr><td>IoT device antenna gain  $G_{\\text{dev}}$ </td><td>3 dBi</td></tr><tr><td>Rain fading mean  $\\mu_r$ </td><td>-2.6 dB</td></tr><tr><td>Rain fading variance  $\\sigma_r^2$ </td><td>1.63 dB</td></tr><tr><td>Rician factor  $K$ </td><td>10 dB</td></tr><tr><td>Noise variance  $\\sigma_0^2$ </td><td>-150 dBm</td></tr><tr><td>Number of layers  $L$ </td><td>2</td></tr><tr><td>Orbit radius  $r_l$ </td><td>[6800 km, 7400 km]</td></tr><tr><td>Satellite antenna gain  $G_{\\text{sat},l}$ </td><td>20 dBi</td></tr><tr><td>Average transmit power  $\\xi_l$ </td><td>[30 dBm, 30 dBm]</td></tr><tr><td>Satellite coverage angle  $\\beta_l$ </td><td>[60°, 60°]</td></tr><tr><td>Satellite density  $\\mu_l$ </td><td>[20, 20]</td></tr><tr><td>Orbit density  $\\lambda_l$ </td><td>[20, 20]</td></tr><tr><td>SINR threshold  $\\gamma_{th}$ </td><td>-10 dB</td></tr><tr><td>Target error rate  $\\delta_{th}$ </td><td> $10^{-4}$ </td></tr><tr><td>Number of time intervals  $M$ </td><td> $10^4$ </td></tr></table>",
+        "bbox": [
+            107,
+            117,
+            459,
+            377
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "IV. SIMULATION RESULTS ",
+        "text_level": 1,
+        "bbox": [
+            187,
+            405,
+            377,
+            417
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "In this section, we provide extensive simulation results to validate the accuracy of the derived expressions for connectivity probability, coverage probability, and transmission rate via the Monte Carlo simulation method with $1 0 ^ { 6 }$ number of iterations to ensure precision. The main parameters of simulations are set according to TR 38.821 [47], which are shown in Table $\\mathrm { I I } . ^ { 2 }$ Specifically, we consider a constellation consisting of two-layer satellites, where satellites in layer 1 have smaller orbit radius than satellites in layer 2. Via simulations, we will try to reveal some insights by comparing with the classical constellations. ",
+        "bbox": [
+            73,
+            428,
+            491,
+            593
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "In Fig. 4 and Fig. 5, we plot the connectivity probability of two layers $\\mathrm { P r } \\left( \\mathcal { A } _ { 1 } \\right)$ and $\\mathrm { P r } \\left( \\mathcal { A } _ { 2 } \\right)$ under various orbit radius $r _ { 1 }$ and transmit power $p _ { 1 }$ . As expected, the analytical results closely align with the simulations, confirming the accuracy of the theoretical model. Notably, for orbital radius between 6900 km and 7400 km, Pr $\\left( \\mathcal { A } _ { 1 } \\right)$ decreases while Pr (A2) increases with $r _ { 1 }$ . This trend arises because larger orbital radius leads to greater path loss, reducing received signal power and increasing the likelihood of IoT devices connecting to satellites in other layers. Conversely, for $r _ { 1 }$ between 6800 km and 6900 km, $\\mathrm { P r } \\left( \\mathcal { A } _ { 1 } \\right)$ increases while $\\mathrm { P r } \\left( \\mathcal { A } _ { 2 } \\right)$ decreases. In this regime, the reduced orbital radius shrinks the satellite coverage area under fixed coverage angles $\\beta _ { l }$ and number of satellites. While lower orbits enhance signal strength, the diminished coverage area reduces the probability of satellites being within a device’s communication range, favoring connections with higher-altitude satellites. Therefore, ",
+        "bbox": [
+            73,
+            594,
+            491,
+            851
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f716413328b1f0753ec366b4a0e5988f3209c5d8a606a84b9371d07b258f4f70.jpg",
+        "content": "| Transmit Power p₁ | Orbit Radius r₁ | Connectivity Probability Pr(A₁) |\n| ----------------- | --------------- | ------------------------------- |\n| 30                | 7200            | 0.5                             |\n| 25                | 7000            | 0.6                             |\n| 20                | 6800            | 0.7                             |\n| 15                | 6600            | 0.75                            |\n| 10                | 6400            | 0.78                            |\n| 5                 | 6200            | 0.8                             |\n| 0                 | 6000            | 0.8                             |\n| 0                 | 5800            | 0.8                             |\n| 0                 | 5600            | 0.8                             |\n| 0                 | 5400            | 0.8                             |\n| 0                 | 5200            | 0.8                             |\n| 0                 | 5000            | 0.8                             |\n| 0                 | 4800            | 0.8                             |\n| 0                 | 4600            | 0.8                             |\n| 0                 | 4400            | 0.8                             |\n| 0                 | 4200            | 0.8                             |\n| 0                 | 4000            | 0.8                             |\n| 0                 | 3800            | 0.8                             |\n| 0                 | 3600            | 0.8                             |\n| 0                 | 3400            | 0.8                             |\n| 0                 | 3200            | 0.8                             |\n| 0                 | 3000            | 0.8                             |",
+        "chart_caption": [
+            "Fig. 4. Connectivity probability $\\mathrm { P r } \\left( \\mathcal { A } _ { 1 } \\right)$ performance under various orbit radius $r _ { 1 }$ and transmit power p1. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "area_stacked",
+        "bbox": [
+            526,
+            87,
+            890,
+            280
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f1a439087a95dc845fbba0c23cc29a7876884d1e6f78a0049dfe0410ff2d9f67.jpg",
+        "content": "",
+        "chart_caption": [
+            "Fig. 5. Connectivity probability Pr (A2) performance under various orbit radius r1 and transmit power p1. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            547,
+            361,
+            870,
+            537
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "when designing a LEO satellite IoT constellation, we should select an appropriate orbital radius based on the actual satellite scale to improve communication quality. Furthermore, at the same orbital radius, $\\mathrm { P r } \\left( \\mathcal { A } _ { 1 } \\right)$ and $\\mathrm { P r } \\left( \\mathcal { A } _ { 2 } \\right)$ remain stable across transmit power variations. The observed stability stems from the fact that in densely populated LEO satellite IoT constellations, connectivity probabilities are primarily governed by inter-satellite interference rather than noise or transmit power levels. ",
+        "bbox": [
+            501,
+            616,
+            921,
+            751
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "The number of satellites per orbit and the number of orbits are two important indicators of the LEO satellite IoT constellation. Therefore, we investigate the impacts of these two parameters on the connectivity probabilities $\\mathrm { P r } \\left( \\mathcal { A } _ { 1 } \\right)$ and $\\mathrm { P r } \\left( \\mathcal { A } _ { 2 } \\right)$ . As shown in Figs. 6 and $^ { 7 , }$ increasing satellite density and orbital density in layer 1 leads to a rise in $\\mathrm { P r } \\left( \\mathcal { A } _ { 1 } \\right)$ and a corresponding decrease in $\\mathrm { P r } \\left( \\mathcal { A } _ { 2 } \\right)$ . This behavior occurs because these two factors collectively determine the constellation scale in layer 1. When both parameters increase, IoT devices exhibit a higher probability of establishing connections with satellites of layer 1. This suggests an inherent tradeoff in multiple-layer constellation design, where enhancing connectivity in one layer necessarily reduces the connectivity probability in others, highlighting the importance of balanced resource allocation across orbital layers. ",
+        "bbox": [
+            501,
+            752,
+            921,
+            949
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "page_number",
+        "text": "13737 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "page_footnote",
+        "text": "2The proposed analytical framework can be extended to N-layer $( N > 3 )$ LEO satellite IoT constellations, but numerical experiments showed that increasing the number of layers introduces heightened sensitivity to system parameters, e.g., constellation scale and orbital altitude, potentially obscuring critical system insights. To maintain analytical tractability while ensuring meaningful interpretation of results, we focus our simulation study on a twolayer LEO satellite IoT constellation architecture. ",
+        "bbox": [
+            73,
+            866,
+            491,
+            949
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/ccc2476d872d314769fd63d769b47c6b8caf17c650ef1ca3ed0ebc826311f90b.jpg",
+        "content": "| Satellite density μ₁ | Orbit density λ₁ | Connectivity Probability Pr(A₁) | Type       |\n| --------------------- | ----------------- | ------------------------------- | ---------- |\n| 10                    | 10                | 0.5                             | Simulation |\n| 15                    | 15                | 0.6                             | Simulation |\n| 20                    | 20                | 0.7                             | Simulation |\n| 25                    | 25                | 0.8                             | Simulation |\n| 30                    | 30                | 0.9                             | Simulation |\n| 35                    | 35                | 1.0                             | Simulation |",
+        "chart_caption": [
+            "Fig. 6. Connectivity probability Pr (A1) performance under various orbit densities $\\lambda _ { 1 }$ and satellite densities $\\mu _ { 1 }$ . "
+        ],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            122,
+            80,
+            441,
+            253
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0112af38749eb157b3dbb530cd4082d836b268425ab582d2125d2395bcd6b2c7.jpg",
+        "content": "| Satellite Density μ₁ | Orbit Density λ₁ | Connectivity Probability Pr(A₂) | Simulation |\n|----------------------|------------------|----------------------------------|----------|\n| 30                   | 10               | 0.1                              | 0.1      |\n| 25                   | 15               | 0.2                              | 0.2      |\n| 20                   | 20               | 0.3                              | 0.3      |\n| 15                   | 25               | 0.4                              | 0.4      |\n| 10                   | 30               | 0.3                              | 0.3      |\n| 5                    | 35               | 0.2                              | 0.2      |",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "area_stacked",
+        "bbox": [
+            120,
+            319,
+            439,
+            494
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "chart",
+        "img_path": "images/cb632dbd250bed6402a488f5584a539414d47ca57729d8cb95c0097bb8a461ac.jpg",
+        "content": "| SINR Threshold (dB) | P₁=10,P₂=10 Ana. | P₁=10,P₂=10 Sim. | P₁=20,P₂=10 Ana. | P₁=20,P₂=10 Sim. | P₁=30,P₂=10 Ana. | P₁=30,P₂=10 Sim. | P₁=10,P₂=20 Ana. | P₁=10,P₂=20 Sim. |\n| ------------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- | ---------------- |\n| -20                 | 1.0              | 1.0              | 1.0              | 1.0              | 1.0              | 1.0              | 1.0              | 1.0              |\n| -15                 | 0.95             | 0.98             | 0.92             | 0.95             | 0.78             | 0.75             | 0.98             | 0.98             |\n| -10                 | 0.6              | 0.7              | 0.7              | 0.7              | 0.7              | 0.7              | 0.7              | 0.7              |\n| -5                  | 0.05             | 0.65             | 0.65             | 0.65             | 0.7              | 0.7              | 0.65             | 0.65             |\n| 0                   | 0.0              | 0.6              | 0.6              | 0.6              | 0.65             | 0.65             | 0.6              | 0.6              |\n| 5                   | 0.0              | 0.5              | 0.5              | 0.5              | 0.6              | 0.6              | 0.5              | 0.5              |\n| 10                  | 0.0              | 0.4              | 0.4              | 0.4              | 0.5              | 0.5              | 0.4              | 0.4              |",
+        "chart_caption": [
+            "Fig. 7. Connectivity probability Pr (A2) performance under various orbit densities $\\lambda _ { 1 }$ and satellite densities $\\mu _ { 1 }$ . ",
+            "Fig. 8. Coverage probability performance under different transmit power versus different SINR thresholds. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            117,
+            549,
+            447,
+            751
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            813,
+            491,
+            843
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Next, we examine the performance of coverage probability for the proposed model in Fig. 8. As expected, the analytical results closely align with the simulations, confirming the accuracy of the theoretical analysis. As the transmit power of satellites in layer $1 \\ p _ { 1 }$ increases, the decline in coverage probability becomes more gradual. This trend occurs because a larger $p _ { 1 }$ improves the SINR for connections to satellites of layer 1. Notably, when $p _ { 1 }$ is set to 20 dBm or 30 dBm, the coverage probability stabilizes near 0.7 for certain SINR thresholds, indicating that devices predominantly connect to layer 1 satellites under these conditions —consistent with the coverage probability definition and the simulation results in Fig. 4 and Fig. 5. Conversely, variations in $p _ { 2 }$ induce more significant fluctuations in coverage probability, suggesting that the transmit power adjustments of layer 2 have a stronger impact on system performance. These findings underscore a hierarchical power-dependency in multiple-layer constellations: while layer 1 power governs baseline connectivity stability, layer 2 power serves as a critical tuning parameter for coverage optimization. Thus, constellation designs must strategically balance inter-layer power allocation to meet specific SINR and coverage requirements. ",
+        "bbox": [
+            73,
+            844,
+            491,
+            949
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "chart",
+        "img_path": "images/a8de5589f94ce7b8d09cba52ac1f89d0f876cf3fe732810cc9bc66f48b12d394.jpg",
+        "content": "| SINR Threshold (dB) | β₁=π/3, β₂=π/3 Ana. | β₁=π/3, β₂=π/3 Sim. | β₁=π/3, β₂=π/4 Ana. | β₁=π/3, β₂=π/4 Sim. | β₁=π/4, β₂=π/3 Ana. | β₁=π/4, β₂=π/3 Sim. | β₁=π/4, β₂=π/4 Ana. | β₁=π/4, β₂=π/4 Sim. |\n| ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- | ------------------- |\n| -20                 | 1.0                 | 1.0                 | 1.0                 | 1.0                 | 1.0                 | 1.0                 | 1.0                 | 1.0                 |\n| -15                 | 0.95                | 0.95                | 0.95                | 0.95                | 0.9                 | 0.9                 | 0.9                 | 0.9                 |\n| -10                 | 0.65                | 0.65                | 0.65                | 0.65                | 0.35                | 0.35                | 0.35                | 0.35                |\n| -5                  | 0.1                 | 0.1                 | 0.1                 | 0.1                 | 0.05                | 0.05                | 0.05                | 0.05                |\n| 0                   | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 |\n| 5                   | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 |\n| 10                  | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 | 0.0                 |",
+        "chart_caption": [
+            "Fig. 9. Coverage probability performance under different antenna coverage angles versus different SINR thresholds. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            532,
+            69,
+            895,
+            284
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            359,
+            921,
+            585
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Fig. 9 shows the performance of coverage probability under different SINR thresholds for various combinations of satellite coverage angle $\\beta _ { l }$ of each layer. Specifically, when the satellite coverage angle of layer $1 \\ \\beta _ { 1 }$ decreases, there is a distinct segmentation phenomenon with the increasing SINR thresholds. For a given SINR threshold (e.g., -8 dB), this segmentation indicates communication occurring primarily with satellites in layer 1. This is because reduced $\\beta _ { 1 }$ value diminishes the coverage range of these satellites, yielding a connectivity probability of approximately 0.31 with the IoT devices for satellites in layer 1. However, the reduction in $\\beta _ { 2 }$ affects coverage differently. Under low SINR thresholds, the coverage probability declines because the satellites in layer 2, e.g., higher-orbit satellites with smaller coverage angles $\\beta _ { 2 } ,$ provide less overlapping coverage area. This reduction in effective coverage increases the probability of no visible satellites Pnosatl mentioned in (17) throughout the constellation. These findings reveal a critical design constraint in LEO satellite IoT constellation, while decreasing coverage angles $\\beta _ { l }$ may improve signal quality for connected devices, it simultaneously reduces overall network availability. This fundamental trade-off necessitates careful optimization of satellite coverage angles to balance connection reliability within service area coverage in multiple-layer constellations. ",
+        "bbox": [
+            501,
+            587,
+            921,
+            949
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "page_number",
+        "text": "13738 ",
+        "bbox": [
+            78,
+            36,
+            107,
+            45
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "chart",
+        "img_path": "images/fb9ca4ad2b0b6cdacddbcebb3cb4a8c6e6c7552a1bb9657e56a652438d7b7b50.jpg",
+        "content": "| Satellite Density μ₁ | Orbit Density λ₁ | Coverage Probability | Analysis | Simulation |\n|----------------------|------------------|----------------------|----------|------------|\n| 10                   | 10               | 0.4                  | 0.7      | 0.7        |\n| 15                   | 15               | 0.5                  | 0.8      | 0.8        |\n| 20                   | 20               | 0.6                  | 0.9      | 0.9        |\n| 25                   | 25               | 0.7                  | 0.9      | 0.9        |\n| 30                   | 30               | 0.8                  | 0.9      | 0.9        |\n| 35                   | 35               | 0.9                  | 0.9      | 0.9        |",
+        "chart_caption": [
+            "Fig. 10. Coverage probability performance under different satellite densities µ1 and orbit densities λ1 of layer 1. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            125,
+            79,
+            441,
+            258
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c9ae5f431d39e49e816228e49e411dfe1eb666cbc9310d205b2bd4fe1eb43389.jpg",
+        "content": "| Satellite Density μ₂ | Orbit Density λ₂ | Coverage Probability |\n| --------------------- | ---------------- | --------------------- |\n| 30                    | 10               | 0.5                   |\n| 25                    | 15               | 0.45                  |\n| 20                    | 20               | 0.4                   |\n| 15                    | 25               | 0.35                  |\n| 10                    | 30               | 0.3                   |\n| 5                     | 35               | 0.25                  |",
+        "chart_caption": [
+            "Fig. 11. Coverage probability performance under different satellite densities µ2 and orbit densities λ2 of layer 2. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "area",
+        "bbox": [
+            125,
+            319,
+            439,
+            496
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Fig. 10 and Fig. 11 investigate the effects of satellite densities and orbit densities on coverage probability in LEO satellite IoT constellation. Fig. 10 reveals a non-monotonic relationship, where the coverage probability initially rises before declining as the satellite density $\\mu _ { 1 }$ and orbit density $\\lambda _ { 1 }$ increase. This is because higher densities first improve connectivity probabilities with LEO satellites in layer 1, whose conditional coverage probability exceeds that of layer 2 satellites. However, beyond a critical density threshold, growing interference from additional satellites degrades overall coverage performance. Moreover, Fig. 11 demonstrates a contrasting monotonic decrease in coverage probability with increasing densities for satellites in layer 2. As a higher orbit altitude with inherently lower connectivity probability, the coverage performance of satellites in layer 2 is more sensitive to density-induced interference effects without benefiting from the initial positive network effects observed in layer 1. Therefore, it highlights a fundamental density-interference trade-off in multiple-layer LEO satellite IoT constellations: while moderate density enhances coverage through improved satellite availability, excessive density ultimately degrades performance through interference accumulation. This suggests the existence of optimal density configurations that balance these competing effects. ",
+        "bbox": [
+            73,
+            556,
+            491,
+            917
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "To evaluate the effectiveness of the CPP model, we compare it with BPP model under the same total number of LEO satellites. It can be seen in Fig. 12 that CPP model can achieve a wider range of adjustment than BPP. Specifically, the BPP models a LEO satellite constellation with only a single parameter, the total number of satellites N . However, the CPP model provides two parameters (the number of orbits λ and the number of satellites per orbit $\\mu )$ to describe a constellation of LEO satellites. This stands in sharp contrast to the binomial approach, as a fixed total N (where $N = \\lambda \\mu )$ can be achieved through diverse combinations of orbit counts and satellite densities per orbit. This flexibility is critical for modeling realworld constellations, allowing the CPP model to produce a vast set of potential LEO satellite constellations. Consequently, it enables a far more comprehensive assessment of performance by accounting for a greater representative variety in spatial distribution. ",
+        "bbox": [
+            73,
+            919,
+            491,
+            949
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bad6b0ffcf6e84f852ef15f2bb43998392a9e1d084bb18aba7acdb299d567669.jpg",
+        "content": "| SINR Threshold (dB) | Coverage Probability (λ₁=20, μ₁=20) | Coverage Probability (λ₁=400, μ₁=1) | Coverage Probability (BPP N_B=400) |\n| ------------------- | ----------------------------------- | ----------------------------------- | ---------------------------------- |\n| -20                 | 0.9                                 | 0.9                                 | 0.9                                |\n| -17                 | 0.9                                 | 0.9                                 | 0.9                                |\n| -14                 | 0.9                                 | 0.9                                 | 0.9                                |\n| -11                 | 0.9                                 | 0.9                                 | 0.9                                |\n| -8                  | 0.5                                 | 0.5                                 | 0.5                                |\n| -5                  | 0.0                                 | 0.0                                 | 0.0                                |\n| -2                  | 0.0                                 | 0.0                                 | 0.0                                |\n| 0                   | 0.0                                 | 0.0                                 | 0.0                                |\n| 2                   | 0.0                                 | 0.0                                 | 0.0                                |\n| 4                   | 0.0                                 | 0.0                                 | 0.0                                |\n| 7                   | 0.0                                 | 0.0                                 | 0.0                                |\n| 10                  | 0.0                                 | 0.0                                 | 0.0                                |",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            562,
+            77,
+            857,
+            258
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4087c4f28f70ea6cd94ca3f0a53e267cb00a180267b18d4e14283c857539d988.jpg",
+        "content": "| SINR Threshold (dB) | SR fading, m = 1.0 | SR fading, m = 3.0 | SR fading, m = 10.0 | Rician fading |\n| ------------------- | ------------------ | ------------------ | ------------------- | ------------- |\n| -20                 | 1.0                | 1.0                | 1.0                 | 1.0           |\n| -15                 | 1.0                | 1.0                | 1.0                 | 1.0           |\n| -10                 | 0.9                | 0.85               | 0.8                 | 0.8           |\n| -5                  | 0.4                | 0.3                | 0.25                | 0.2           |\n| 0                   | 0.0                | 0.0                | 0.0                 | 0.0           |\n| 5                   | 0.0                | 0.0                | 0.0                 | 0.0           |\n| 10                  | 0.0                | 0.0                | 0.0                 | 0.0           |",
+        "chart_caption": [
+            "Fig. 12. Coverage probability performance for the BPP and CPP models. ",
+            "Fig. 13. Coverage probability performance under Rician fading and shadowed-Rician fading with different Nakagami shape parameters. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            563,
+            290,
+            862,
+            474
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "table",
+        "img_path": "images/24efce2d616c5fea31088db1685db10c6f010e90ba582cc15ee01f1b9d82fd15.jpg",
+        "table_caption": [
+            "TABLE III SIMULATION PARAMETERS OF SHADOWED-RICIAN SCENARIOS "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Shadowing scenarios</td><td> $b_0$ </td><td>m</td><td>Ω</td></tr><tr><td>Infrequent light shadowing</td><td>0.158</td><td>19.4</td><td>1.29</td></tr><tr><td>Frequent heavy shadowing</td><td>0.063</td><td>0.739</td><td> $8.97 \\times 10^{-4}$ </td></tr><tr><td>Average shadowing</td><td>0.126</td><td>10.1</td><td>0.835</td></tr></table>",
+        "bbox": [
+            519,
+            561,
+            908,
+            622
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            646,
+            921,
+            872
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Finally, to assess the robustness of the proposed framework under diverse propagation conditions, coverage probability is analyzed across both parameterized Shadowed-Rician (SR) fading and established canonical SR scenarios. Fig. 13 compares the coverage probability performance of the proposed framework under Rician fading and SR fading with different severity parameter m. A counterintuitive trend is observed: SR fading with smaller m values, which indicates more severe shadowing, yields higher coverage probability. This result stems from the interplay between the maximum received power association criterion and the interference profile in multi-layer LEO satellite constellations. While the serving link is selected based on the most favorable instantaneous channel, severe shadowing simultaneously suppresses the aggregate interference from other LEO satellites, leading to a net improvement in the overall SINR balance. Furthermore, the close alignment between the Rician curve and the SR curve with $m = 1 0$ confirms the consistency of the analytical framework across fading models. This robustness is also validated under three typical SR scenarios defined in [48], namely infrequent light, frequent heavy, and average shadowing, whose parameters are listed in Table III. As illustrated in Fig. 14, the proposed scheme maintains robust performance under infrequent light and average shadowing, matching the performance of a conventional Rician channel. Although frequent heavy shadowing, characterized by significantly diminished LoS power, leads to expected performance degradation, the scheme sustains viable coverage within practical LEO link budgets. Collectively, these analyses demonstrate that the proposed design remains effective across a wide range of realistic fading environments, offering valuable insights for selecting satellite association strategies in varied propagation conditions. ",
+        "bbox": [
+            503,
+            873,
+            921,
+            950
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "page_number",
+        "text": "13739 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "table",
+        "img_path": "images/f0635e81bbc7b037902205a6e8b3bf3728a2953ecf31a95aec2fe3889c20b895.jpg",
+        "table_caption": [
+            "TABLE IV COEFFICIENTS χn AND ηn FOR DIFFERENT K "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td rowspan=\"2\">N</td><td colspan=\"2\">K=0 dB</td><td colspan=\"2\">K=3 dB</td><td colspan=\"2\">K=5 dB</td><td colspan=\"2\">K=7 dB</td><td colspan=\"2\">K=10 dB</td></tr><tr><td> $\\chi_n$ </td><td> $\\eta_n$ </td><td> $\\chi_n$ </td><td> $\\eta_n$ </td><td> $\\chi_n$ </td><td> $\\eta_n$ </td><td> $\\chi_n$ </td><td> $\\eta_n$ </td><td> $\\chi_n$ </td><td> $\\eta_n$ </td></tr><tr><td>n=1</td><td>-45.90</td><td>1.86</td><td>56.32</td><td>1.83</td><td>43.13</td><td>2.90</td><td>28.77</td><td>3.91</td><td>177.75</td><td>3.87</td></tr><tr><td>n=2</td><td>-22.82</td><td>1.67</td><td>45.12</td><td>1.81</td><td>74.79</td><td>2.50</td><td>95.44</td><td>3.44</td><td>-338.05</td><td>4.38</td></tr><tr><td>n=3</td><td>33.44</td><td>1.92</td><td>-61.05</td><td>1.82</td><td>22.34</td><td>2.92</td><td>11.77</td><td>2.53</td><td>297.00</td><td>5.40</td></tr><tr><td>n=4</td><td>36.28</td><td>1.65</td><td>-39.40</td><td>1.86</td><td>-139.27</td><td>2.71</td><td>-134.98</td><td>3.48</td><td>-135.70</td><td>5.99</td></tr><tr><td> $\\widehat{\\mathcal{E}}(K)$ </td><td colspan=\"2\"> $8.3954 \\times 10^{-6}$ </td><td colspan=\"2\"> $7.4144 \\times 10^{-5}$ </td><td colspan=\"2\"> $1.1045 \\times 10^{-5}$ </td><td colspan=\"2\"> $1.8885 \\times 10^{-4}$ </td><td colspan=\"2\"> $1.5746 \\times 10^{-4}$ </td></tr><tr><td> $B(K)$ </td><td colspan=\"2\"> $2.8975 \\times 10^{-3}$ </td><td colspan=\"2\"> $8.6107 \\times 10^{-3}$ </td><td colspan=\"2\"> $3.3234 \\times 10^{-3}$ </td><td colspan=\"2\"> $1.3742 \\times 10^{-2}$ </td><td colspan=\"2\"> $1.2548 \\times 10^{-2}$ </td></tr></table>",
+        "bbox": [
+            187,
+            109,
+            810,
+            220
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "chart",
+        "img_path": "images/d7ecea5c731165709633812de785b2d1fbd8ae1987014449f70bddd40145dd05.jpg",
+        "content": "| SINR Threshold (dB) | Rician fading | Infrequent light shadowing | Average shadowing | Frequent heavy shadowing |\n| ------------------- | ------------- | -------------------------- | ----------------- | ------------------------ |\n| -20                 | 1.0           | 1.0                        | 1.0               | 0.8                      |\n| -15                 | 1.0           | 1.0                        | 1.0               | 0.4                      |\n| -10                 | 0.9           | 0.8                        | 0.9               | 0.1                      |\n| -5                  | 0.6           | 0.4                        | 0.6               | 0.0                      |\n| 0                   | 0.1           | 0.1                        | 0.1               | 0.0                      |\n| 5                   | 0.0           | 0.0                        | 0.0               | 0.0                      |\n| 10                  | 0.0           | 0.0                        | 0.0               | 0.0                      |",
+        "chart_caption": [
+            "Fig. 14. Coverage probability performance under different fading scenarios. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            135,
+            239,
+            433,
+            425
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            463,
+            491,
+            885
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "V. DISCUSSION ",
+        "text_level": 1,
+        "bbox": [
+            225,
+            900,
+            341,
+            912
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "In this section, we firstly discuss three key aspects of the proposed framework to further validate its robustness and practicality: the accuracy of the Rician channel approximation, the generality of the Cox-based model for various constellation designs, and the implications of multi-layer interference and IoT-specific performance. Finally, we give out the concrete design guidelines for LEO satellite IoT constellations. ",
+        "bbox": [
+            73,
+            919,
+            491,
+            950
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            246,
+            921,
+            323
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "A. Rician Approximation Analysis ",
+        "text_level": 1,
+        "bbox": [
+            503,
+            338,
+            740,
+            353
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Firstly, we validate the effectiveness of the proposed finite General Dirichlet series approximation. To establish a rigorous error bound for the proposed approximation, we begin by defining the absolute error function for a given Rician factor K as ",
+        "bbox": [
+            501,
+            357,
+            921,
+            431
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\epsilon (x; K) = \\left| Q _ {1} \\left(\\sqrt {2 K}, \\sqrt {\\frac {2 (1 + K) x}{\\Omega_ {s}}}\\right) - \\sum_ {n = 1} ^ {N} \\chi_ {n} e ^ {- \\eta_ {n} x} \\right| \\\\ = \\left| \\mathcal {F} _ {| h _ {l, m} | ^ {2}} ^ {\\prime} (x) - \\widetilde {\\mathcal {F}} _ {| h _ {l, m} | ^ {2}} ^ {\\prime} (x) \\right|. \\tag {42} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            519,
+            434,
+            921,
+            510
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Deriving a direct and tight upper bound for $\\epsilon ( x ; K )$ from its explicit form is mathematically challenging. However, the effectiveness of the approximation can be compellingly demonstrated by proving that its error is uniformly small over the domain of interest. Applying the Cauchy-Schwarz inequality to the integrated square error ${ \\mathcal { E } } ( K )$ , yields a worstcase bound on the maximum absolute error: ",
+        "bbox": [
+            501,
+            513,
+            921,
+            619
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\sup \\quad \\epsilon (x; K) \\\\ x \\in [ 0, x _ {\\mathrm{max}} ] \\\\ \\leq \\sqrt {\\frac {1}{x _ {\\max}} \\cdot \\int_ {0} ^ {x _ {\\max}} \\epsilon (x ; K) ^ {2} d x} \\leq \\sqrt {\\frac {\\mathcal {E} (K)}{x _ {\\max}}}, \\tag {43} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            563,
+            626,
+            921,
+            696
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Given that $\\mathcal { E } ( K ) \\approx \\hat { \\mathcal { E } } ( K )$ , the numerical error bound $B ( K )$ can be obtained as ",
+        "bbox": [
+            503,
+            702,
+            919,
+            732
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "equation",
+        "text": "$$\nB (K) = \\sqrt {\\frac {\\hat {\\mathcal {E}} (K)}{x _ {\\max}}}, \\tag {44}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            645,
+            736,
+            919,
+            777
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "As computed in Table IV, the values of $B ( K )$ are consistently very low across all considered K-factors. This quantitatively confirms that the maximum pointwise error introduced by our approximation is negligible, thereby validating the high accuracy of the proposed approximation. ",
+        "bbox": [
+            501,
+            780,
+            919,
+            856
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Then we focus on the complexity analysis of the proposed approximation method. Specifically, the proposed approximation is analyzed in two phases: offline parameter optimization and online evaluation. ",
+        "bbox": [
+            501,
+            857,
+            921,
+            915
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "1) Offline parameter optimization: The optimization problem Q1 is solved using GA. The complexity depends on the population size P , number of generations G, and the costs of evaluating Eˆ(K) per candidate, which involves computing the Marcum Q-function and the approximation at $i _ { \\operatorname* { m a x } } = { x _ { \\operatorname* { m a x } } } / { \\delta } .$ . Then, the total complexity is $O ( P G i _ { \\operatorname* { m a x } } )$ . While this is computationally intensive, it is performed once for each $K ,$ and does not affect online performance. The offline process is feasible on modern workstations. ",
+        "bbox": [
+            521,
+            919,
+            921,
+            950
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "page_number",
+        "text": "13740 ",
+        "bbox": [
+            78,
+            36,
+            109,
+            45
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "chart",
+        "img_path": "images/ae46281a39be5e091f0224b8ad5380f665ebe8fc9d23ca923cea815821390ba2.jpg",
+        "content": "| Values of b | Exact K = 0 dB | Approx K = 0 dB | Exact K = 3 dB | Approx K = 3 dB | Exact K = 5 dB | Approx K = 5 dB | Exact K = 7 dB | Approx K = 7 dB | Exact K = 10 dB | Approx K = 10 dB |\n| ----------- | -------------- | --------------- | -------------- | --------------- | -------------- | --------------- | -------------- | --------------- | --------------- | ---------------- |\n| 0           | 1.0            | 1.0             | 1.0            | 1.0             | 1.0            | 1.0             | 1.0            | 1.0             | 1.0             | 1.0              |\n| 1           | 0.4            | 0.4             | 0.4            | 0.4             | 0.4            | 0.4             | 0.4            | 0.4             | 0.4             | 0.4              |\n| 2           | 0.1            | 0.1             | 0.1            | 0.1             | 0.1            | 0.1             | 0.1            | 0.1             | 0.1             | 0.1              |\n| 3           | 0.05           | 0.05            | 0.05           | 0.05            | 0.05           | 0.05            | 0.05           | 0.05            | 0.05            | 0.05             |\n| 4           | 0.02           | 0.02            | 0.02           | 0.02            | 0.02           | 0.02            | 0.02           | 0.02            | 0.02            | 0.02             |\n| 5           | 0.01           | 0.01            | 0.01           | 0.01            | 0.01           | 0.01            | 0.01           | 0.01            | 0.01            | 0.01             |\n| 6           | 0.005          | 0.005           | 0.005          | 0.005           | 0.005          | 0.005           | 0.005          | 0.005           | 0.005           | 0.005            |\n| 7           | 0.002          | 0.002           | 0.002          | 0.002           | 0.002          | 0.002           | 0.002          | 0.002           | 0.002           | 0.002            |",
+        "chart_caption": [
+            "Fig. 15. Comparisons with the Marcum Q-function with the proposed approximation method under different Rician factor K. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            135,
+            69,
+            433,
+            251
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "table",
+        "img_path": "images/011d3d4efef1372c0e2fc935430834c43338819946557c9e0a37473d079dfdcd.jpg",
+        "table_caption": [
+            "TABLE V PARAMETERS OF VALIDATED LEO SATELLITE CONSTELLATIONS "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Constellation</td><td>Altitude (km)</td><td>Planes</td><td>Sats/Plane</td><td>Inclination (°)</td></tr><tr><td>Starlink (Shell 1)</td><td>530</td><td>28</td><td>120</td><td>43</td></tr><tr><td>Starlink (Shell 2)</td><td>525</td><td>28</td><td>120</td><td>53</td></tr><tr><td>Starlink (Shell 3)</td><td>535</td><td>28</td><td>120</td><td>33</td></tr><tr><td>OneWeb (Gen 1)</td><td>1,200</td><td>12</td><td>54</td><td>86.4</td></tr><tr><td>Kuiper (Shell 1)</td><td>630</td><td>34</td><td>34</td><td>51.9</td></tr><tr><td>Kuiper (Shell 2)</td><td>610</td><td>42</td><td>36</td><td>36.0</td></tr><tr><td>Kuiper (Shell 3)</td><td>590</td><td>28</td><td>28</td><td>33.0</td></tr></table>",
+        "bbox": [
+            81,
+            339,
+            486,
+            431
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            112,
+            455,
+            491,
+            575
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "2) Online Evaluation Complexity: Once the approximation expression is determined, evaluating the approximation for any x requires computing N exponential terms. Thus, the online complexity is O(N ), which is extremely efficient compared to direct computation of the Marcum Q-function. For N = 4, this is negligible in system-level simulations. ",
+        "bbox": [
+            91,
+            577,
+            491,
+            681
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "The accuracy of the proposed approximation is validated across different Rician factors K in Fig. 15 and Table IV. Fig. 15 demonstrates excellent visual alignment between the approximated and exact Marcum-Q functions, while Table IV quantitatively confirms the approximation’s high accuracy through consistently low error bounds. These results validate the effectiveness of the method in accurately approximating the Marcum-Q function across various channel conditions. ",
+        "bbox": [
+            73,
+            684,
+            491,
+            806
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "B. Model for Practical Satellite Constellations ",
+        "text_level": 1,
+        "bbox": [
+            73,
+            824,
+            393,
+            839
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "To establish the robustness and practical utility of the CPP model, we validate the model against a diverse set of constellation architectures. Specifically, we provide a comprehensive performance comparison using the precise orbital parameters of three major LEO constellations with fundamentally different design philosophies: Space X’s Starlink, OneWeb, and Amazon’s Project Kuiper, as illustrated in Table V [49]. ",
+        "bbox": [
+            73,
+            843,
+            490,
+            949
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/ec85d596f243581d4670ee79c268bce73560253d3c27dcdd1bd8f157ae567a50.jpg",
+        "content": "| SINR Threshold (dB) | Starlink Lat. 30 | Cox-Starlink Lat. 30 | Starlink Lat. 0 | Cox-Starlink Lat. 0 | Oneweb Lat. 0 | Cox-Oneweb Lat. 0 | Kuiper Lat. 0 | Cox-Kuiper Lat. 0 |\n| ------------------- | ---------------- | -------------------- | --------------- | ------------------- | ------------- | ----------------- | ------------- | ----------------- |\n| -20                 | 0.9              | 0.9                  | 0.8             | 0.8                 | 0.9           | 0.9               | 0.8           | 0.8               |\n| -15                 | 0.9              | 0.9                  | 0.8             | 0.8                 | 0.9           | 0.9               | 0.8           | 0.8               |\n| -10                 | 0.9              | 0.9                  | 0.8             | 0.8                 | 0.9           | 0.9               | 0.8           | 0.8               |\n| -5                  | 0.8              | 0.8                  | 0.7             | 0.7                 | 0.8           | 0.8               | 0.7           | 0.7               |\n| 0                   | 0.5              | 0.5                  | 0.4             | 0.4                 | 0.5           | 0.5               | 0.4           | 0.4               |\n| 5                   | 0.1              | 0.1                  | 0.1             | 0.1                 | 0.1           | 0.1               | 0.1           | 0.1               |\n| 10                  | 0.0              | 0.0                  | 0.0             | 0.0                 | 0.0           | 0.0               | 0.0           | 0.0               |",
+        "chart_caption": [
+            "Fig. 16. The coverage probability performance of different satellite constellations with the CPP model. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            566,
+            70,
+            862,
+            253
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "Moreover, the frequency reuse factor is adopted 8 for Starlink and 4 for Kuiper. ",
+        "bbox": [
+            503,
+            310,
+            919,
+            339
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "To represent the orbital distributions and satellites of these constellations by using Cox point processes, we enhance a moment matching method which aligns the number of orbits and the number of satellites of the Cox point process to ensure that the CPP model approximate the local distribution of LEO satellites in those forthcoming constellations. Specifically, the average number of visible satellites for Starlink, Oneweb, and Kuiper at the latitude of $0 ^ { \\circ }$ is 38, 34 and 37, respectively. Fig. 16 demonstrates a remarkably close agreement between the CPP model and the high-fidelity simulations across all three heterogeneous architectures. This consistent accuracy, observed despite the vast differences in orbital altitudes, inclination strategies, and shell organizations, provides compelling empirical evidence that the rotation-invariant Cox process effectively captures the essential statistical spatial distribution of satellites from a user’s perspective. It robustly confirms that the model’s simplifying assumptions do not hinder its ability to deliver accurate, system-level performance estimates for a wide variety of current and planned constellation designs, thereby solidifying its generality and practical value for network analysis and optimization. ",
+        "bbox": [
+            501,
+            340,
+            921,
+            656
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "Moreover, the visibility of satellites of practical constellations varies based on the user latitudes. However, the CPP model is rotation invariant which means the geometric model is independence from the latitudes. Therefore, we focus on two distinct satellite distributions: one at the equator and another at a latitude of 30 degrees. Specifically, the average number of Starlink satellites visible from latitude $3 0 ^ { \\circ }$ is 60, while the average number of visible Starlink satellites at the latitude of $0 ^ { \\circ }$ is 38. Based on these empirical mean values, we determine the satellite density $\\mu _ { l }$ and orbit density λl of the CPP model to represent the Starlink constellations by keeping the same average numbers of visible satellites. It is shown in Fig. 16 that the proposed CPP model match well with the Starlink constellation, which provides guidance for performance analysis of future LEO satellite IoT. ",
+        "bbox": [
+            501,
+            657,
+            921,
+            883
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "C. Multi-Layer and IoT-Specific Performance ",
+        "text_level": 1,
+        "bbox": [
+            504,
+            900,
+            815,
+            914
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "text",
+        "text": "Building upon the analytical framework, this subsection delves deeper into the performance implications of multi-layer architectures and their specific relevance to IoT applications. We examine the intricate dynamics of inter-layer interference and explicitly connect the finite blocklength analysis to core IoT requirements based on the short package transmission rate. ",
+        "bbox": [
+            503,
+            919,
+            921,
+            949
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "page_number",
+        "text": "13741 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 12
+    },
+    {
+        "type": "chart",
+        "img_path": "images/dcf02cb7fefe932abf43435f5862b0755ceddce9c15f15643b3084dbbd6bea0c.jpg",
+        "content": "| SINR Threshold (dB) | L = 1 | L = 2 | L = 3 | L = 4 |\n| ------------------- | ----- | ----- | ----- | ----- |\n| -20                 | 0.7   | 0.95  | 0.98  | 0.99  |\n| -15                 | 0.7   | 0.95  | 0.98  | 0.99  |\n| -10                 | 0.7   | 0.9   | 0.95  | 0.98  |\n| -5                  | 0.55  | 0.35  | 0.45  | 0.2   |\n| 0                   | 0.1   | 0.05  | 0.05  | 0.0   |\n| 5                   | 0.0   | 0.0   | 0.0   | 0.0   |\n| 10                  | 0.0   | 0.0   | 0.0   | 0.0   |",
+        "chart_caption": [
+            "Fig. 17. Coverage probability performance under number of layers L for LEO satellite IoT constellation. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            135,
+            69,
+            433,
+            256
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "chart",
+        "img_path": "images/b9509ebc2fe8140295632af33dfca37f7b3f8628445b827c0411a604fab41d0f.jpg",
+        "content": "| Orbit Radius r₁ | Infinite | Finite, δ = 10⁻⁴ | Finite, δ = 10⁻⁶ | Finite, δ = 10⁻⁸ |\n| --------------- | -------- | ---------------- | ---------------- | ---------------- |\n| 6800            | 0.7      | 0.63             | 0.61             | 0.6              |\n| 6900            | 0.57     | 0.5              | 0.49             | 0.48             |\n| 7000            | 0.44     | 0.39             | 0.37             | 0.36             |\n| 7100            | 0.35     | 0.3              | 0.28             | 0.27             |\n| 7200            | 0.27     | 0.23             | 0.21             | 0.2              |\n| 7300            | 0.21     | 0.18             | 0.16             | 0.15             |\n| 7400            | 0.16     | 0.13             | 0.11             | 0.1              |",
+        "chart_caption": [
+            "Fig. 18. Transmission rate performance under different target error rates versus various orbit radius r1. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            133,
+            306,
+            434,
+            491
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            556,
+            491,
+            617
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "As illustrated in Fig. 17, we evaluate the coverage probability of the LEO satellite constellation under different numbers of layers. It can be observed that increasing the number of layers improves the coverage probability in the low SINR regime, as it enhances the likelihood of a device finding a visible satellite with a strong signal. However, when the satellite coverage becomes sufficient, further increasing the number of layers introduces significant inter-layer interference, which ultimately degrades the coverage performance, particularly in the high SINR region. This reveals a fundamental trade-off between multi-layer diversity and interference accumulation in LEO satellite IoT. ",
+        "bbox": [
+            73,
+            617,
+            491,
+            796
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Then, we focus on the IoT-specific performance in LEO satellite IoT constellation, especially the achievable rate discussed in finite block-length packet transmission. The analysis of Fig. 18 explicitly quantifies the fundamental trade-off between latency and reliability for short-packet IoT communications. The results demonstrate a critical finding for IoT that the achievable rate under practical short-packet constraints is significantly lower than the Shannon capacity, especially at lower orbital altitudes where the potential channel capacity is higher. This “finite block-length penalty” quantifies the fundamental trade-off between reliability (lower error rate), data rate, and latency (implicit in block-length). This reveals that while lower orbits improve channel conditions, the gains are substantially limited by the short-packet characteristic of IoT traffic, providing crucial guidance for setting realistic performance expectations in LEO satellite IoT constellations. ",
+        "bbox": [
+            73,
+            797,
+            491,
+            950
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "chart",
+        "img_path": "images/95241bd09a7377d7a01cb43213f327e1d829a879eec1ed30480eb49443d6e8bd.jpg",
+        "content": "| Satellite Antenna Gain G_sat,1 | Infinite | Finite, M = 2000 | Finite, M = 5000 | Finite, M = 10000 |\n| ------------------------------ | -------- | ---------------- | ---------------- | ----------------- |\n| 10                             | 0.18     | 0.10             | 0.13             | 0.15              |\n| 15                             | 0.24     | 0.15             | 0.18             | 0.20              |\n| 20                             | 0.28     | 0.19             | 0.23             | 0.25              |\n| 25                             | 0.32     | 0.23             | 0.27             | 0.29              |\n| 30                             | 0.36     | 0.27             | 0.30             | 0.32              |",
+        "chart_caption": [
+            "Fig. 19. Transmission rate performance under various satellite antenna gain $G _ { \\mathrm { s a t , 1 } }$ for different block-length M . "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            563,
+            69,
+            866,
+            256
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            501,
+            316,
+            921,
+            407
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "Moreover, Fig. 19 investigates the impact of satellite antenna gain and the block-length on the achievable rate. This analysis directly addresses the practical design space for IoT applications. The results show that increasing the antenna gain provides substantial performance improvements that are consistent across different block-lengths. More importantly, the analysis reveals that for a given antenna gain, increasing the block-length M yields diminishing returns, particularly in the lower gain regime. This provides valuable insight for network operators: while increasing packet duration improves reliability, there is an optimal point beyond which the latency costs outweigh the marginal coding gains. This is particularly relevant for delay-sensitive IoT applications, guiding the joint optimization of physical parameters and transmission strategies. ",
+        "bbox": [
+            501,
+            409,
+            921,
+            635
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "D. Concrete Design Guidelines ",
+        "text_level": 1,
+        "bbox": [
+            504,
+            657,
+            720,
+            672
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "The rigorous analytical framework and extensive simulation results yield concrete design guidelines for future multi-layer LEO satellite IoT constellations, directly addressing practical implementation considerations. Constellation designers should target an optimal satellite density that balances connectivity gains against interference effects, as both under-provisioning and over-provisioning can degrade coverage performance. Furthermore, power allocation should be prioritized toward higher-altitude orbital layers, whose transmit power demonstrates greater influence on overall system coverage compared to lower layers. For accurate performance prediction, realistic channel assessment must incorporate Shadowed-Rician fading rather than relying solely on the ideal Rician assumption, particularly in environments susceptible to shadowing where coverage probability is significantly affected. ",
+        "bbox": [
+            501,
+            676,
+            921,
+            902
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "To effectively support IoT-specific requirements, the finite block-length analysis confirms that lower orbital altitudes combined with substantial satellite antenna gains are essential to establish the necessary SNR conditions for reliable shortpacket communications. Additionally, the satellite coverage angle requires careful optimization to balance the competing needs of high signal quality for connected users against broad service availability for potential users across different geographic regions. Collectively, these guidelines provide system architects with a concrete foundation for optimizing future LEO satellite IoT deployments, effectively bridging the gap between our theoretical framework and practical constellation design constraints. ",
+        "bbox": [
+            503,
+            904,
+            921,
+            950
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "page_number",
+        "text": "13742 ",
+        "bbox": [
+            78,
+            36,
+            109,
+            45
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            138,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 13
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            71,
+            491,
+            220
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "VI. CONCLUSION ",
+        "text_level": 1,
+        "bbox": [
+            217,
+            233,
+            349,
+            246
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "This paper presented a comprehensive stochastic geometric framework for analyzing multiple-layer LEO satellite IoT constellations, incorporating both Rician fading channels and CPP modeling. In particular, a novel channel approximation method was proposed to effectively simplify complex expressions arising from Rician fading characteristics. Building upon this foundation, we have derived exact theoretical expressions for three fundamental performance metrics: connectivity probability, coverage probability, and transmission rate. Finally, extensive simulation results validated the accuracy and effectiveness of our proposed model. Moreover, the results yield several important design insights that offer valuable guidance for future LEO satellite IoT constellation deployment and optimization. ",
+        "bbox": [
+            73,
+            251,
+            491,
+            463
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "APPENDIX A THE PROOF OF PROPOSITION 1 ",
+        "text_level": 1,
+        "bbox": [
+            173,
+            474,
+            392,
+            503
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Noticing that the small-scale fading $| h _ { l , m } | ^ { 2 }$ follows i.i.d. distribution, thus the Laplace form of $I _ { k }$ can be derived as ",
+        "bbox": [
+            73,
+            507,
+            488,
+            539
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {L} _ {I _ {k}} (s) \\\\ = \\mathcal {L} _ {I _ {k} ^ {\\mathrm{Sev}}} (s) \\mathcal {L} _ {I _ {k} ^ {\\mathrm{Inf}}} (s) \\\\ = \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} ^ {| \\varphi_ {i} - \\pi / 2 | \\leq \\xi_ {k}} \\mathbb {E} \\left[ \\prod_ {m ^ {\\prime} \\in \\psi_ {k, i}} \\mathbb {E} _ {| h | ^ {2}} \\left[ e ^ {- s g _ {t} p _ {k} G _ {\\mathrm{sat}, k} | h | ^ {2} d _ {k, m ^ {\\prime}} ^ {- 2}} \\right] \\right]. \\\\ \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} \\mathbb {E} \\left[ \\prod_ {m ^ {\\prime} \\in \\psi_ {k, i}} \\mathbb {E} _ {| h | ^ {2}} \\left[ e ^ {- s g _ {t} p _ {k} G _ {\\mathrm{sat}, k} | h | ^ {2} d _ {k, m ^ {\\prime}} ^ {- 2}} \\right] \\right]. \\\\ \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} ^ {| \\varphi_ {i} - \\pi / 2 | \\leq \\overline {{\\varphi}} _ {\\beta , k}} \\mathbb {E} \\left[ \\prod_ {m ^ {\\prime} \\in \\overline {{\\psi}} _ {k, i}} \\mathbb {E} _ {| h | ^ {2}} \\left[ e ^ {- s g _ {t} p _ {k} | h | ^ {2} d _ {k, m ^ {\\prime}} ^ {- 2}} \\right] \\right]. \\\\ \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} \\mathbb {E} \\left[ \\prod_ {m ^ {\\prime} \\in \\overline {{\\psi}} _ {k, i}} \\mathbb {E} _ {| h | ^ {2}} \\left[ e ^ {- s g _ {t} p _ {k} | h | ^ {2} d _ {k, m ^ {\\prime}} ^ {- 2}} \\right] \\right], \\tag {45} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            80,
+            545,
+            488,
+            806
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "where $d _ { k , m ^ { \\prime } }$ is the distance between the LEO satellite $m ^ { \\prime }$ of layer $k$ and the typical IoT device. According to [26], $d _ { k , m ^ { \\prime } }$ can be expressed as ",
+        "bbox": [
+            73,
+            813,
+            491,
+            858
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\nd _ {k, m ^ {\\prime}} = \\sqrt {r _ {k} ^ {2} - 2 r _ {k} r _ {e} \\cos \\left(\\omega_ {m ^ {\\prime}}\\right) \\sin \\left(\\varphi_ {i}\\right) + r _ {e} ^ {2}} = f _ {k, \\varphi_ {i}} \\left(\\omega_ {m ^ {\\prime}}\\right). \\tag {46}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            78,
+            863,
+            488,
+            898
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "$\\xi _ { k } , \\overline { { \\varphi } } _ { \\beta , k }$ and $\\overline { { \\varphi } } _ { k }$ are given by ",
+        "bbox": [
+            73,
+            900,
+            279,
+            916
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\xi_ {k} = \\arccos \\left(\\frac {r _ {e} ^ {2} + r _ {k} ^ {2} - d ^ {2}}{2 r _ {e} r _ {k}}\\right), \\tag {47}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            104,
+            919,
+            488,
+            954
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\overline {{{\\varphi}}} _ {\\beta , k} = \\arccos \\left(\\frac {r _ {k}}{r _ {e}} \\sin^ {2} \\beta_ {k} - \\sqrt {1 - \\frac {r _ {l} ^ {2}}{r _ {e} ^ {2}} \\sin^ {2} \\beta_ {k}} \\cos \\beta_ {k}\\right), \\tag {48}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            517,
+            66,
+            919,
+            121
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\overline {{{\\varphi}}} _ {k} = \\arccos \\frac {r _ {e}}{r _ {k}}. \\tag {49}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            531,
+            123,
+            919,
+            152
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Then, by applying PGFL of a PPP of intensity $\\mu _ { k }$ [50], [51], the Laplace form $\\mathsf { \\bar { \\mathcal { L } } } _ { | h | ^ { 2 } } ( s ) = \\mathbb { E } _ { | h | ^ { 2 } } [ e ^ { - s | h | ^ { 2 } } ]$ and (46), (45) can be further rewritten as ",
+        "bbox": [
+            503,
+            157,
+            919,
+            202
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\begin{array}{l} \\mathcal {L} _ {I _ {k}} (s) \\\\ = \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} ^ {| \\varphi_ {i} - \\pi / 2 | \\leq \\xi_ {k}} e ^ {\\frac {\\mu_ {k}}{\\pi} \\int_ {w _ {l, \\varphi_ {i}, 1}} ^ {w _ {k, \\varphi_ {i}, 2}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k} G _ {\\mathrm{sat} , k}}{f _ {l , \\varphi_ {i}} ^ {2} (w)}\\right) d w} \\\\ \\cdot \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} e ^ {\\xi_ {k} \\leq | \\varphi_ {i} - \\pi / 2 | \\leq \\overline {{\\varphi}} _ {\\beta , k}} - \\frac {\\mu_ {k}}{\\pi} \\int_ {0} ^ {w _ {k, \\varphi_ {i}, 2}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k} G _ {\\mathrm{sat} , k}}{f _ {l , \\varphi_ {i}} ^ {2} (w)}\\right) d w \\\\ \\cdot \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} e ^ {- \\frac {\\mu_ {k}}{\\pi} \\int_ {w _ {k, \\varphi_ {i}, 2}} ^ {w _ {k, \\varphi_ {i}, 3}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {1}}{f _ {k , \\phi_ {i}} ^ {2} (w)}\\right) d w} \\\\ \\cdot \\prod_ {Z _ {i} \\in \\mathcal {Z} _ {k}} e ^ {- \\frac {\\mu_ {k}}{\\pi} \\int_ {0} ^ {w _ {k, \\varphi_ {i}, 3}} 1 - \\mathcal {L} _ {| h | ^ {2}} \\left(\\frac {s g _ {t} p _ {k}}{f _ {l , \\varphi_ {i}} ^ {2} (w)}\\right) d w}. \\tag {50} \\\\ \\end{array}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            516,
+            214,
+            921,
+            441
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "where we have ",
+        "bbox": [
+            504,
+            450,
+            611,
+            463
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\nw _ {k, \\varphi_ {i}, 1} = \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\xi_ {k} \\csc^ {2} \\varphi_ {i}}\\right), \\tag {51}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            566,
+            472,
+            919,
+            491
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\nw _ {k, \\varphi_ {i}, 2} = \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\overline {{{\\varphi}}} _ {\\beta , k} \\csc^ {2} \\varphi_ {i}}\\right), \\tag {52}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            566,
+            493,
+            919,
+            518
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "equation",
+        "text": "$$\nw _ {k, \\varphi_ {i}, 3} = \\arcsin \\left(\\sqrt {1 - \\cos^ {2} \\overline {{{\\varphi}}} _ {k} \\csc^ {2} \\varphi_ {i}}\\right). \\tag {53}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            566,
+            520,
+            919,
+            539
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "Finally, by rearranging the terms in (50), we can obtain the results in (33). ",
+        "bbox": [
+            503,
+            547,
+            919,
+            577
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "The proof is completed. ",
+        "bbox": [
+            519,
+            579,
+            686,
+            593
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "text",
+        "text": "REFERENCES ",
+        "text_level": 1,
+        "bbox": [
+            665,
+            614,
+            761,
+            627
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "[1] E. Sisinni, A. Saifullah, S. Han, U. Jennehag, and M. Gidlund, “Industrial Internet of Things: Challenges, opportunities, and directions,” IEEE Trans. Ind. Informat., vol. 14, no. 11, pp. 4724–4734, Nov. 2018. ",
+            "[2] M. R. Palattella et al., “Internet of Things in the 5G era: Enablers, architecture, and business models,” IEEE J. Sel. Areas Commun., vol. 34, no. 3, pp. 510–527, Mar. 2016. ",
+            "[3] X. Shao, X. Chen, C. Zhong, J. Zhao, and Z. Zhang, “A unified design of massive access for cellular Internet of Things,” IEEE Internet Things J., vol. 6, no. 2, pp. 3934–3947, Apr. 2019. ",
+            "[4] J. Chu, X. Chen, C. Zhong, and Z. Zhang, “Robust design for NOMAbased multibeam LEO satellite Internet of Things,” IEEE Internet Things J., vol. 8, no. 3, pp. 1959–1970, Feb. 2021. ",
+            "[5] G. M. Capez, S. Henn, J. A. Fraire, and R. Garello, “Sparse satellite constellation design for global and regional direct-to-satellite IoT services,” IEEE Trans. Aerosp. Electron. Syst., vol. 58, no. 5, pp. 3786–3801, Oct. 2022. ",
+            "[6] K. Xiong, X. Chen, and M. Ying, “Robust beamforming design for integrated satellite-terrestrial maritime communications in the presence of wave fluctuation,” IEEE Internet Things J., vol. 11, no. 21, pp. 35568–35579, Nov. 2024. ",
+            "[7] M. Ying, X. Chen, Q. Qi, and W. Gerstacker, “Deep learning-based joint channel prediction and multibeam precoding for LEO satellite Internet of Things,” IEEE Trans. Wireless Commun., vol. 23, no. 10, pp. 13946–13960, Oct. 2024. ",
+            "[8] J. Park, J. Choi, and N. Lee, “A tractable approach to coverage analysis in downlink satellite networks,” IEEE Trans. Wireless Commun., vol. 22, no. 2, pp. 793–807, Feb. 2023. "
+        ],
+        "bbox": [
+            503,
+            633,
+            924,
+            946
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "page_number",
+        "text": "13743 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            137,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 14
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "[9] S. Yang, Y. Zhu, O. A. Dobre, G. K. Karagiannidis, and Z. Ding, “Performance analysis for NOMA-assisted LEO communications: A two-dimensional stochastic geometric approach,” IEEE Trans. Wireless Commun., vol. 24, no. 5, pp. 3822–3836, May 2025. ",
+            "[10] H. Jia, C. Jiang, L. Kuang, and J. Lu, “An analytic approach for modeling uplink performance of mega constellations,” IEEE Trans. Veh. Technol., vol. 72, no. 2, pp. 2258–2268, Feb. 2023. ",
+            "[11] Y. Sun and Z. Ding, “A fine grained stochastic geometry-based analysis on LEO satellite communication systems,” IEEE Netw. Lett., vol. 5, no. 4, pp. 237–240, Dec. 2023. ",
+            "[12] M. Ying, X. Chen, Q. Qi, and Z. Zhang, “QoS-driven satellite constellation design for LEO satellite Internet of Things,” IEEE Trans. Wireless Commun., vol. 25, pp. 3610–3625, 2026, doi: 10.1109/ TWC.2025.3605220. ",
+            "[13] R. Deng, B. Di, H. Zhang, L. Kuang, and L. Song, “Ultra-dense LEO satellite constellations: How many LEO satellites do we need?,” IEEE Trans. Wireless Commun., vol. 20, no. 8, pp. 4843–4857, Aug. 2021. ",
+            "[14] N. Okati and T. Riihonen, “Nonhomogeneous stochastic geometry analysis of massive LEO communication constellations,” IEEE Trans. Commun., vol. 70, no. 3, pp. 1848–1860, Mar. 2022. ",
+            "[15] N. Okati, T. Riihonen, D. Korpi, I. Angervuori, and R. Wichman, “Downlink coverage and rate analysis of low Earth orbit satellite constellations using stochastic geometry,” IEEE Trans. Commun., vol. 68, no. 8, pp. 5120–5134, Aug. 2020. ",
+            "[16] R. Wang, M. A. Kishk, and M.-S. Alouini, “Evaluating the accuracy of stochastic geometry based models for LEO satellite networks analysis,” IEEE Commun. Lett., vol. 26, no. 10, pp. 2440–2444, Oct. 2022. ",
+            "[17] X. Hu et al., “Performance analysis of end-to-end LEO satellite-aided shore-to-ship communications: A stochastic geometry approach,” IEEE Trans. Wireless Commun., vol. 23, no. 9, pp. 11753–11769, Sep. 2024. ",
+            "[18] D.-H. Jung, J.-G. Ryu, W.-J. Byun, and J. Choi, “Performance analysis of satellite communication system under the shadowed-Rician fading: A stochastic geometry approach,” IEEE Trans. Commun., vol. 70, no. 4, pp. 2707–2721, Apr. 2022. ",
+            "[19] W.-Y. Dong, S. Yang, P. Zhang, and S. Chen, “Modeling and performance analysis of IoT-over-LEO satellite systems under realistic operational constraints: A stochastic geometry approach,” IEEE Internet Things J., vol. 12, no. 15, pp. 30576–30593, Aug. 2025. ",
+            "[20] N. Okati and T. Riihonen, “Stochastic coverage analysis for multialtitude LEO satellite networks,” IEEE Commun. Lett., vol. 27, no. 12, pp. 3305–3309, Dec. 2023. ",
+            "[21] R. Wang, M. A. Kishk, and M.-S. Alouini, “Reliability analysis of multihop routing in multi-tier LEO satellite networks,” IEEE Trans. Wireless Commun., vol. 23, no. 3, pp. 1959–1973, Mar. 2024. ",
+            "[22] S. Feng, X. Lu, S. Sun, E. Hossain, G. Wei, and Z. Ni, “Covert communication in large-scale multi-tier LEO satellite networks,” IEEE Trans. Mobile Comput., vol. 23, no. 12, pp. 11576–11587, Dec. 2024. ",
+            "[23] A. Talgat, R. Wang, M. A. Kishk, and M.-S. Alouini, “Enhancing physical-layer security in LEO satellite-enabled IoT network communications,” IEEE Internet Things J., vol. 11, no. 20, pp. 33967–33979, Oct. 2024. ",
+            "[24] X. Yuan, F. Tang, M. Zhao, and N. Kato, “Joint rate and coverage optimization for the THz/RF multi-band communications of space-airground integrated network in 6G,” IEEE Trans. Wireless Commun., vol. 23, no. 6, pp. 6669–6682, Jun. 2024. ",
+            "[25] R. Wang, M. A. Kishk, and M.-S. Alouini, “Stochastic geometry-based low latency routing in massive LEO satellite networks,” IEEE Trans. Aerosp. Electron. Syst., vol. 58, no. 5, pp. 3881–3894, Oct. 2022. ",
+            "[26] C.-S. Choi and F. Baccelli, “Cox point processes for multi altitude LEO satellite networks,” IEEE Trans. Veh. Technol., vol. 73, no. 10, pp. 15916–15921, Oct. 2024. ",
+            "[27] C.-S. Choi and F. Baccelli, “A novel analytical model for LEO and MEO satellite networks based on cox point processes,” IEEE Trans. Commun., vol. 73, no. 4, pp. 2265–2279, Apr. 2025. ",
+            "[28] C.-S. Choi, “Modeling and analysis of downlink communications in a heterogeneous LEO satellite network,” IEEE Trans. Wireless Commun., vol. 23, no. 8, pp. 8588–8602, Aug. 2024. ",
+            "[29] C.-S. Choi, “Analysis of a delay-tolerant data harvest architecture leveraging low Earth orbit satellite networks,” IEEE J. Sel. Areas Commun., vol. 42, no. 5, pp. 1329–1343, May 2024. ",
+            "[30] E. Kim, I. P. Roberts, and J. G. Andrews, “Downlink analysis and evaluation of multi-beam LEO satellite communication in shadowed Rician channels,” IEEE Trans. Veh. Technol., vol. 73, no. 2, pp. 2061–2075, Feb. 2024. ",
+            "[31] X. Yue et al., “Outage behaviors of NOMA-based satellite network over shadowed-Rician fading channels,” IEEE Trans. Veh. Technol., vol. 69, no. 6, pp. 6818–6821, Jun. 2020. "
+        ],
+        "bbox": [
+            71,
+            68,
+            496,
+            949
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "[32] C. Rao, Z. Ding, K. Cumanan, and X. Dai, “Outage performance of satellite-terrestrial channels with shadowed Rician fading via large deviations principle,” IEEE Trans. Veh. Technol., vol. 73, no. 9, pp. 13938–13943, Sep. 2024. ",
+            "[33] Z. Qu, G. Zhang, H. Cao, and J. Xie, “LEO satellite constellation for Internet of Things,” IEEE Access, vol. 5, pp. 18391–18401, 2017. ",
+            "[34] T. M. Schmidl and D. C. Cox, “Robust frequency and timing synchronization for OFDM,” IEEE Trans. Commun., vol. 45, no. 12, pp. 1613–1621, Dec. 1997. ",
+            "[35] Y. H. Kim, I. Song, S. Yoon, and S. R. Park, “An efficient frequency offset estimator for OFDM systems and its performance characteristics,” IEEE Trans. Veh. Technol., vol. 50, no. 5, pp. 1307–1312, Sep. 2001. ",
+            "[36] A. Al-Hourani, “Optimal satellite constellation altitude for maximal coverage,” IEEE Wireless Commun. Lett., vol. 10, no. 7, pp. 1444–1448, Jul. 2021. ",
+            "[37] Y. Liu et al., “Space-air-ground integrated networks: Spherical stochastic geometry-based uplink connectivity analysis,” IEEE J. Sel. Areas Commun., vol. 42, no. 5, pp. 1387–1402, May 2024. ",
+            "[38] O. Montenbruck and E. Gill, Satellite Orbits: Models, Methods and Applications. Berlin, Germany: Springer, 2012. ",
+            "[39] C. Guo, X. Chen, J. Yu, and Z. Xu, “Design of joint device and data detection for massive grant-free random access in LEO satellite Internet of Things,” IEEE Internet Things J., vol. 10, no. 8, pp. 7090–7099, Apr. 2023. ",
+            "[40] Y. Xu, X. Chen, M. Ying, and Z. Zhang, “Integrated communication and remote sensing in LEO satellite systems: Protocol, architecture, and prototype,” IEEE Trans. Wireless Commun., vol. 25, pp. 1609–1623, 2026, doi: 10.1109/TWC.2025.3591886. ",
+            "[41] M. Ying, X. Chen, and X. Shao, “Exploiting tensor-based Bayesian learning for massive grant-free random access in LEO satellite Internet of Things,” IEEE Trans. Commun., vol. 71, no. 2, pp. 1141–1152, Feb. 2023. ",
+            "[42] Z. Song et al., “Cooperative satellite-aerial-terrestrial systems: A stochastic geometry model,” IEEE Trans. Wireless Commun., vol. 22, no. 1, pp. 220–236, Jan. 2023. ",
+            "[43] D. Stoyan, W. Kendall, and J. Mecke, Stochastic Geometry and Its Applications, 2nd ed., Hoboken, NJ, USA: Wiley, 1996. ",
+            "[44] A. Defant and I. Schoolmann, “H {p}-theory of general Dirichlet series,” J. Fourier Anal. Appl., vol. 25, no. 6, pp. 3220–3258, 2019. ",
+            "[45] J. Proakis, Digital Communications, 4th ed., New York, NY, USA: McGraw-Hill, 2000. ",
+            "[46] Y. Polyanskiy, H. V. Poor, and S. Verdu, “Channel coding rate in the finite blocklength regime,” IEEE Trans. Inf. Theory, vol. 56, no. 5, pp. 2307–2359, May 2010. ",
+            "[47] Non-Terrestrial Networks Channel Models, document TR 38.811, 3GPP, Sep. 2020. ",
+            "[48] A. Abdi, W. C. Lau, M. Alouini, and M. Kaveh, “A new simple model for land mobile satellite channels: First{-} and second-order statistics,” IEEE Trans. Wireless Commun., vol. 2, no. 3, pp. 519–528, May 2003. ",
+            "[49] Space Exploration Holdings, LLC. Request for Orbital Deployment and Operating Authority for the SpaceX Gen2 NGSO Satellite System. Accessed: Jun. 1, 2024. [Online]. Available: https://docs.fcc.gov/public/ attachments/FCC-22-91A1.pdf ",
+            "[50] S. N. Chiu, D. Stoyan, W. S. Kendall, and J. Mecke, Stochastic Geometry and Its Applications. Hoboken, NJ, USA: Wiley, 2013. ",
+            "[51] F. Baccelli and B. Błaszczyszyn, “Stochastic geometry and wireless networks: Volume I theory,” Found. Trends Netw., vol. 3, no. 3–4, pp. 249–449, 2010. "
+        ],
+        "bbox": [
+            506,
+            73,
+            921,
+            731
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "image",
+        "img_path": "images/6424d28c021e3ae26a05c48501bd964df2dc65121bd38ab5969c036e67c690d4.jpg",
+        "image_caption": [
+            "Ming Ying (Graduate Student Member, IEEE) received the B.S. degree in information engineering from Zhejiang University, Hangzhou, China, in 2022, where he is currently pursuing the Ph.D. degree with the College of Information Science and Electronic Engineering. His research interests include LEO satellite communications, the Internet of Things, performance analysis, constellation optimization, and massive access. "
+        ],
+        "image_footnote": [],
+        "content": "Portrait photo of a young man in a white shirt against a blue background (no text or symbols visible)",
+        "sub_type": "natural_image",
+        "bbox": [
+            506,
+            830,
+            627,
+            946
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "page_number",
+        "text": "13744 ",
+        "bbox": [
+            78,
+            36,
+            109,
+            46
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "header",
+        "text": "IEEE TRANSACTIONS ON WIRELESS COMMUNICATIONS, VOL. 25, 2026 ",
+        "bbox": [
+            535,
+            35,
+            921,
+            46
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            138,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 15
+    },
+    {
+        "type": "image",
+        "img_path": "images/2b6b264abc28513285cf99d4448ef996b453692aef98a3874ea7ef037e6837ab.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "Portrait of a man wearing glasses and a striped shirt against a blue background (no text or symbols visible)",
+        "sub_type": "natural_image",
+        "bbox": [
+            76,
+            73,
+            199,
+            191
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "Xiaoming Chen (Senior Member, IEEE) received the B.Sc. degree from Hohai University in 2005, the M.Sc. degree from Nanjing University of Science and Technology in 2007, and the Ph.D. degree from Zhejiang University, Hangzhou, China, in 2011, all in electronic engineering. He is currently a Professor with the College of Information Science and Electronic Engineering, Zhejiang University. From March 2011 to October 2016, he was with Nanjing University of Aeronautics and Astronautics, Nanjing, China. From February 2015 to June 2016, he was a Humboldt Research Fellow with the Institute for Digital Communications, Friedrich-Alexander University of Erlangen-Nuremberg (FAU), Germany. His research interests mainly focus on 6G key techniques, LEO satellite constellations, and smart communications. He received the Best Paper Awards at IEEE Global Communications Conference (GLOBECOM) 2020, International Conference on Wireless Communications and Signal Processing (WCSP) 2020, IEEE International Conference on Communications (ICC) 2019, and IEEE/CIC International Conference on Communications in China (ICCC) 2018. He served as an Editor for IEEE TRANSACTIONS ON COMMUNICATIONS, an Associate Editor for IEEE COMMUNICATIONS LETTERS, and a Guest Editor for IEEE JOURNAL ON SELECTED AREAS IN COMMUNICATIONS “Massive Access for 5G and Beyond” and IEEE WIRELESS COMMUNICATIONS “Massive Machine-Type Communications for IoT.” ",
+        "bbox": [
+            207,
+            73,
+            491,
+            198
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            73,
+            198,
+            491,
+            356
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "image",
+        "img_path": "images/44bb507c4ed2217892ff0c633988369c6692af377fc305a465f0bdd53f39c409.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "Portrait of a young woman wearing a school uniform and bow tie (no visible text or symbols)",
+        "sub_type": "natural_image",
+        "bbox": [
+            506,
+            74,
+            629,
+            191
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "Qiao Qi (Member, IEEE) received the B.S. degree in electronic information engineering from Hangzhou Dianzi University in 2018, and the Ph.D. degree in information and communication engineering from Zhejiang University in 2023, Hangzhou, China. She is currently a Lecturer with the School of Information Science and Technology, Hangzhou Normal University, Hangzhou. Her research interests include cellular IoT, edge intelligence, and integrated sensing, communication and computing. ",
+        "bbox": [
+            638,
+            73,
+            921,
+            188
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "image",
+        "img_path": "images/4447e914ad3597b57e1db1ce8fc76aaa3a17a46f324eda6ff37027f56d6a5c05.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "Portrait photo of a young man in formal attire (no text or symbols visible)",
+        "sub_type": "natural_image",
+        "bbox": [
+            506,
+            237,
+            629,
+            356
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "text",
+        "text": "Yichao Xu (Graduate Student Member, IEEE) received the B.S. degree in information engineering from Zhejiang University, Hangzhou, China, in 2024, where he is currently pursuing the Ph.D. degree with the College of Information Science and Electronic Engineering. His research interests include integrated sensing and communication, LEO satellite communication, and SAR remote sensing. ",
+        "bbox": [
+            638,
+            237,
+            921,
+            330
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "header",
+        "text": "YING et al.: MODELING AND ANALYSIS FOR MULTIPLE-LAYER LEO SATELLITE IoT CONSTELLATIONS ",
+        "bbox": [
+            76,
+            35,
+            630,
+            46
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "page_number",
+        "text": "13745 ",
+        "bbox": [
+            888,
+            36,
+            919,
+            46
+        ],
+        "page_idx": 16
+    },
+    {
+        "type": "footer",
+        "text": "Authorized licensed use limited to: Zhejiang University. Downloaded on May 24,2026 at 02:24:50 UTC from IEEE Xplore. Restrictions apply. ",
+        "bbox": [
+            138,
+            962,
+            854,
+            974
+        ],
+        "page_idx": 16
+    }
+]

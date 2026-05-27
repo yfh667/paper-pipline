@@ -1,4 +1,4 @@
-"""Import output/{ieee,acm,sd}/*.pdf into the running local Zotero desktop.
+"""Import output/{ieee,acm,sd,optica}/*.pdf into the running local Zotero desktop.
 
 Uses Zotero's local Connector endpoint POST /connector/saveStandaloneAttachment
 to upload each PDF as a standalone attachment. Zotero then auto-recognizes the
@@ -33,7 +33,7 @@ import requests
 LIB_ID = 12146168
 ZOTERO_BASE = "http://127.0.0.1:23119"
 PROJECT_ROOT = Path(__file__).resolve().parent
-SOURCE_DIRS = ["ieee", "acm", "sd"]
+SOURCE_DIRS = ["ieee", "acm", "sd", "optica"]
 LOG_PATH = PROJECT_ROOT / "output" / "logs" / "zotero_import.log"
 
 # /api endpoints on local Zotero only support GET, so we identify duplicates

@@ -1,0 +1,2272 @@
+[
+    {
+        "type": "text",
+        "text": "JOURNAL OF Optical Communications and Networking ",
+        "text_level": 1,
+        "bbox": [
+            117,
+            52,
+            459,
+            121
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Robust chaotic free-space optical communication via Bessel–Gaussian beams and adaptive sparse mode detection ",
+        "text_level": 1,
+        "bbox": [
+            75,
+            137,
+            919,
+            219
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Jinyun Cao,1,5 Ning Jiang,1 ,\\* Anran Li,1,6 Chao Wang,2,7 Yiqun Zhang,3,4,8 Yong Geng,1,9 AND Kun Qiu1,10 ",
+        "bbox": [
+            74,
+            231,
+            843,
+            266
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1School of Information and Communication Engineering, University of Electronic Science and Technology of China, Chengdu 611731, China ",
+        "bbox": [
+            74,
+            270,
+            910,
+            284
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "2Institute of Spacecraft Application System Engineering, China Academy of Space Technology, Beijing 100081, China ",
+        "bbox": [
+            74,
+            284,
+            777,
+            298
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "3State Key Laboratory of Optical Field Manipulation Science and Technology, Institute of Optics and Electronics, Chinese Academy of Sciences, Chengdu 610209, China ",
+        "bbox": [
+            74,
+            298,
+            744,
+            323
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "4Research Center on Vector Optical Fields, Institute of Optics and Electronics, Chinese Academy of Sciences, Chengdu 610209, China ",
+        "bbox": [
+            74,
+            323,
+            878,
+            335
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "5socrg\\_caojinyun@163.com ",
+        "bbox": [
+            74,
+            335,
+            245,
+            348
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "6lianran\\_2021@163.com ",
+        "bbox": [
+            74,
+            348,
+            225,
+            360
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "7w409048772@163.com ",
+        "bbox": [
+            74,
+            361,
+            227,
+            372
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "8zyq@ioe.ac.cn ",
+        "bbox": [
+            74,
+            374,
+            171,
+            386
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "9gengyong@uestc.edu.cn ",
+        "bbox": [
+            74,
+            386,
+            234,
+            399
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "10kqiu@uestc.edu.cn ",
+        "bbox": [
+            74,
+            399,
+            203,
+            411
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "\\*uestc\\_nj@uestc.edu.cn ",
+        "bbox": [
+            74,
+            412,
+            225,
+            424
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Received 6 March 2026; revised 9 April 2026; accepted 11 April 2026; published 20 May 2026 ",
+        "bbox": [
+            74,
+            434,
+            648,
+            448
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "This paper proposes and comprehensively investigates a robust architecture for free-space chaotic physical-layer secure communication based on Bessel–Gaussian vortex beams (BGVBs). By exploiting the inherent self-healing properties of BGVBs and utilizing the topological charge l and cone angle α as dual degrees of freedom for multiplexing, we effectively mitigate channel impairments through optimized multidimensional mode spacing. Furthermore, by integrating adaptive optics compensation with a hierarchical sparse mode detection algorithm, the system successfully establishes a reliable physical link in the presence of severe atmospheric turbulence and partial beam obscuration. Statistical analysis verifies that the proposed algorithm enables the system to maintain a correct detection probability exceeding 90%, even under closed-loop strong turbulence scenarios. Building upon this robust physical connectivity, we validate an end-to-end performance of four-channel chaotic transmission over a 1 km strong turbulence link. The system achieves high-fidelity chaotic synchronization with correlation coefficients exceeding 0.97. Ultimately, an aggregate transmission capacity of 40 Gbps is realized at an SNR of 20 dB, with the BER consistently remaining below the HD-FEC threshold. Beyond turbulence mitigation, the system exhibits remarkable resilience against macroscopic obstruction; notably, the link sustains a 40 Gbps transmission rate even under a severe occlusion ratio of β = 0.5. © 2026 Optica Publishing Group. All rights, including for text and data mining (TDM), Artificial Intelligence (AI) training, and similar technologies, are reserved. ",
+        "bbox": [
+            114,
+            467,
+            888,
+            696
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "https://doi.org/10.1364/JOCN.597195 ",
+        "bbox": [
+            116,
+            704,
+            351,
+            717
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "1. INTRODUCTION ",
+        "text_level": 1,
+        "bbox": [
+            75,
+            749,
+            240,
+            763
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Free-space optical (FSO) communication has emerged as a pivotal technology for future space-air-ground integrated networks and 6G infrastructure, offering unparalleled bandwidth, unlicensed spectrum, and immunity to electromagnetic interference [1–3]. However, as the demand for capacity and security escalates, FSO systems confront two critical challenges: the physical channel is compromised by atmospheric turbulence and obstructions, while inherent beam divergence exposes the link to eavesdropping risks [4,5]. ",
+        "bbox": [
+            74,
+            771,
+            484,
+            906
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "Optical chaotic communication has been extensively investigated as a promising solution for enhancing physical layer security. By concealing information within broadband, noiselike carriers generated by semiconductor lasers, chaos offers inherent hardware-layer encryption [6–8]. Despite its proven success in fiber-optic networks [9–14], migrating this technology to FSO links presents significant challenges. Atmospheric turbulence induces severe intensity scintillation and phase distortion, which can severely compromise the high-fidelity synchronization required for decryption [15]. Although recent studies have demonstrated chaotic FSO transmission utilizing orbital angular momentum (OAM) [16,17] or vector beams [18], these investigations are predominantly confined to weak turbulence regimes (e.g., characterized by a telescope aperture to Fried parameter ratio of $D / r _ { 0 } \\le 1 )$ or limited transmission capacities (typically below 10 Gbps) or short-reach transmission distances [19]. Consequently, establishing secure, ultra-high-speed chaotic FSO links under strong turbulence conditions scenario—targeted in this work—remains a critical and unresolved challenge. ",
+        "bbox": [
+            75,
+            906,
+            484,
+            938
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            750,
+            929,
+            937
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "page_number",
+        "text": "602 ",
+        "bbox": [
+            95,
+            26,
+            124,
+            38
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            141,
+            26,
+            567,
+            39
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            764,
+            26,
+            910,
+            39
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "footer",
+        "text": "1943-0620/26/060602-12 Journal © 2026 Optica Publishing Group ",
+        "bbox": [
+            77,
+            955,
+            484,
+            969
+        ],
+        "page_idx": 0
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            74,
+            63,
+            481,
+            153
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Theoretically, OAM modes form an infinite orthogonal basis, suggesting unlimited capacity [20,21]. However, in practical FSO scenarios, realizing this “infinite” potential faces severe physical constraints. First, generating high-order OAM modes requires complex phase modulation devices with high pixel density [22,23]. Second, and more critically, the radius of the OAM vortex ring scales with the topological charge√ $( r \\propto \\sqrt { l } )$ . High-order modes inherently possess larger beam diameters [24], making them susceptible to aperture truncation at the receiver, especially in long-distance links [25]. Furthermore, high-order topological charges are extremely sensitive to atmospheric turbulence [26,27] and pointing errors [28]; slight wavefront distortions can cause energy to leak into neighboring modes, leading to catastrophic intermode crosstalk. Consequently, relying solely on increasing the azimuthal index to expand capacity is practically inefficient and fundamentally limited by the system’s power-aperture product. ",
+        "bbox": [
+            74,
+            153,
+            484,
+            404
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "In contrast, Bessel–Gaussian vortex beams (BGVBs) provide a promising solution for spectral-efficient OAM multiplexing [29]. BGVBs are characterized by their “non-diffracting” [30] and “self-healing” properties, allowing them to reconstruct their intensity profiles after encountering obstacles [31,32]. More critically, distinct from the radial index $\\left( \\phi \\right)$ of LG beams where the beam size is intrinsically coupled with the topological charge [24], the spectral ring radius of a BGVB in the Fourier plane is determined solely by its half-cone angle (α), independent of l [33,34]. This unique decoupling feature significantly simplifies the demodulation complexity, making robust radial-azimuthal multi-dimensional multiplexing (RA-MDM) practically feasible. Despite these advantages, the application of BGVB in chaotic FSO systems under strong turbulence and macroscopic occlusion remains unexplored, as traditional BGVB schemes still suffer from mode coupling under severe phase perturbations [35,36]. ",
+        "bbox": [
+            74,
+            404,
+            486,
+            655
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Turbulence mitigation is indispensable for stable FSO links. Traditional adaptive optics (AO), typically employing Shack– Hartmann wavefront sensors and deformable mirrors, serves as the standard hardware architecture for real-time wavefront correction [37,38]. Beyond standard AO, emerging techniques such as deep learning-based prediction [39], phase-locked fiber arrays [40], and vector AO [41] have been developed to enhance correction speed and handle polarization distortions. ",
+        "bbox": [
+            74,
+            656,
+            484,
+            773
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "To achieve adaptive mode recognition without prior negotiation, digital signal processing (DSP) algorithms are required at the receiver. Existing DSP approaches for the BGVB/OAM mode detection primarily rely on Gerchberg–Saxton phase retrieval algorithms or machine-learning-based image classifiers $\\left( \\mathrm { e . g . } \\right.$ , convolutional neural networks) [42–46]. Although these digital methods achieve high mode recognition accuracy, they typically suffer from severe computational latency and algorithmic complexity. Such high-latency bottlenecks are fundamentally incompatible with the stringent real-time synchronization tracking demands of physical-layer chaotic communications. Therefore, rather than directly transplanting traditional DSP methods, it is imperative to design a customized, low-complexity detection algorithm that is highly tailored to the unique physical characteristics of this chaotic RA-MDM system. Driven by this motivation, we propose a novel hierarchical sparse mode detection algorithm. By reformulating the mode recognition task as a low-complexity sparse optimization problem, this tailored DSP approach elegantly bypasses the computational bottlenecks of traditional methods. ",
+        "bbox": [
+            74,
+            773,
+            486,
+            937
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            63,
+            927,
+            200
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "In this paper, we propose and validate a robust free-space chaotic secure communication architecture based on dualdegree-of-freedom (DoF) multiplexed BGVBs. By synergizing hardware-based AO for physical wavefront compensation with a software-based hierarchical sparse mode detection algorithm for adaptive demodulation, we successfully establish a reliable physical link under complex channel environments. Specifically, we construct a high-capacity chaotic transmission link by exploiting the spatial dimensions of BGVBs, utilizing their inherent robustness to mitigate link impairments, while optimizing the mode spacing to minimize inter-channel crosstalk. To ensure reliability under severe conditions, a hybrid strategy is introduced: a Shack–Hartmann wavefront sensor-based AO system first corrects macroscopic phase distortions, while a hierarchical sparse algorithm subsequently performs adaptive identification of the sparse mode coefficients from the residual turbulence field, ensuring a mode correct detection probability exceeding 90% even under strong turbulence $( D / r _ { 0 } = 6 )$ . Based on this robust connectivity, we successfully demonstrate a four-channel, 40 Gbps chaotic transmission over a simulated 1 km link. Ultimately, the system maintains a bit error rate (BER) below the hard-decision forward error correction (HD-FEC) threshold and high-quality chaotic synchronization $( C C > 0 . 9 7 )$ , even when subjected to a severe occlusion ratio of $\\dot { \\boldsymbol { \\beta } } = 0 . 5$ . ",
+        "bbox": [
+            516,
+            200,
+            927,
+            575
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "2. PRINCIPLES AND THEORETICAL MODEL ",
+        "text_level": 1,
+        "bbox": [
+            516,
+            598,
+            888,
+            613
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "A. Theoretical Basis and System Model ",
+        "text_level": 1,
+        "bbox": [
+            516,
+            620,
+            824,
+            634
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Bessel–Gauss vortex beams are a class of nondiffracting optical fields that carry the OAM. In the source plane $( z = 0 )$ , the complex amplitude distribution of a BGVB can be described as the product of a Bessel function of the first kind and a Gaussian envelope. The electric field $E ( r , \\varphi , 0 )$ is expressed in cylindrical coordinates (r , ϕ, z) as ",
+        "bbox": [
+            516,
+            641,
+            927,
+            731
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "equation",
+        "text": "$$\nE (r, \\varphi , 0) = A _ {0} \\cdot J _ {l} \\left(k _ {r} r\\right) \\cdot \\exp \\left(- \\frac {r ^ {2}}{w _ {0} ^ {2}}\\right) \\cdot \\exp (i l \\varphi), \\tag {1}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            542,
+            742,
+            927,
+            777
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "where $A _ { 0 }$ is the amplitude constant, and $J _ { l } ( \\cdot )$ denotes the Bessel function of the first kind with order l . Here, l represents the topological charge or azimuthal index, which determines the spiral phase structure and the OAM content of the beam. The term $w _ { 0 }$ is the waist radius of the Gaussian envelope. The parameter $k _ { r }$ is the radial wave vector component, related to the half-cone angle α of the beam by $k _ { r } = k$ sin α, where $k = 2 \\pi / \\lambda$ is the wave number [30,33]. ",
+        "bbox": [
+            516,
+            786,
+            927,
+            906
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "Two distinct properties of BGVBs make them particularly suitable for free-space optical communication: propagation invariance and self-healing. Within the maximum nondiffracting range $Z _ { \\mathrm { m a x } } ,$ the transverse intensity profile of the BGVB remains nearly unchanged, overcoming the diffraction limit associated with conventional Gaussian beams. Furthermore, the self-healing property allows the beam to reconstruct its wavefront and intensity distribution after encountering an obstruction or distortion [31,32]. This inherent robustness provides significant advantages in mitigating the deleterious effects of atmospheric turbulence and obstacles in the transmission link [36]. ",
+        "bbox": [
+            516,
+            906,
+            927,
+            937
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            94,
+            26,
+            237,
+            40
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            388,
+            26,
+            860,
+            39
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "page_number",
+        "text": "603 ",
+        "bbox": [
+            880,
+            28,
+            907,
+            38
+        ],
+        "page_idx": 1
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            74,
+            63,
+            483,
+            210
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The chaotic optical carrier is generated by a semiconductor laser subject to external optical feedback. This nonlinear dynamic system is mathematically described by the wellknown Lang–Kobayashi (L–K) equations [47,48]. For the driver laser (DL), the temporal evolution of the slowly varying complex electric field amplitude E (t) and the carrier density $N ( t )$ are governed by ",
+        "bbox": [
+            75,
+            212,
+            483,
+            316
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\frac {\\mathrm{d} E (t)}{\\mathrm{d} t} = \\frac {1}{2} \\left(1 + i \\alpha_ {L W}\\right) \\left(G - \\gamma_ {p}\\right) E (t) + \\kappa E (t - \\tau) e ^ {- i \\omega_ {0} \\tau}, \\tag {2}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            87,
+            323,
+            483,
+            367
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\frac {\\mathrm{d} N (t)}{\\mathrm{d} t} = \\frac {I}{e V} - \\gamma_ {e} N (t) - G | E (t) | ^ {2}, \\tag {3}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            159,
+            378,
+            483,
+            409
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "where $\\alpha _ { L W }$ is the linewidth enhancement factor, $\\gamma _ { P }$ is the photon decay rate, and $\\omega _ { 0 }$ is the angular frequency of the solitary laser. The feedback term is characterized by the feedback strength κ and the external cavity delay time τ . In the carrier density equation, I is the bias current, e is the elementary charge, V is the volume of the active region, and $\\gamma _ { e }$ is the carrier decay rate. The optical gain G typically considers the gain saturation effect. By adjusting the feedback parameters κ and τ , the laser can be driven into a chaotic state suitable for secure communications. ",
+        "bbox": [
+            74,
+            416,
+            483,
+            563
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Mathematically, the optical state space H of the BGVB can be decomposed into the tensor product of the azimuthal subspace $\\mathcal { H } _ { l }$ and the radial subspace $\\mathcal { H } _ { k _ { r } }$ [49]: ",
+        "bbox": [
+            75,
+            564,
+            483,
+            609
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathcal {H} = \\mathcal {H} _ {l} \\otimes \\mathcal {H} _ {k _ {r}}. \\tag {4}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            225,
+            616,
+            483,
+            634
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "To maximize spectral efficiency, we construct a discrete two-dimensional multiplexing space formed by the Cartesian product of a selected set of azimuthal topological charges $\\bar { \\mathbb { L } } = \\{ l _ { 1 } , \\dots , l _ { M } \\}$ and a discretized set of radial wave vectors $\\mathbb { K } = \\{ k _ { r 1 } , \\ldots , l _ { r N } \\}$ . This implies that each ordered pair $( l _ { m } , k _ { r n } )$ defines a unique orthogonal basis in the Hilbert space, enabling the system to support a total of $M \\times N$ independent communication channels. Based on this, the total multiplexed optical field $E _ { m u x }$ is constructed as a linear superposition within this tensor product space: ",
+        "bbox": [
+            75,
+            642,
+            484,
+            790
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "text": "$$\nE _ {m u x} (\\mathrm{r}) = \\sum_ {m = 1} ^ {M} \\sum_ {n = 1} ^ {N} A _ {m n} \\cdot \\left(\\Phi_ {l _ {m}} (\\phi) \\otimes \\mathcal {R} _ {k _ {r n}} (r)\\right), \\tag {5}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            94,
+            798,
+            483,
+            826
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "where $A _ { m n }$ denotes the complex modulation coefficient corresponding to the mode $( l _ { m } , k _ { r n } )$ . ",
+        "bbox": [
+            75,
+            832,
+            483,
+            863
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The separability of radial modes is physically realized in the spatial frequency domain (Fourier plane). When a BGVB passes through a Fourier transform lens with a focal length $f ,$ its spectrum manifests as a perfect annular ring. According to diffraction theory, the radius of this spectral ring, denoted as $R _ { f } ,$ is strictly determined by the radial wave vector $k _ { r n } .$ Geometrically, this radial wave vector is governed by the half-cone angle $\\alpha _ { n }$ of the nth radial mode, satisfying $\\dot { k } _ { r n } = k \\sin ( \\alpha _ { n } )$ . In physical implementation, this cone angle is dynamically modulated by a diffractive axicon phase pattern. By defining $d _ { n }$ as the spatial period of this axicon, the radial wave vector can be explicitly expressed as $k _ { r n } = k \\cdot \\lambda / ( d _ { n } ^ { 2 } + \\lambda ^ { 2 } ) ^ { 1 / 2 }$ [50]. Incorporating this physical relationship, the precise expression for the spectral ring radius $R _ { f }$ is given by ",
+        "bbox": [
+            75,
+            863,
+            483,
+            937
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            63,
+            927,
+            213
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "equation",
+        "text": "$$\nR _ {f} = \\frac {k _ {r n} f}{k} = \\frac {\\lambda f}{\\sqrt {d _ {n} ^ {2} + \\lambda^ {2}}}, \\tag {6}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            636,
+            219,
+            925,
+            256
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "where $d _ { n }$ represents the period of the axicon required to generate the specific radial mode. The equation demonstrates that $R _ { f }$ is independent of the topological charge l , establishing the physical basis for separating different radial channels via spatial filtering in the frequency domain. ",
+        "bbox": [
+            516,
+            263,
+            927,
+            338
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "B. Simulation Configurations ",
+        "text_level": 1,
+        "bbox": [
+            518,
+            357,
+            744,
+            372
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "The schematic diagram of the proposed adaptive secure FSO communication system is illustrated in Fig. 1. The architecture is modeled as three cascaded subsystems, and their physical configurations and corresponding numerical implementations are described below. ",
+        "bbox": [
+            516,
+            376,
+            927,
+            450
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Chaotic Transmitter and BGVB Multiplexing. The transmitter (Alice) utilizes an external-cavity semiconductor laser (ECSL) with conventional optical feedback as the drive source. To induce chaotic dynamics, an external optical feedback loop is constructed using a $1 \\times 2$ fiber coupler (FC1), a polarization controller (PC1), a variable optical attenuator (VOA1), and a mirror. An optical isolator (ISO1) is placed after the chaotic source to ensure unidirectional transmission. The chaotic carrier is split into four parallel channels via a 1 × 4 coupler (FC2) [17]. To ensure the statistical independence of the channels, fiber delay lines (FDL1–3) of varying lengths are inserted to decorrelate the chaotic streams. Each branch is modulated by non-return-to-zero on-off keying (NRZ-OOK) signals via a high-speed Mach–Zehnder modulator (MZM) with a modulation depth of 0.1 and amplified by erbium-doped fiber amplifiers (EDFA1–4). Subsequently, they are incident on four reflective spatial light modulators (SLM1–4). These SLMs are loaded with specific computer-generated holograms (CGHs) to generate the BGVB modes defined by $\\{ ( l _ { 1 } , \\stackrel {  } { k } _ { r 1 } ) , ( l _ { 1 } , k _ { r 2 } )$ , $( l _ { 2 } , k _ { r 1 } ) , ( l _ { 2 } , k _ { r 2 } ) \\}$ }. Specifically, the CGHs impose a composite phase profile combining a spiral phase $e ^ { i l \\varphi }$ and a conical phase. The radial wave vector is strictly determined by the projection relation $k _ { r } = k$ sin α. The beams are coaxially combined using beam splitters (BSs) and subsequently collimated by a 10× beam expander to form the multiplexed transmit field. ",
+        "bbox": [
+            516,
+            450,
+            927,
+            818
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "text",
+        "text": "Turbulent Channel and AO Compensation. Upon reaching the receiver, the incoming beam is first divided by a BS into two parallel paths: a control branch and a data demodulation branch. In the control branch, a dichroic beam splitter (DBS) spectrally isolates the spectral components. The separated beacon light is directed to the wavefront sensor (WFS) to drive the deformable mirror (DM) for real-time hardware phase correction. Simultaneously, the BGVB signal component in this branch serves as the input for the software layer, providing the sparse mode detection algorithm with the necessary phase information. Then, in the demodulation branch, a secondary DBS is employed to optically filter out the beacon light, ensuring that only the purified BGVB signal enters the subsequent demultiplexing and decoding modules. ",
+        "bbox": [
+            516,
+            818,
+            927,
+            937
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "page_number",
+        "text": "604 ",
+        "bbox": [
+            99,
+            28,
+            127,
+            38
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            146,
+            26,
+            617,
+            39
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            765,
+            26,
+            910,
+            40
+        ],
+        "page_idx": 2
+    },
+    {
+        "type": "image",
+        "img_path": "images/a42cf38563fc35f1c9d2a25336c75f109f1729110804a4ab5c62ccac272d5dde.jpg",
+        "image_caption": [
+            "Fig. 1. Configuration of the proposed scheme. DL, driver laser; SL, slave laser; FC, fiber coupler; PC, polarization controller; VOA, variable optical attenuator; M, mirror; ISO, optical isolator; MZM, Mach–Zehnder modulator; EDFA, erbium-doped fiber amplifier; FDL, fiber delay line; COL, collimator; LP, linear polarizer; SLM, spatial light modulator; BS, beam splitter; Lens, lens; DM, deformable mirror; WFS, wavefront sensor; DBS, dichroic beam splitter; S, motorized beam shutter; CCD, charge-coupled device; and PD, photodetector. "
+        ],
+        "image_footnote": [],
+        "content": "Optical system diagram showing beam path from source to detector, including lenses, mirrors, and beam collectors with labeled components.",
+        "sub_type": "flowchart",
+        "bbox": [
+            97,
+            63,
+            905,
+            269
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            74,
+            362,
+            483,
+            453
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "Adaptive Demultiplexing and Decryption. After the AO correction, a portion of the beam is tapped to a CCD camera. The system recovers the complex amplitude of the optical field by fusing the intensity image with the phase slopes measured by the WFS. Guided by the sparse mode detection algorithm, SLM5 and SLM6 are dynamically configured with annular apertures and conjugate phase masks. The signal beam undergoes cascaded demultiplexing, where it first passes through SLM5 in the Fourier plane to spatially separate the radial modes and subsequently impinges on SLM6 to demultiplex the BGVB signal back to a fundamental Gaussian beam, which is then coupled into a single-mode fiber (SMF) via a collimator (COL5). For decryption, the received signal is injected into a response laser (RL) to achieve chaos synchronization. The message is recovered by subtracting the synchronized local chaos from the received signal via photodetectors (PD1, PD2). ",
+        "bbox": [
+            75,
+            453,
+            484,
+            694
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "The system is modeled in MATLAB. The chaotic dynamics are governed by the Lang–Kobayashi equations and solved using a fourth-order Runge–Kutta algorithm. The atmospheric propagation is simulated using the split-step beam propagation method (BPM), where turbulence-induced phase fluctuations are generated via the spectral inversion of the modified von Kármán power spectrum, incorporating both inner (l0) and outer $( L _ { 0 } )$ scales. The AO system is modeled using the Object-Oriented MATLAB Adaptive Optics (OOMAO) toolbox. Key simulation parameters are listed in Table 1, and the specific channel configurations for the four-channel BGVB multiplexing are detailed in Table 2. ",
+        "bbox": [
+            74,
+            694,
+            484,
+            876
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "In practical hardware deployment, the AO mechanical latency does not perturb chaotic synchronization. The dynamic evolution of atmospheric turbulence is physically governed by Taylor’s frozen turbulence hypothesis, which ",
+        "bbox": [
+            74,
+            876,
+            484,
+            938
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/7c5e3954468ae82c1f5ac32d918fcad31fd4cf95af4fecab7fc3a31b68e6531d.jpg",
+        "table_caption": [
+            "Table 1. Key Simulation Parameters "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Symbol</td><td>Parameter</td><td>Value</td></tr><tr><td> $\\lambda$ </td><td>Carrier wavelength</td><td>1550 nm</td></tr><tr><td> $I_{th}$ </td><td>Threshold current</td><td>14.7 mA</td></tr><tr><td> $I_{bias}$ </td><td>Bias current</td><td> $1.5I_{th}$ </td></tr><tr><td> $\\alpha_{LW}$ </td><td>Linewidth enhancement factor</td><td>5</td></tr><tr><td> $\\kappa$ </td><td>Chaos feedback strength</td><td> $10\\ \\text{ns}^{-1}$ </td></tr><tr><td> $\\tau_{ext}$ </td><td>External feedback delay</td><td>2 ns</td></tr><tr><td> $w_{0}$ </td><td>Transmit beam waist</td><td>8 mm</td></tr><tr><td> $D_{Rx}$ </td><td>Receiver aperture diameter</td><td>250 mm</td></tr><tr><td> $D/r_{0}$ </td><td>Turbulence strength indicator</td><td>6</td></tr><tr><td> $L_{0}$ </td><td>Outer scale of turbulence</td><td>50 m</td></tr><tr><td> $l_{0}$ </td><td>Inner scale of turbulence</td><td>1 mm</td></tr><tr><td> $N_{sub}$ </td><td>WFS sub-apertures</td><td> $16 \\times 16$ </td></tr><tr><td> $N_{act}$ </td><td>DM actuators</td><td> $17 \\times 17$ </td></tr><tr><td> $m$ </td><td>Modulation depth</td><td>0.1</td></tr></table>",
+        "bbox": [
+            516,
+            378,
+            927,
+            602
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "table",
+        "img_path": "images/4797ba872b3ff9d5f084ce2cb0bd7951dbacee4516938a9c480896ccef5efebf.jpg",
+        "table_caption": [
+            "Table 2. Configuration for BGVB Multiplexing "
+        ],
+        "table_footnote": [],
+        "table_body": "<table><tr><td>Channel</td><td>Mode Representation</td><td>Physical Configuration</td></tr><tr><td>Mode 1</td><td> $(l_1, k_{r1})$ </td><td> $l = 1, \\alpha = 0.3$  mrad</td></tr><tr><td>Mode 2</td><td> $(l_1, k_{r2})$ </td><td> $l = 1, \\alpha = 0.6$  mrad</td></tr><tr><td>Mode 3</td><td> $(l_2, k_{r1})$ </td><td> $l = 4, \\alpha = 0.3$  mrad</td></tr><tr><td>Mode 4</td><td> $(l_2, k_{r2})$ </td><td> $l = 4, \\alpha = 0.6$  mrad</td></tr></table>",
+        "bbox": [
+            516,
+            641,
+            927,
+            727
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "implies that the temporal fluctuation of the wavefront is primarily driven by transverse wind speeds. Quantitatively, this time-varying characteristic is described by the Greenwood frequency ( fG ), which typically spans from 10s to several 100s of hertz, corresponding to an atmospheric coherence time (τ0) in the millisecond regime (e.g., 1–10 ms). It is crucial to emphasize the fundamental timescale decoupling between the macroscopic channel fluctuations and the microscopic high-speed data transmission. The AO system does not need to respond to the gigahertz-level frequency of the chaotic signal. Instead, its sole objective is to track and compensate for the macroscopic atmospheric phase distortions. As long as the closed-loop tracking bandwidth of the AO system $( f _ { A O } )$ ",
+        "bbox": [
+            516,
+            740,
+            927,
+            937
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            95,
+            26,
+            237,
+            40
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            388,
+            26,
+            860,
+            39
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "page_number",
+        "text": "605 ",
+        "bbox": [
+            882,
+            28,
+            907,
+            38
+        ],
+        "page_idx": 3
+    },
+    {
+        "type": "text",
+        "text": "sufficiently exceeds the Greenwood frequency $( f _ { A O } > f _ { G } )$ , the residual wavefront error can be effectively suppressed. Under this condition, the atmospheric channel acts as a static, nearly aberration-free medium within each coherence time window (τ0). During this “frozen” millisecond window, billions of chaotic bits can be transmitted and successfully synchronized without being perturbed by the low-frequency mechanical latency of the AO control loop. ",
+        "bbox": [
+            74,
+            63,
+            486,
+            185
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "C. Sparse Mode Detection Algorithm ",
+        "text_level": 1,
+        "bbox": [
+            75,
+            205,
+            361,
+            219
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "To enable blind communication in a dynamic dual-mode multiplexing system, accurate identification of the active mode indices is a prerequisite for data recovery. Since the specific channel allocation is unknown to the receiver, we propose a hierarchical adaptive mode detection algorithm, as shown in Fig. 2. This module functions as a “cognitive unit, identifying the active radial $k _ { r }$ and azimuthal l indices to guide the subsequent SLM-based demultiplexing process. ",
+        "bbox": [
+            74,
+            224,
+            484,
+            344
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "As illustrated in the system flow, the detection proceeds in three stages: ",
+        "bbox": [
+            75,
+            344,
+            484,
+            375
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "list",
+        "sub_type": "text",
+        "list_items": [
+            "1) Data Acquisition and Field Reconstruction: By fusing the intensity image $I _ { c a m }$ with the wavefront slopes $S _ { x y }$ from the AO sensor [37], a complete complex field $\\bar { U } = \\bar { I } ^ { 1 / 2 } \\cdot e ^ { i \\varphi }$ is synthesized. ",
+            "2) Radial Sparse Locking: To identify the active radial modes, we exploit the sparsity of the signal in the spatial frequency domain. The reconstructed field undergoes a 2D-FFT to generate a spectral map. We formulate the radial identification as a sparse reconstruction problem, solving for the radial coefficients using a dictionary $\\mathrm { D } _ { r a d }$ of theoretical Bessel rings and a LASSO solver [51]. This “Macro Locking” step accurately outputs the set of active radial wave vectors $( \\mathrm { e } . \\mathrm { g } . , \\hat { \\alpha } _ { 1 } , \\hat { \\alpha } _ { 2 } )$ . ",
+            "3) Targeted OAM Tomography: Once the radial indices are locked, the algorithm performs slicing on the frequency spectrum. It isolates the specific annular regions corresponding to the detected radial modes and applies an azimuthal FFT. This “Micro Analysis” acts as targeted tomography, precisely extracting the OAM topological charge l for each radial channel [52]. "
+        ],
+        "bbox": [
+            82,
+            380,
+            484,
+            681
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "image",
+        "img_path": "images/77ce4a9a0c75394fa230b41d82e3f10e821d7d644908b7edd164e6bea515a91e.jpg",
+        "image_caption": [
+            "Fig. 2. Flowchart of the AO-assisted hierarchical sparse mode detection algorithm. The pipeline comprises complex field reconstruction (Module A), frequency feature extraction (Module B), and a two-stage demodulation process. "
+        ],
+        "image_footnote": [],
+        "content": "```mermaid\ngraph TD\n    A[\"Module A: Data Acquisition & Field Reconstruction\"] --> B[\"CCD Image(Iloom)\"]\n    B --> C[\"Complex Field Fusion\"]\n    C --> D[\"Reconstructed Complex Field\"]\n    D --> E[\"Module B: Frequency Feature Extraction\"]\n    E --> F[\"2D-FFT\"]\n    F --> G[\"Polar Resampling\"]\n    G --> H[\"Data Object: V(K, φ)\"]\n    H --> I[\"Stage II-Targeted OAM Tomography\"]\n    I --> J[\"Micro Locking\"]\n    J --> K[\"Step 1: Slicing\"]\n    J --> L[\"Step 2: Azimuthal FFT\"]\n    K --> M[\"OAM Spectrum\"]\n    L --> M\n    M --> N[\"Stage II-Targeted OAM Tomography\"]\n    N --> O[\"Micro Locking\"]\n    O --> P[\"Step 1: Angular Integration\"]\n    O --> Q[\"Step 2: Sparse Solving\"]\n    P --> R[\"Radial Energy Profile\"]\n    Q --> R\n    R --> S[\"Target 1: d1, Target 2: d2\"]\n    S --> T[\"αi\"]\n    T --> U[\"Ii\"]\n    U --> V[\"Output\"]\n```",
+        "sub_type": "flowchart",
+        "bbox": [
+            84,
+            688,
+            479,
+            878
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The final output of this module is the joint state readout [a list of active $\\bar { ( l , k _ { r } ) }$ pairs], which is then fed to the SLM controller to realize cascaded demultiplexing. ",
+        "bbox": [
+            516,
+            63,
+            927,
+            109
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "3. RESULTS AND DISCUSSION ",
+        "text_level": 1,
+        "bbox": [
+            516,
+            132,
+            782,
+            146
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "A. Robustness Analysis of the BGVB ",
+        "text_level": 1,
+        "bbox": [
+            516,
+            154,
+            801,
+            168
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "We conducted a quantitative comparison between the proposed BGVB and conventional LGVB beams. Both beam types were configured with identical beam waist radii and transmission power. Furthermore, to guarantee statistical reliability, the evaluation results were averaged over 100 independent Monte Carlo realizations of the random turbulence phase screens. ",
+        "bbox": [
+            516,
+            174,
+            927,
+            277
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "The impact of atmospheric turbulence is quantified by the ratio of the receiver aperture diameter D to the Fried parameter $r _ { 0 } .$ . The optical channel characteristics are distinctively categorized into two regimes based on this ratio. In the weak turbulence regime $D / r _ { 0 } \\ll 1$ , the spatial coherence length of the wavefront is larger than the aperture, ensuring that system performance is bounded primarily by the diffraction limit with negligible scintillation. Conversely, in the strong turbulence regime $D / r _ { 0 } \\gg 1$ , the receiver aperture significantly exceeds the coherence length. This scenario is dominated by severe wavefront fragmentation and deep intensity fading, which drastically degrade the link reliability and the BER [53]. This study was mainly conducted under strong turbulence link conditions with $D / r _ { 0 } = 6 $ . ",
+        "bbox": [
+            516,
+            278,
+            927,
+            487
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "To quantitatively evaluate the beam quality under turbulence, we utilize two key metrics: the aperture-averaged scintillation index and mode purity. The aperture-averaged scintillation index $\\sigma _ { I } ^ { 2 } ( D )$ characterizes the intensity fluctuations received by the detection aperture. Unlike the point scintillation index, this metric accounts for the spatial averaging effect of the receiver lens, which is more relevant to practical communication systems. It is defined as ",
+        "bbox": [
+            516,
+            487,
+            927,
+            606
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\sigma_ {I} ^ {2} (D) = \\frac {\\langle P ^ {2} \\rangle - \\langle P \\rangle^ {2}}{\\langle P \\rangle^ {2}}, \\tag {7}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            639,
+            615,
+            927,
+            650
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "where P denotes the instantaneous optical power collected by the receiver aperture of diameter D, and $\\langle \\cdot \\rangle$ represents the ensemble average over independent turbulence realizations. The mode purity η measures the preservation of the OAM orthogonality, defined as the ratio of the power in the target mode $l _ { 0 }$ to the total received power: ",
+        "bbox": [
+            516,
+            657,
+            927,
+            749
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\eta = \\frac {\\left| C _ {l _ {0}} \\right| ^ {2}}{\\sum_ {l} \\left| C _ {l} \\right| ^ {2}}. \\tag {8}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            671,
+            757,
+            927,
+            794
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "text",
+        "text": "In this equation, $C _ { l }$ is the projection coefficient of the received field onto the eigenmode basis. It is crucial to emphasize that the spatial integration for calculating $C _ { l } ,$ and consequently the total received power in the denominator, is strictly bounded by the physical receiver aperture of diameter $D ,$ rather than an infinite theoretical transverse plane. This realistic boundary condition inherently accounts for the aperture truncation effects that predominantly penalize higher-order spatial modes in practical FSO links. ",
+        "bbox": [
+            516,
+            800,
+            927,
+            937
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "page_number",
+        "text": "606 ",
+        "bbox": [
+            99,
+            28,
+            127,
+            38
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            146,
+            26,
+            619,
+            39
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            765,
+            26,
+            910,
+            40
+        ],
+        "page_idx": 4
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bfce7a7d99b0d3c4909a41597cc028eb44386b57e4857ad6b50157c209b09bdc.jpg",
+        "content": "(a)\n| D/r₀ | BGBV | LGVB |\n|---|---|---|\n| 1 | 0.02 | 0.03 |\n| 2 | 0.07 | 0.1 |\n| 4 | 0.12 | -0.15 |\n| 6 | 0.16 | 0.2 |\n| 8 | 0.11 | 0.13 |\n| 10 | 0.07 | -0.09 |\n| 12 | 0.04 | -0.05 |",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "bar",
+        "bbox": [
+            82,
+            62,
+            279,
+            199
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/bc8771dfcd5cb2b983602d469803d95ab320318b9353062a65eaf38aa0bb68af.jpg",
+        "content": "(b)\n| Mode | BGVB | LGVB |\n|---|---|---|\n| 1 | 0.97 | 0.95 |\n| 2 | 0.73 | 0.69 |\n| 4 | 0.56 | 0.45 |\n| 6 | 0.25 | 0.2 |\n| 8 | 0.21 | 0.18 |\n| 10 | 0.15 | 0.11 |\n| 12 | 0.11 | 0.1 |",
+        "chart_caption": [
+            "Fig. 3. Statistical comparison of physical layer robustness between BGVB and LGVB beams under varying turbulence strengths $D / r _ { 0 } .$ . (a) Aperture-averaged scintillation index. (b) Mode purity. The error bars represent the standard deviation calculated over 100 independent turbulence realizations. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "bar",
+        "bbox": [
+            282,
+            63,
+            479,
+            200
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Figure 3 evaluates the aperture-averaged scintillation index and mode purity to characterize turbulence-induced channel impairments. As illustrated in Fig. 3(a), both beams exhibit an initial rise in scintillation followed by saturation—a characteristic of the strong turbulence regime. However, the BGVB consistently demonstrates stronger resistance to amplitude fading. Specifically, at $D / r _ { 0 } = 6 _ { \\mathrm { \\Omega } }$ , the BGVB maintains a lower scintillation index of 0.16, compared to 0.20 for the LGVB. Concurrently, Fig. 3(b) depicts the severe degradation of the OAM orthogonality, which inevitably induces inter-modal crosstalk. Although the BGVB still outperforms the LGVB (maintaining a mode purity of 0.25 versus 0.20 at $D / r _ { 0 } = 6 )$ , the absolute purity drops below the acceptable threshold for direct physical demodulation. Consequently, the fundamental inadequacy of direct physical-layer demodulation under such severe channel impairments mandates the integration of cascaded AO compensation and robust mode detection architectures. ",
+        "bbox": [
+            74,
+            293,
+            484,
+            561
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Distinct from turbulence-induced phase distortions, physical obstructions in the propagation path lead to direct information loss. To quantitatively evaluate the beam’s wavefront reconstruction capability, we employ three key metrics: the obstruction ratio $\\beta ,$ radial mode purity $\\eta _ { r a d i a l } ,$ , and complex amplitude correlation coefficient $C _ { a m p } .$ . The obstruction ratio is defined as the fraction of the total beam energy blocked by the opaque strip, expressed as $\\beta = 1 - ( P _ { o b s } / P _ { t o t a l } )$ , where $P _ { o b s }$ represents the residual power. The radial mode purity $\\eta _ { r a d i a l }$ reflects the preservation of the radial structure by calculating the energy ratio of the target mode to the total field. Furthermore, to measure the fidelity between the reconstructed field $E _ { r e c }$ and the ideal obstruction-free field $E _ { i d e a l } ,$ the correlation coefficient is calculated as [24] ",
+        "bbox": [
+            75,
+            561,
+            484,
+            770
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "equation",
+        "text": "$$\nC _ {a m p} (z) = \\frac {\\left| \\iint E _ {r e c} (x , y , z) E _ {i d e a l} ^ {*} (x , y , z) \\mathrm{d} x \\mathrm{d} y \\right|}{\\sqrt {\\iint | E _ {r e c} | ^ {2} \\mathrm{d} x \\mathrm{d} y \\cdot \\iint | E _ {i d e a l} | ^ {2} \\mathrm{d} x \\mathrm{d} y}}. \\tag {9}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            116,
+            777,
+            484,
+            823
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Figure 4 shows the comparative analysis of LGVB and BGVB beams. To ensure structural comparability, a high-order LGVB mode was selected to match the multi-ring profile of the BGVB. As illustrated in the schematic intensity profiles (top row), both beams are subjected to vertical obstruction with varying ratios. When $\\beta$ reaches 0.8, the spectral analysis in the middle row reveals a distinct performance gap. The LGVB beam suffers from severe orthogonality collapse, with a significant portion of energy leaking into adjacent radial modes. In contrast, the BGVB retains its dominant energy distribution within the target radial frequency. This observation is corroborated by the evolution of camp shown in the bottom row. While the correlation for the LG beam degrades permanently, the BGVB exhibits a rising trend along the propagation distance. This recovery is attributed to the beam’s self-healing mechanism, where energy flows transversely from the unobstructed side lobes to regenerate the central vortex core, thereby verifying the suitability of BGVBs for links susceptible to partial blocking. ",
+        "bbox": [
+            75,
+            832,
+            484,
+            937
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e54b8622cc0723e87bdef8fc8fbffa7ce0fd1515d05a5dbdc390e02714656696.jpg",
+        "content": "| Z/Z_R^LGFV | η_anald | C_ωm^LGFV(z) |\n| ---------- | ------- | ------------ |\n| 0          | 0       | 1            |\n| 5          | 1       | 1            |\n| 10         | 0       | 1            |\n| 15         | 0       | 1            |",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "bar",
+        "bbox": [
+            528,
+            63,
+            708,
+            201
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/831c36e1034a3dfa15d5c617c078c7b9764b5ec7d040b36fbf6e2340e69a73ec.jpg",
+        "content": "| β    | k_r    | C_μm^fit / C_μm^fit (Y) |\n|------|--------|--------------------------|\n| 0    | 0      | 1.0                      |\n| 0    | 5×10⁰  | 0.5                      |\n| 0.4  | 0      | 0.8                      |\n| 0.4  | 5×10⁰  | 0.3                      |\n| 0.8  | 0      | 0.6                      |",
+        "chart_caption": [
+            "Fig. 4. Comparative analysis of self-healing capabilities against obstruction for (a) LGVB and (b) BGVB beams. The top row illustrates the schematic intensity profiles under different obstruction ratios $\\beta .$ . The middle row displays the radial mode purity spectrum demonstrating the energy distribution across modes. The bottom row depicts the evolution of the complex amplitude correlation coefficient $C _ { a m p }$ along the propagation distance. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "bar",
+        "bbox": [
+            723,
+            63,
+            912,
+            201
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            326,
+            927,
+            507
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "B. Mode Crosstalk and Algorithm Performance ",
+        "text_level": 1,
+        "bbox": [
+            516,
+            527,
+            878,
+            542
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "text",
+        "text": "Optimal channel configuration represents a critical trade-off between spectral efficiency and signal integrity. To ensure optimal system transmission performance, it is imperative to characterize the crosstalk behaviors of the OAM and radial modes to determine the most robust multiplexing strategy for the physical layer. We first investigated the isolation performance under single-dimensional multiplexing, decoupling the interference mechanisms of the topological charge and the radial cone angle. Figures 5(a) and 5(b) quantify the crosstalk energy matrices for varying OAM spacing $\\Delta { l }$ and radial spacing $\\Delta \\alpha$ , respectively, while keeping the other dimension constant. Both matrices exhibit a similar trend where adjacent mode coupling is the dominant impairment. As illustrated in Fig. 5(a), increasing the topological charge difference from $\\Delta l = 1$ to $\\Delta l = 3$ results in a precipitous decline in crosstalk, effectively suppressing it to levels below −20 dB. A comparable isolation performance is observed for the radial modes in Fig. 5(b), where widening the radial parameter difference from $\\Delta \\alpha = 0 . 1$ to $\\Delta \\alpha = 0 . 3$ mrad yields a similar reduction in inter-mode coupling. However, it is noteworthy that the crosstalk suppression exhibits a saturation effect when the spacing exceeds a certain threshold, specifically, when $\\Delta l \\ge 4$ or $\\Delta \\alpha \\ge 0 . 4$ mrad. Beyond this point, further widening the interval yields negligible isolation gain but consumes valuable channel resources. To evaluate the system under realistic operating conditions, we mapped the signal-to-interference ratio (SIR) in the dual-degree-of-freedom multiplexing scenario, as shown in Fig. 6. This heat map captures the joint impact of simultaneous mode switching. Consistent with the single-dimensional analysis, the high-performance region (red) expands with larger spacings. Based on the saturation analysis, we selected the configuration of $\\Delta l = 3$ and $\\Delta \\alpha = 0 . 3$ mrad. This setting strikes an optimal balance: it secures an SIR above 30 dB—approaching the saturation ceiling—while maintaining a higher spectral density than the conservative setting of $\\Delta l = 4$ or $\\Delta \\alpha = 0 . 4$ mrad. ",
+        "bbox": [
+            516,
+            547,
+            927,
+            937
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            94,
+            26,
+            237,
+            40
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            388,
+            26,
+            860,
+            39
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "page_number",
+        "text": "607 ",
+        "bbox": [
+            880,
+            28,
+            905,
+            38
+        ],
+        "page_idx": 5
+    },
+    {
+        "type": "chart",
+        "img_path": "images/e8c069c769506beba479f2e6caa9ab8beb39bd13234ec934966d182a19716eb5.jpg",
+        "content": "| | ΔI = 1 | ΔI = 2 | ΔI = 3 | ΔI = 4 | ΔI = 5 |\n|---|---|---|---|---|---|\n| (a) | 0.0 | -11.9 | 0.0 | -17.2 | 0.0 |\n| (a) | -12.7 | -0.1 | -17.4 | -0.3 | -21.3 |\n| (a) | 0.0 | 0.0 | -20.4 | 0.0 | -24.5 |\n| (a) | -29.2 | 0.0 | -24.5 | 0.0 | -25.7 |\n| (a) | -1.4 | -1.4 | -25.1 | -0.9 | -25.7 |\n| (b) | 0.0 | -10.3 | 0.0 | -24.8 | 0.0 |\n| (b) | -8.7 | -1.2 | -23.2 | -2.3 | -28.4 |\n| (b) | 0.0 | 0.0 | -24.8 | 0.0 | -31.9 |\n| (b) | -31.9 | 0.0 | -31.9 | 0.0 | -35.8 |\n| (b) | -35.8 | 0.0 | -31.1 | -4.1 | -31.1 |\n| (b) | -36.5 | 0.0 | -31.1 | -4.1 | -31.1 |\n| (b) | -5.3 | -36.5 | -31.1 | -4.1 | -31.1 |",
+        "chart_caption": [
+            "Fig. 5. Evaluation of mode crosstalk under single-degree-offreedom multiplexing. (a) Normalized crosstalk energy matrix with varying 1l . (b) Normalized crosstalk energy matrix with varying 1α. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            82,
+            63,
+            479,
+            187
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/f3a50420e5aef5a323e797442cfea73f2e58d0b9ad41b4fb2c46649a628b448b.jpg",
+        "content": "| OAM Mode Spacing(Δl) | Radial Spacing(Δα) [mrad] | SIR (dB) |\n| --------------------- | -------------------------- | -------- |\n| 1                     | 0.1                        | 15       |\n| 2                     | 0.3                        | 20       |\n| 3                     | 0.25                       | 25       |\n| 4                     | 0.28                       | 30       |\n| 5                     | 0.27                       | 35       |\n| 6                     | 0.1                        | 40       |",
+        "chart_caption": [
+            "Fig. 6. SIR levels under dual-degree-of-freedom multiplexing. The heat map illustrates the SIR performance as a function of 1l and 1α. The contour lines indicate SIR thresholds. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            116,
+            260,
+            444,
+            453
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            75,
+            519,
+            486,
+            667
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Guided by the optimal mode spacing determined in the previous analysis, we adopted the channel configuration detailed in Table 2 for the subsequent link simulation. To validate the efficacy of the AO system in this specific configuration, we evaluated the channel characteristics under both open-loop and closed-loop conditions. ",
+        "bbox": [
+            75,
+            669,
+            484,
+            758
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "Figure 7 shows the comparative results at the receiver. The intensity profiles shown in Fig. 7(b) provide an intuitive validation of the multiplexing scheme. In the open-loop scenario, strong turbulence induces severe phase distortions, resulting in a speckle-like intensity distribution where the mode structure is indistinguishable. In contrast, the closed-loop profile clearly recovers the intended dual-DOF features: the distinct two concentric rings correspond to the radial multiplexing, while the visible interference fringes on each ring manifest the OAM multiplexing. This structural recovery confirms that the AO system effectively concentrates the energy back into the target spatial modes. To quantitatively assess the signal quality, Fig. 7(a) displays the normalized channel crosstalk matrices. In the open-loop state, the diagonal elements representing signal power are severely attenuated, ranging from −9.6 to −20.6 dB, indicating that the signal is submerged in turbulence-induced noise. ",
+        "bbox": [
+            75,
+            758,
+            484,
+            937
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/cc1eed7548beb74054e152d11bd67776e2bf189a515628af7c045628a5fc264e.jpg",
+        "content": "Open-Loop\n| RX: | CH1 | CH2 | CH3 | CH4 |\n|---|---|---|---|---|\n| RX: | -9.6 | -25.2 | -16.8 | -26.4 |\n| RX: | -19.9 | -15.5 | -28.3 | -18.6 |\n| RX: | -15.6 | -30.4 | -12.1 | -28.1 |\n| RX: | -20.6 | -17.2 | -24.0 | -16.5 |\nThe values in the heatmap are estimated based on the numerical values displayed in the table. The values in the heatmap are estimated based on the color intensity of the cell values.",
+        "chart_caption": [
+            "（a)"
+        ],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            550,
+            74,
+            702,
+            178
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/0d30e56654f6061fbc57c0b35359600232cdc2f91a484f8bc050b53ebdded906.jpg",
+        "content": "Closed-Loop\n| RX: | CH1 | CH2 | CH3 | CH4 |\n|---|---|---|---|---|\n| RX: | 0.0 | -30.5 | -24.4 | -30.8 |\n| TX: | -27.7 | -3.7 | -34.3 | -24.4 |\n| RX: | -22.3 | -35.4 | -1.7 | -32.8 |\n| RX: | -28.4 | -22.9 | -31.5 | -4.1 |\nThe values in the heatmap are estimated based on the grid layout and the color scale ranges from -40 dB to 0 dB. The heatmap displays the estimated values for each cell within the grid. The values in the heatmap are estimated based on the grid layout and the color scale. The color scale ranges from -40 dB to 0 dB, but the numerical values are not explicitly labeled on the cells. The heatmap appears to be a heatmap with a color bar indicating the magnitude of the value. The heatmap is labeled with the same axes and the color bar indicating the value in dB.",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "heatmap",
+        "bbox": [
+            722,
+            74,
+            915,
+            178
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/e6c13bfe3cd20b281c7acab90cfaf883795782160a21da6cfe9a448fcf4d2322.jpg",
+        "image_caption": [
+            "(b) "
+        ],
+        "image_footnote": [],
+        "content": "Open-Loop image showing a glowing red-orange circular pattern against a black background (no text or symbols)",
+        "sub_type": "natural_image",
+        "bbox": [
+            585,
+            189,
+            700,
+            283
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "image",
+        "img_path": "images/9d49ed6d1ae9d627d4375b250d46c64a0a6f4e1155a0a14f3bc353b73cf4314a.jpg",
+        "image_caption": [
+            "Fig. 7. Performance evaluation of the AO compensation system. (a) Normalized channel crosstalk matrices for open-loop and closed-loop states. (b) Received intensity profiles. "
+        ],
+        "image_footnote": [],
+        "content": "Circular glowing object with red-orange gradient against black background, labeled 'Closed-Loop' at top (no other text or symbols)",
+        "sub_type": "natural_image",
+        "bbox": [
+            757,
+            189,
+            872,
+            283
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            353,
+            927,
+            429
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "However, with the AO compensation, the signal energy on the diagonal is significantly restored, and the crosstalk is effectively suppressed. Notably, the recovery effect exhibits a distinct hierarchy governed by the modal properties. As shown by the diagonal elements in Fig. 7(a), CH1 demonstrates the highest robustness. Possessing the minimal topological charge and cone angle, it features the simplest mode structure and the most compact spot size, thereby minimizing susceptibility to wavefront distortions and aperture truncation effects. Conversely, CH4 suffers the largest residual penalty, as the high-order phase singularity is inherently more fragile, and the large cone angle results in a broader spatial distribution that is more vulnerable to aperture truncation. Furthermore, a critical comparison between the intermediate channels reveals that the sensitivity of this configuration to α significantly exceeds that to the topological charge $l ;$ CH3 outperforms CH2 despite having a higher OAM order, confirming that aperture truncation effects are the dominant factor in performance degradation. Although minor residual crosstalk persists, the significantly improved SIR satisfies the fundamental demodulation requirements, thereby enabling the subsequent sparse mode detection algorithm to achieve higher detection probability. ",
+        "bbox": [
+            516,
+            430,
+            927,
+            772
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "text",
+        "text": "In this study, the correct detection probability $P _ { d }$ is defined as the probability of simultaneously identifying all transmitted mode indices correctly. The data presented herein are derived from 100 independent Monte Carlo measurements for each turbulence intensity. Figure 8 illustrates the comparative evaluation of $P _ { d }$ across varying turbulence strengths. In the open-loop regime, reliable detection (defined as $P _ { d } \\ge 9 0 )$ is strictly confined to weak turbulence; beyond this limit, severe phase distortions cause $P _ { d }$ to drop precipitously below 45%, rendering the link operationally unstable. In sharp contrast, the closed-loop system exhibits superior resilience. Benefiting from wavefront correction, it maintains a correct detection probability above 90% even under challenging strong turbulence scenarios. Notably, the results unveil an inherent robustness disparity: radial modes consistently outperform angular modes, regardless of whether the system is in open-loop or closed-loop operation. This is attributed to the distinct physical encoding mechanisms: the radial index is primarily mapped to the spatial intensity envelope, a macroscopic spatial feature that possesses higher intrinsic resilience against turbulence-induced distortions. Conversely, the azimuthal index relies on the fragile phase singularity, which remains highly susceptible to disruption by phase aberrations and intensity scintillation. ",
+        "bbox": [
+            516,
+            772,
+            927,
+            937
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "page_number",
+        "text": "608 ",
+        "bbox": [
+            101,
+            28,
+            127,
+            38
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            148,
+            26,
+            617,
+            39
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            767,
+            26,
+            910,
+            39
+        ],
+        "page_idx": 6
+    },
+    {
+        "type": "chart",
+        "img_path": "images/7a1ccc34b8501e20cc3ec52d6dd2a34092de405ef6a268bf98b6f3e891e9a06c.jpg",
+        "content": "| D/r₀ | Angular (P₀) | Radial (P₀) |\n|---|---|---|\n| 0.1 | 100.0% | 100.0% |\n| 1 | 100.0% | 100.0% |\n| 2 | 100.0% | 100.0% |\n| 4 | 100.0% | 100.0% |\n| 6 | 100.0% | 100.0% |\n| 8 | 100.0% | 100.0% |\n| Weak | 100.0% | 100.0% |\n| Mid | 100.0% | 100.0% |\n| Strong | 100.0% | 100.0% |\n| Closed-Loop | 100.0% | 100.0% |\n| Open-Loop | 100.0% | 100.0% |",
+        "chart_caption": [
+            "Fig. 8. Statistical evaluation of correct detection probability $P _ { d }$ under varying turbulence strengths. The bars compare the detection success rates for angular (blue) and radial (green) modes in open-loop (bottom) and closed-loop (top) systems. The red dashed line indicates the reliability threshold of 90%. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "bar",
+        "bbox": [
+            82,
+            62,
+            476,
+            305
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            74,
+            401,
+            486,
+            579
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "C. Performance of Chaotic Secure Transmission ",
+        "text_level": 1,
+        "bbox": [
+            75,
+            602,
+            447,
+            616
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Building upon the robust physical connectivity established by the AO compensation and the sparse detection algorithm, we proceed to evaluate the end-to-end performance of the closed-loop chaotic secure transmission system under strong turbulence conditions. ",
+        "bbox": [
+            74,
+            621,
+            484,
+            653
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            63,
+            927,
+            108
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Figure 9 provides a comprehensive evaluation of the system’s synchronization quality and synchronization crosstalk. Figure 9(a) depicts the time-domain waveforms of the four multiplexed channels operating at an SNR of 20 dB with a transmission rate of 10 Gbps. It is evident that the recovered signal waveforms (colored waveforms) exhibit a high degree of coincidence with the transmitted bit streams (black waveforms), indicating that the chaotic carriers have been successfully demodulated despite the channel impairments. This synchronization quality is further corroborated by the correlation scatter plots between the master and slave lasers in Fig. 9(b). The distribution of state points for all four channels converges tightly along the unit slope diagonal, demonstrating the high-quality synchronization between the master and slave lasers. ",
+        "bbox": [
+            516,
+            109,
+            927,
+            329
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "Figure 9(c) shows the chaotic synchronization crosstalk matrix. The diagonal elements represent the correlation coefficients between the transmitted and received chaotic states of the corresponding channels. The off-diagonal elements quantify the residual chaotic crosstalk, defined as the crosscorrelation coefficient between the transmitted chaotic carrier of an interfering channel and the recovered signal of the target channel. The results show that the synchronization coefficients for all four channels exceed 0.97, while the cross-channel interference is suppressed to negligible levels. ",
+        "bbox": [
+            516,
+            330,
+            927,
+            480
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "D. BER Performance ",
+        "text_level": 1,
+        "bbox": [
+            518,
+            499,
+            683,
+            512
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "text",
+        "text": "To comprehensively validate the reliability and capacity of the secure communication link under strong turbulence $D / r _ { 0 } = 6 ,$ the BER performance was systematically characterized across multiple dimensions. Given the immense computational overhead of simulating a sufficient number of bits through the Lang–Kobayashi equations and multi-screen split-step propagation to directly count errors at a $1 0 ^ { - 1 2 }$ level, direct Monte Carlo error counting is practically prohibitive. Therefore, in our simulations, the BER is analytically estimated via the ",
+        "bbox": [
+            516,
+            519,
+            927,
+            653
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "image",
+        "img_path": "images/55edff0f390041eaf9ee0c3e988c4a60ec178a6f8bb9936bc2d77153a2bf5dfe.jpg",
+        "image_caption": [
+            "Fig. 9. Performance evaluation of multi-channel chaotic synchronization. (a) Time-domain waveforms of the four multiplexed channels at SNR = 20 dB and 10 Gbps. (b) Correlation scatter plots between the ML and SL. (c) Chaotic synchronization crosstalk matrix. The diagonal elements represent the chaotic synchronization coefficients of the respective channels. "
+        ],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            146,
+            660,
+            860,
+            892
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            95,
+            26,
+            237,
+            39
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            388,
+            26,
+            858,
+            39
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "page_number",
+        "text": "609 ",
+        "bbox": [
+            882,
+            29,
+            905,
+            38
+        ],
+        "page_idx": 7
+    },
+    {
+        "type": "chart",
+        "img_path": "images/87712296926c15dd9659830640d414c7981afdf8d1d773cec4644957d8ae44de.jpg",
+        "content": "| Bit rate(Gbps) | CH1 Encrypted | CH2 Encrypted | CH1 Decrypted | CH2 Decrypted | CH2 DDLF | CH3 Encrypted | CH4 Encrypted | CH3 Decrypted | CH4 Decrypted | CH3 DDLF | CH4 DDLF |\n| -------------- | ------------- | ------------- | ------------- | ------------- | -------- | ------------- | ------------- | ------------- | ------------- | -------- | -------- |\n| 5              | -5.5          | -5.5          | -12.0         | -5.5          | -5.5     | -9.0          | -5.5          | -12.0         | -5.5          | -5.5     | -5.5     |\n| 6              | -4.5          | -4.5          | -9.0          | -4.5          | -4.5     | -7.0          | -4.5          | -9.0          | -4.5          | -4.5     | -4.5     |\n| 7              | -4.0          | -4.0          | -7.0          | -4.0          | -4.0     | -6.0          | -4.0          | -7.0          | -4.0          | -4.0     | -4.0     |\n| 8              | -3.5          | -3.5          | -6.0          | -3.5          | -3.5     | -5.0          | -3.5          | -6.0          | -3.5          | -3.5     | -3.5     |\n| 9              | -3.0          | -3.0          | -5.0          | -3.0          | -3.0     | -4.0          | -3.0          | -5.0          | -3.0          | -3.0     | -3.0     |\n| 10             | -2.5          | -2.5          | -4.5          | -2.5          | -2.5     | -3.5          | -2.5          | -4.5          | -2.5          | -2.5     | -2.5     |",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            80,
+            62,
+            365,
+            242
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/cab1db397747ff7701ebf400a480137825f64288c054b554e758224f5f3676fb.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            368,
+            66,
+            478,
+            114
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/8f95c18de59367bd687c9d3d9b61777ddc9b359c4aecb460aca734f2050a5156.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            368,
+            117,
+            476,
+            166
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/814a6e54f336af0df3a3577a37030d0699a08f40b8fd1155707913c7063b5dbd.jpg",
+        "image_caption": [
+            "Fig. 10. Communication performance under the AO closed-loop correction $( D / r _ { 0 } = 6 , \\mathrm { S N R } = 2 0 \\mathrm { d B } )$ . (a) The BER versus transmission rate for the legitimate decrypted, encrypted, and DDLF-attacked signals. (b)–(d) Eye diagrams of CH1 at 8 Gbps for the decrypted, encrypted, and DDLF-attacked cases, respectively. "
+        ],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            368,
+            169,
+            476,
+            218
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Q-factor method. Specifically, the Q-factor is derived from the statistical means $( \\mu _ { 1 } , \\mu _ { 0 } )$ and standard deviations $( \\sigma _ { 1 } , \\sigma _ { 0 } )$ of the recovered signal amplitudes for bits $^ { \\mathfrak { a } } 1 ^ { \\mathfrak { n } }$ and $^ { \\mathfrak { e } } 0 ^ { \\mathfrak { p } }$ using $Q = | \\mu _ { 1 } - \\mu _ { 0 } | \\cdot ( \\sigma _ { 1 } ^ { - } + \\sigma _ { 0 } ) ^ { - 1 }$ . The corresponding BER is then analytically calculated as ",
+        "bbox": [
+            75,
+            335,
+            484,
+            412
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "equation",
+        "text": "$$\n\\mathrm{BER} = \\frac {1}{2} \\operatorname{erfc} (Q / \\sqrt {2}). \\tag {10}\n$$",
+        "text_format": "latex",
+        "bbox": [
+            196,
+            421,
+            483,
+            450
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Figure 10(a) illustrates the BER evolution of the four multiplexed channels under closed-loop conditions at a fixed SNR of 20 dB, as the data rate increases from 5 to 10 Gbps. The results clearly delineate the system’s performance across distinct operational states. For the legitimate receiver, although the BER increases monotonically with the data rate, it remains consistently below the HD-FEC threshold $\\mathrm { o f } 3 . 8 \\times 1 0 ^ { - 3 }$ throughout the entire test range. Notably, at 10 Gbps, while the BERs for all channels remain within the feasible region for FEC, CH2, and CH4 are observed to approach the critical threshold. This achieves a cumulative capacity of 40 Gbps, underscoring the efficacy of the proposed architecture in mitigating turbulenceinduced impairments. Furthermore, regarding security, the BER for both the encrypted signals and the unauthorized interception attempts via direct detection linear filtering (DDLF) maintains a constant level of approximately 0.5, independent of the data rate. This sustained high-error floor confirms that, lacking the correct chaotic decryption key, the intercepted data is statistically indistinguishable from random noise, thereby ensuring robust physical layer security. Figures 10(b)–10(d) display the eye diagrams captured at a transmission rate of 8 Gbps. The decrypted eye diagram in Fig. 10(b) exhibits a wide opening with well-defined logic levels, indicating a high Q-factor and low timing jitter, which aligns with the low BER measurements. In sharp contrast, both the encrypted eye diagram in Fig. 10(c) and the eye diagram subjected to the DDLF attack in Fig. 10(d) are completely closed and exhibit noiselike characteristics. This comparison validates the efficacy of the chaotic masking and the system’s security against linear filtering attacks. ",
+        "bbox": [
+            74,
+            459,
+            486,
+            906
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "In stark contrast to the robust operation observed under closed-loop correction, Fig. 11 illustrates the catastrophic performance degradation encountered in the open-loop regime without the AO compensation. Under the same strong turbulence conditions and a fixed SNR of 20 dB, the severe phase distortions destroy the orthogonality of the multiplexed modes. As evidenced by the BER evolution curves in Fig. 11(a), the bit error rate for the legitimate decrypted channels remains consistently high, hovering well above the HD-FEC threshold across the entire transmission rate range from 5 to 10 Gbps. This indicates a complete link interruption. ",
+        "bbox": [
+            75,
+            906,
+            484,
+            938
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/4cfa2672b0f2f58478a6ea95c5c34d381c23971260765118a6275f2f48552427.jpg",
+        "content": "| Bit rate(Gbps) | CH1 Encrypted | CH2 Encrypted | CH1 Decrypted | CH2 Decrypted | CH1 DDLF | CH2 DDLF | CH3 Encrypted | CH4 Encrypted | CH3 Decrypted | CH4 Decrypted | CH3 DDLF | CH4 DDLF |\n| -------------- | -------------- | -------------- | -------------- | -------------- | -------- | -------- | -------------- | -------------- | -------------- | -------------- | -------- | -------- |\n| 5              | -0.5           | -0.5           | -0.8           | -0.8           | -0.8     | -0.8     | -0.8           | -0.8           | -0.8           | -0.8           | -0.8     | -0.8     |\n| 6              | -0.5           | -0.5           | -0.8           | -0.8           | -0.8     | -0.8     | -0.8           | -0.8           | -0.8           | -0.8           | -0.8     | -0.8     |\n| 7              | -0.5           | -0.5           | -0.8           | -0.8           | -0.8     | -0.8     | -0.8           | -0.8           | -0.8           | -0.8           | -0.8     | -0.8     |\n| 8              | -0.5           | -0.5           | -0.8           | -0.8           | -0.8     | -0.8     | -0.8           | -0.8           | -0.8           | -0.8           | -0.8     | -0.8     |\n| 9              | -0.5           | -0.5           | -0.8           | -0.8           | -0.8     | -0.8     | -0.8           | -0.8           | -0.8           | -0.8           | -0.8     | -0.8     |\n| 10             | -0.5           | -0.5           | -0.8           | -0.8           | -0.8     | -0.8     | -0.8           | -0.8           | -0.8           | -0.8           | -0.8     | -0.8     |",
+        "chart_caption": [],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            525,
+            63,
+            806,
+            243
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/30ce9b1331db2d3df614c484d1c5ddbdef1db9e26982cd983b0f1c9f30d0e0b1.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            811,
+            66,
+            920,
+            114
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/eed0edfebbbc1e8d29d43b1a6d57c31470c5dca7684073a1adb24b1a0bfa51b9.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            811,
+            117,
+            920,
+            166
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "image",
+        "img_path": "images/a4cff716f8fab0d45a3f10ec4c6b7f0b2b930bf50c53388e8bd823b11714bf19.jpg",
+        "image_caption": [],
+        "image_footnote": [],
+        "content": "",
+        "bbox": [
+            811,
+            169,
+            920,
+            218
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/fc99cc1f46c6647772d1288623fd8f4e6d0a667f0a88381db344e1fbc3b86b80.jpg",
+        "content": "| SNR(dB) | CH1 Encrypted | CH2 Encrypted | CH1 DDLF | CH2 DDLF | CH3 Encrypted | CH3 DDLF | CH4 Encrypted | CH4 DDLF |\n| ------- | ------------- | ------------- | -------- | -------- | ------------- | -------- | ------------- | -------- |\n| 10      | -0.5          | -0.5          | -1.0     | -0.5     | -1.5          | -1.5     | -0.5          | -0.5     |\n| 15      | -1.5          | -1.5          | -2.0     | -1.5     | -3.0          | -3.0     | -1.5          | -1.5     |\n| 20      | -2.5          | -2.5          | -3.0     | -2.5     | -4.5          | -4.5     | -2.5          | -2.5     |\n| 25      | -3.5          | -3.5          | -4.0     | -3.5     | -6.0          | -6.0     | -3.5          | -3.5     |\n| 30      | -4.5          | -4.5          | -5.0     | -4.5     | -7.5          | -7.5     | -4.5          | -4.5     |",
+        "chart_caption": [
+            "Fig. 11. Open-loop performance under strong turbulence $( D / r _ { 0 } = 6 , \\ \\mathrm { S N R } = 2 0 \\ \\bar { \\mathrm { d B } } )$ . (a) The BER versus transmission rate indicating link outage. (b)–(d) Closed eye diagrams at 8 Gbps for the decrypted, encrypted, and DDLF-attacked signals. ",
+            "Fig. 12. BER versus SNR under AO closed-loop correction $( D / r _ { 0 } = 6 )$ . (a) BER at 10 Gbps, indicating that all channels satisfy the HD-FEC threshold for SNR ≥ 20 dB. (b)–(e) Eye diagrams of the recovered signals for channels CH1–CH4, exhibiting clear and uniform eye openings. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            525,
+            329,
+            920,
+            503
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            597,
+            927,
+            730
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "text",
+        "text": "Following the rate analysis, we further characterized the system’s robustness against noise by sweeping the SNR from 10 to 30 dB at the maximum transmission rate of 10 Gbps. Figure 12 shows the performance under closed-loop AO correction. As the SNR increases, the BER for the legitimate channels improves significantly, crossing the critical HD-FEC threshold at 20 dB. This establishes a clear operational boundary, confirming that the system supports stable 40 Gbps transmission given sufficient optical power. Figures 12(b)–12(e) display the eye diagrams for the four decrypted channels at this high SNR regime. Despite minor variations in eye opening resulting from inherent signal power disparities and residual crosstalk, all ports consistently exhibit clear logic levels with sufficient decision margins. ",
+        "bbox": [
+            516,
+            730,
+            927,
+            937
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "page_number",
+        "text": "610 ",
+        "bbox": [
+            101,
+            29,
+            127,
+            38
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            148,
+            28,
+            617,
+            39
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            767,
+            26,
+            910,
+            39
+        ],
+        "page_idx": 8
+    },
+    {
+        "type": "chart",
+        "img_path": "images/8021cd29b78dbe504befc2c7b75894b04810911d4108d92fe319e5f6d4f0b00c.jpg",
+        "content": "| SNR(dB) | CH1 Encrypted | CH2 Encrypted | CH1 Decrypted | CH2 Decrypted | CH1 DDLF | CH2 DDLF | CH3 Encrypted | CH4 Encrypted | CH3 Decrypted | CH4 DDLF |\n| ------- | -------------- | -------------- | -------------- | -------------- | -------- | -------- | -------------- | -------------- | -------------- | -------- |\n| 10      | 0.0            | 0.0            | 0.0            | 0.0            | 0.0      | 0.0      | 0.0            | 0.0            | 0.0            | 0.0      |\n| 15      | 0.0            | 0.0            | 0.0            | 0.0            | 0.0      | 0.0      | 0.0            | 0.0            | 0.0            | 0.0      |\n| 20      | 0.0            | 0.0            | 0.0            | 0.0            | 0.0      | 0.0      | 0.0            | 0.0            | 0.0            | 0.0      |\n| 25      | 0.0            | 0.0            | 0.0            | 0.0            | 0.0      | 0.0      | 0.0            | 0.0            | 0.0            | 0.0      |\n| 30      | 0.0            | 0.0            | 0.0            | 0.0            | 0.0      | 0.0      | 0.0            | 0.0            | 0.0            | 0.0      |",
+        "chart_caption": [
+            "Fig. 13. Performance limitations under open-loop conditions $( D / r _ { 0 } = 6 ,$ 10 Gbps). (a) The evolution of the BER versus SNR. (b)–(e) Completely closed eye diagrams for channels CH1–CH4. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            80,
+            63,
+            479,
+            237
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "chart",
+        "img_path": "images/c8ca246cbe271d655d91f60be371c8826b4cb580e0654c61e66bb8b56eba3513.jpg",
+        "content": "| Obstructed Power Ratio | CH1 Decrypted | CH1 DDLF | CH2 Decrypted | CH2 DDLF | CH3 Decrypted | CH3 DDLF | CH4 Decrypted | CH4 DDLF |\n| ---------------------- | ------------- | -------- | ------------- | -------- | ------------- | -------- | ------------- | -------- |\n| 0.1                    | -5.0          | -5.0     | -3.0          | -3.0     | -5.0          | -5.0     | -4.0          | -1.0     |\n| 0.2                    | -4.5          | -4.5     | -2.5          | -2.5     | -4.5          | -4.5     | -3.5          | -1.0     |\n| 0.3                    | -4.0          | -4.0     | -2.0          | -2.0     | -4.0          | -4.0     | -3.0          | -1.0     |\n| 0.4                    | -3.5          | -3.5     | -1.5          | -1.5     | -3.5          | -3.5     | -2.5          | -1.0     |\n| 0.5                    | -3.0          | -3.0     | -1.0          | -1.0     | -3.0          | -3.0     | -2.0          | -1.0     |\n| 0.6                    | -2.5          | -2.5     | -0.5          | -0.5     | -2.5          | -2.5     | -1.5          | -1.0     |",
+        "chart_caption": [
+            "Fig. 14. Robustness evaluation against opaque bar-shaped obstructions. The BER evolution as a function of $\\beta$ measured with a 2 dB link margin. The inset diagrams visually illustrate the relative spatial overlap between the obstruction bar (marked by white dashed lines) and the beam intensity profiles. "
+        ],
+        "chart_footnote": [],
+        "sub_type": "line",
+        "bbox": [
+            99,
+            312,
+            461,
+            541
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "In stark contrast to the closed-loop scenario, Fig. 13 illustrates the fundamental limitations encountered in the open-loop regime. Despite increasing the SNR to 30 dB, the link fails to achieve the HD-FEC threshold, signifying a complete outage. ",
+        "bbox": [
+            74,
+            636,
+            484,
+            711
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Finally, to rigorously validate the self-healing capability of the BGVB carriers in complex environments, we evaluated the communication quality under varying degrees of opaque bar-shaped obstructions. A 2 dB link margin was introduced to compensate for the energy loss induced by the obstruction, thereby allowing the analysis to focus primarily on mode purity and topological stability. Figure 14 depicts the evolution of the BER as $\\beta$ increases. The inset diagrams visually illustrate the experimental geometry, showing the relative spatial overlap between the obstruction bar (marked by white dashed lines) and the recovered beam intensity profiles at different β levels. ",
+        "bbox": [
+            74,
+            711,
+            484,
+            876
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "A comprehensive analysis reveals a decisive shift in the dominant physical mechanisms governing system performance. Consistent with the crosstalk analysis, Ch1 exhibits the highest robustness under obstruction-free conditions, followed by Ch3, while Ch2 and Ch4 suffer from higher residual errors. However, the introduction of a bar-shaped obstruction triggers a significant reversal in this performance hierarchy. Ch3 exhibits the superior performance, surpassing Ch1, while Ch4 outperforms Ch2. This inversion highlights the superior spatial redundancy of high-order topological charges against linear occlusions compared to lower-order modes. This phenomenon originates from distinct spatial intensity profiles: the energy of lower-order modes (CH1, CH2) is spatially confined near the optical axis, rendering them highly vulnerable to the geometry of the obstruction bar, which can easily intercept a substantial fraction of the mode’s core energy. In contrast, higher-order modes (CH3, CH4) feature a larger, ring-like intensity distribution that effectively bypasses the central blockage. Therefore, Ch3 achieves the optimal trade-off among aperture truncation, turbulence resilience, and self-healing capability. ",
+        "bbox": [
+            74,
+            876,
+            484,
+            937
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            63,
+            927,
+            305
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "Amidst these general trends, localized anomalies are observed for Channel 2 at $\\beta = 0 . 2$ and Channel 3 at $\\beta = 0 . 5$ , where the BER paradoxically improves. These enhancements are attributed to a spatial filtering effect: at these specific positions, the opaque bar selectively blocks a significant portion of the crosstalk energy from adjacent modes while preserving the signal power of the target channel, thereby temporarily boosting the SINR. Despite the severe occlusion limits, the link successfully maintains an aggregate transmission rate of 40 Gbps even at $\\beta = 0 . 5$ , confirming that the self-healing property of BGVBs provides a resilient physical layer safeguard against line-of-sight obstructions. ",
+        "bbox": [
+            516,
+            305,
+            927,
+            486
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "4. CONCLUSION ",
+        "text_level": 1,
+        "bbox": [
+            518,
+            509,
+            664,
+            524
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "In this paper, we propose a robust BGVB-based free-space optical chaotic secure communication architecture. Leveraging the synergy between the AO compensation and a hierarchical sparse mode detection algorithm, the system enables negotiation-free spatial mode demultiplexing. Furthermore, this architecture guarantees a reliable physical connection under long-distance complex channel impairments. Statistical analysis demonstrates that the proposed scheme maintains a mode correct detection probability exceeding 90% even under strong turbulence conditions $( D / r _ { 0 } = 6 )$ . Building upon this robust connectivity, we realized a four-channel chaotic transmission, achieving high-fidelity synchronization with correlation coefficients surpassing 0.97. Ultimately, an aggregate capacity of 40 Gbps was sustained with a BER consistently below the HD-FEC threshold, even when the link was subjected to a severe macroscopic occlusion ratio of $\\beta = 0 . 5 .$ This performance marks a substantial advancement over state-of-the-art chaotic FSO architectures, which are typically restricted to weak turbulence regimes or lower data rates [54,55]. Crucially, such systems lack the robustness required to sustain connectivity under the severe compound impairments demonstrated here. ",
+        "bbox": [
+            516,
+            530,
+            927,
+            860
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "A pivotal insight from this study is that the system robustness under hybrid impairments is governed by a critical optimization trade-off. While experimental results confirm that a compact beam profile effectively minimizes turbulenceinduced crosstalk and avoids aperture truncation, resilience against macroscopic obstruction imposes conflicting geometric demands. Theoretically, enlarging α facilitates the wavefront reconstruction necessary to circumvent central obstructions; however, this advantage is inherently constrained by receiver aperture truncation and atmospheric turbulence. Consequently, optimal link reliability requires reconciling the spatial redundancy of high-order modes with the system’s physical limits. ",
+        "bbox": [
+            516,
+            860,
+            927,
+            937
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            94,
+            26,
+            237,
+            40
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            388,
+            26,
+            860,
+            39
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "page_number",
+        "text": "611 ",
+        "bbox": [
+            880,
+            28,
+            905,
+            38
+        ],
+        "page_idx": 9
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            74,
+            65,
+            484,
+            182
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "By effectively balancing high spectral efficiency, chaotic security, and dual-mechanism robustness, this scheme provides a viable blueprint for next-generation optical networks that demand high availability and confidentiality in dynamic, hostile free-space environments. ",
+        "bbox": [
+            75,
+            182,
+            484,
+            257
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "Funding. National Natural Science Foundation of China (62475036); National Key Laboratory of Security Communication (WD202405). ",
+        "bbox": [
+            75,
+            263,
+            484,
+            289
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "text",
+        "text": "REFERENCES ",
+        "text_level": 1,
+        "bbox": [
+            77,
+            311,
+            198,
+            325
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "1. M. Z. Chowdhury, M. Shahjalal, S. Ahmed, et al., “6G wireless communication systems: applications, requirements, technologies, challenges, and research directions,” IEEE Open J. Commun. Soc. 1, 957–975 (2020). ",
+            "2. M. A. Khalighi and M. Uysal, “Survey on free space optical communication: a communication theory perspective,” IEEE Commun. Surv. Tutorials 16, 2231–2258 (2014). ",
+            "3. H. Kaushal and G. Kaddoum, “Optical communication in space: challenges and mitigation techniques,” IEEE Commun. Surv. Tutorials 19, 57–96 (2017). ",
+            "4. F. J. Lopez-Martinez, G. Gomez, and J. M. Garrido-Balsells, “Physical-layer security in free-space optical communications,” IEEE Photonics J. 7, 7901014 (2015). ",
+            "5. Y. Ai, A. Mathur, G. D. Verma, et al., “Comprehensive physical layer security analysis of FSO communications over Málaga channels,” IEEE Photonics J. 12, 7906617 (2020). ",
+            "6. L. M. Pecora and T. L. Carroll, “Synchronization in chaotic systems,” Phys. Rev. Lett. 64, 821–824 (1990). ",
+            "7. E. Ott, C. Grebogi, and J. A. Yorke, “Controlling chaos,” Phys. Rev. Lett. 64, 1196–1199 (1990). ",
+            "8. A. Argyris, D. Syvridis, L. Larger, et al., “Chaos-based communications at high bit rates using commercial fibre-optic links,” Nature 438, 343–346 (2005). ",
+            "9. Y. Xu, M. Zhang, L. Zhang, et al., “Time-delay signature suppression in a chaotic semiconductor laser by fiber random grating induced random distributed feedback,” Opt. Lett. 42, 4107–4110 (2017). ",
+            "10. J. Ke, L. Yi, G. Xia, et al., “Chaotic optical communications over 100-km fiber transmission at 30-Gb/s bit rate,” Opt. Lett. 43, 1323–1326 (2018). ",
+            "11. Z. Yang, L. Yi, J. Ke, et al., “Chaotic optical communication over 1000 km transmission by coherent detection,” J. Lightwave Technol. 38, 4648–4655 (2020). ",
+            "12. A. Zhao, N. Jiang, S. Liu, et al., “Generation of synchronized wideband complex signals and its application in secure optical communication,” Opt. Express 28, 23363–23373 (2020). ",
+            "13. A. Zhao, N. Jiang, S. Liu, et al., “Physical layer encryption for WDM optical communication systems using private chaotic phase scrambling,” J. Lightwave Technol. 39, 2288–2295 (2021). ",
+            "14. J. Feng, L. Jiang, J. Sun, et al., “256 Gbit/s chaotic optical communication over 1600 km using an AI-based optoelectronic oscillator model,” J. Lightwave Technol. 42, 2774–2783 (2024). ",
+            "15. N. F. Rulkov, M. A. Vorontsov, and L. Illing, “Chaotic free-space laser communication over a turbulent channel,” Phys. Rev. Lett. 89, 277905 (2002). ",
+            "16. Y. Zhang, M. Xu, M. Pu, et al., “Experimental demonstration of an 8-Gbit/s free-space secure optical communication link using all-optical chaos modulation,” Opt. Lett. 48, 1470–1473 (2023). ",
+            "17. Y. Zhang, M. Xu, M. Pu, et al., “Simultaneously enhancing capacity and security in free-space optical chaotic communication utilizing orbital angular momentum,” Photonics Res. 11, 2185–2193 (2023). "
+        ],
+        "bbox": [
+            80,
+            329,
+            488,
+            938
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "18. Z. Song, Y. Zhang, M. Xu, et al., “High capacity turbulence-resilient free-space chaotic optical communication based on vector optical field manipulation,” J. Lightwave Technol. 42, 8647–8654 (2024). ",
+            "19. J. Cao, N. Jiang, F. Wen, et al., “Multiplexed Bessel-Gaussian vortex beam chaotic communication in obstructed turbulent links,” in Asia Communications and Photonics Conference (ACP), Jiangsu, China, 2025. ",
+            "20. L. Allen, M. W. Beijersbergen, R. J. C. Spreeuw, et al., “Orbital angular momentum of light and the transformation of Laguerre-Gaussian laser modes,” Phys. Rev. A 45, 8185–8189 (1992). ",
+            "21. J. Wang, J.-Y. Yang, I. M. Fazal, et al., “Terabit free-space data transmission employing orbital angular momentum multiplexing,” Nat. Photonics 6, 488–496 (2012). ",
+            "22. A. E. Willner, H. Huang, Y. Yan, et al., “Optical communications using orbital angular momentum beams,” Adv. Opt. Photonics 7, 66–106 (2015). ",
+            "23. R. Fickler, R. Lapkiewicz, W. N. Plick, et al., “Quantum entanglement of high angular momenta,” Science 338, 640–643 (2012). ",
+            "24. M. J. Padgett, F. M. Miatto, M. P. J. Lavery, et al., “Divergence of an orbital-angular-momentum-carrying beam upon propagation,” New J. Phys. 17, 023011 (2015). ",
+            "25. G. Xie, L. Li, Y. Ren, et al., “Performance metrics and design considerations for a free-space optical orbital-angular-momentummultiplexed communication link,” Optica 2, 357–365 (2015). ",
+            "26. C. Paterson, “Atmospheric turbulence and orbital angular momentum of single photons for optical communication,” Phys. Rev. Lett. 94, 153901 (2005). ",
+            "27. G. A. Tyler and R. W. Boyd, “Influence of atmospheric turbulence on the propagation of quantum states of light carrying orbital angular momentum,” Opt. Lett. 34, 142–144 (2009). ",
+            "28. M. V. Vasnetsov, V. A. Pas’ko, and M. S. Soskin, “Analysis of orbital angular momentum of a misaligned optical beam,” New J. Phys. 7, 46 (2005). ",
+            "29. N. Ahmed, Z. Zhao, L. Li, et al., “Mode-division-multiplexing of multiple Bessel-Gaussian beams carrying orbital-angular-momentum for obstruction-tolerant free-space optical and millimetre-wave communication links,” Sci. Rep. 6, 22082 (2016). ",
+            "30. J. Durnin, “Exact solutions for nondiffracting beams. I. The scalar theory,” J. Opt. Soc. Am. A 4, 651–654 (1987). ",
+            "31. Z. Bouchal, J. Wagner, and M. Chlup, “Self-reconstruction of a distorted nondiffracting beam,” Opt. Commun. 151, 207–211 (1998). ",
+            "32. M. McLaren, T. Mhlanga, M. J. Padgett, et al., “Self-healing of quantum entanglement after an obstruction,” Nat. Commun. 5, 3248 (2014). ",
+            "33. J. Arlt and K. Dholakia, “Generation of high-order Bessel beams by use of an axicon,” Opt. Commun. 177, 297–301 (2000). ",
+            "34. N. A. Carvajal, C. H. Acevedo, and Y. T. Moreno, “Generation of perfect optical vortices by using a transmission liquid crystal spatial light modulator,” Int. J. Opt. 2017, 6852019 (2017). ",
+            "35. N. A. Ferlic, M. van Iersel, and C. C. Davis, “Weak turbulence effects on different beams carrying orbital angular momentum,” J. Opt. Soc. Am. A 38, 1423–1437 (2021). ",
+            "36. F. Zhu, S. Huang, W. Shao, et al., “Free-space optical communication link using perfect vortex beams carrying orbital angular momentum (OAM),” Opt. Commun. 396, 50–57 (2017). ",
+            "37. K. Irsch, “Adaptive optics – basic optical principles,” Acta Ophthalmol. 103, 1590–1594 (2025). ",
+            "38. G. Rousset and T. Fusco, “Optique adaptative : correction des effets de la turbulence atmosphérique sur les images astronomiques,” C. R. Phys. 23, 293–344 (2023). ",
+            "39. N. Wang, L. Zhu, Q. Yuan, et al., “Performance of the neural network-based prediction model in closed-loop adaptive optics,” Opt. Lett. 49, 2926–2929 (2024). ",
+            "40. F. Zou, Z. Pan, J. Liu, et al., “Turbulence compensation for receiving and coherent combining via phased fiber laser array,” IEEE Photonics Technol. Lett. 35, 733–736 (2023). ",
+            "41. S. Yang, C. Yan, Y. Fan, et al., “Mechanism and application of wavefront-polarization joint correction of radially polarized vortex beam in atmospheric turbulence,” Opt. Commun. 592, 132237 (2025). "
+        ],
+        "bbox": [
+            516,
+            65,
+            930,
+            936
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "page_number",
+        "text": "612 ",
+        "bbox": [
+            99,
+            28,
+            127,
+            38
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            146,
+            26,
+            619,
+            39
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            765,
+            26,
+            910,
+            39
+        ],
+        "page_idx": 10
+    },
+    {
+        "type": "list",
+        "sub_type": "ref_text",
+        "list_items": [
+            "42. Q. Zhang, Y. Fang, N. Jiang, et al., “All-optical digital logic and neuromorphic computing based on multi-wavelength auxiliary and competition in a single microring resonator,” Opto-Electron. Sci. 4, 250003 (2025). ",
+            "43. H. Sasaki, Y. Yagi, H. Fukumoto, et al., “OAM-MIMO multiplexing transmission system for high-capacity wireless communications on millimeter-wave band,” IEEE Trans. Wireless Commun. 23, 3990–4003 (2024). ",
+            "44. Z. Ruan, Y. Wan, L. Wang, et al., “Flexible orbital angular momentum mode switching in multimode fibre using an optical neural network chip,” Light Adv. Manuf. 5, 23 (2024). ",
+            "45. Q. Zhang, Y. Zhang, and J. Czarske, “FPGA-accelerated mode decomposition for multimode fiber-based communication,” Light Adv. Manuf. 6, 31 (2025). ",
+            "46. J. Ye, T. Wu, A. Bazammul, et al., “Orbital angular momentum beams demultiplexing using a hybrid Fourier phase shift neural network,” Photonics Res. 13, B120–B132 (2025). ",
+            "47. R. Lang and K. Kobayashi, “External optical feedback effects on semiconductor injection laser properties,” IEEE J. Quantum Electron. 16, 347–355 (1980). ",
+            "48. A. Zhao, N. Jiang, J. Peng, et al., “Parallel generation of lowcorrelation wideband complex chaotic signals using CW laser and external-cavity laser with self-phase-modulated injection,” Opto-Electron. Adv. 5, 200026 (2022). ",
+            "49. M. Krenn, M. Huber, R. Fickler, et al., “Generation and confirmation of a (100 × 100)-dimensional entangled quantum system,” Proc. Nat. Acad. Sci. USA 111, 6243–6247 (2014). ",
+            "50. W. Shao, S. Huang, X. Liu, et al., “Free-space optical communication with perfect optical vortex beams multiplexing,” Opt. Commun. 427, 545–550 (2018). ",
+            "51. R. Tibshirani, “Regression shrinkage and selection via the lasso,” J. R. Stat. Soc. B 58, 267–288 (1996). ",
+            "52. C. Schulze, A. Dudley, D. Flamm, et al., “Measurement of the orbital angular momentum density of light by modal decomposition,” New J. Phys. 15, 073025 (2013). ",
+            "53. Y. Zhang, “Research on key technologies of space chaotic laser communication,” Ph.D. dissertation (University of Electronic Science and Technology of China, 2025). ",
+            "54. Y. Jin, R. Zhang, J. Wang, et al., “Experimental demonstration of a 10 Gbps secure FSO communication link using chaos-based phase encryption,” J. Lightwave Technol. 43, 4203–4209 (2025). ",
+            "55. S. Zaminga, A. Martinez, H. Huang, et al., “Optical chaotic signal recovery in turbulent environments using a programmable optical processor,” Light Sci. Appl. 14, 131 (2025). "
+        ],
+        "bbox": [
+            72,
+            63,
+            488,
+            602
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Cao Jinyun (Graduate Student Member, IEEE) was born in Xishan, China, in 2002. He received the B.Eng. degree from Heilongjiang University, Harbin, China, in 2023. He is currently pursuing the M.S. degree with the University of Electronic Science and Technology of China, Chengdu, China. His research focuses on free-space optical chaotic secure communication. ",
+        "bbox": [
+            75,
+            620,
+            484,
+            684
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Ning Jiang (Senior Member, IEEE) received the B.S. degree in communication engineering from the University of Electronic Science and Technology of China, Chengdu, China, in 2005 and the Ph.D. degree in communication and information systems from Southwest Jiaotong University, Chengdu, China, in 2012. He is currently a Professor with the School of Information and Communication Engineering, University of Electronic Science and Technology of China. He has authored or coauthored more than 120 research papers. His current research interests include all-optical secure communication, laser chaos, and microwave photonics. He is also a Member of Optica and a Reviewer of Light: Science & Applications, Photonics Research, Opto-Electronic Advances, Optics Express, Optics Letters, the Journal of Lightwave Technology, the IEEE Journal of Selected Topics in Quantum Electronics, the IEEE Photonics Journal , Optics Communications, and some other journals. ",
+        "bbox": [
+            75,
+            702,
+            484,
+            791
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "",
+        "bbox": [
+            516,
+            66,
+            927,
+            144
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Anran Li was born in Chongqing, China, in 1999. He received the B.Eng. degree in 2021 from Southwest Jiaotong University, Chengdu, China. He is currently working toward the Ph.D. degree with the University of Electronic Science and Technology of China, Chengdu, China, His research focuses on chaotic secure optical communication. ",
+        "bbox": [
+            516,
+            160,
+            927,
+            224
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Chao Wang received his B.S. degree in information display and photoelectric technology from Shenyang Ligong University, Shenyang, China, in 2015 and his M.S. degree in communication and information systems from the University of Electronic Science and Technology of China, Chengdu, China, in 2018. He is currently an Engineer at the Institute of Spacecraft Application System Engineering, China Academy of Space Technology. His research interests include chaotic secure communication and satellite covert communication systems. ",
+        "bbox": [
+            516,
+            243,
+            927,
+            344
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Yiqun Zhang received his B.Eng. degree in communication engineering from Xidian University, Xi’an, China, in 2019 and his Ph.D. degree in information and communication engineering from the University of Electronic Science and Technology of China, Chengdu, China, in 2025. He is currently an Assistant Research Fellow at the State Key Laboratory of Optical Field Manipulation Science and Technology, Institute of Optics and Electronics, Chinese Academy of Sciences. His research interests include free-space optical communication, chaotic secure communication, and meta-optical communication. ",
+        "bbox": [
+            516,
+            363,
+            927,
+            477
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Yong Geng was born in Sichuan, China, in 1990. He received the B.S. and Ph.D. degrees in optical engineering from the University of Electronic Science and Technology, Chengdu, China, in 2013 and 2019, respectively. He is currently an Associate Professor with the School of Information and Communication Engineering, University of Electronic Science and Technology, Chengdu, China. He has authored or coauthored more than 30 research papers. His current research interests include optical fiber communication, optical frequency combs, and integrated optics. ",
+        "bbox": [
+            516,
+            496,
+            927,
+            598
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "text",
+        "text": "Kun Qiu received the M.S. and Ph.D. degrees from Tsinghua University, Beijing, China, in 1987 and 1990, respectively. In 1990, he joined the University of Electronic Science and Technology of China, Chengdu, China, where he was involved in the theories and technologies in optical fiber communications. From 1993 to 1994, he was a Visiting Scholar with the Institution of Optics, University of Rochester, Rochester, New York, USA. From 2002 to 2006, he was the Director of the State Key Laboratory of the Broadband Optical Transmission and Communication Network. He has finished more than 20 important projects as a Research Team Leader. He has authored more than 200 scientific papers and the book Optical Fiber Communication. He was the recipient of the Eight Awards of Science and Technology Progress from provinces or ministries. He was the Chair of the Chengdu Chapter and the IEEE Photonics Society. ",
+        "bbox": [
+            516,
+            616,
+            929,
+            782
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "header",
+        "text": "Research Article ",
+        "bbox": [
+            94,
+            26,
+            237,
+            40
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "header",
+        "text": "Vol. 18, No. 6 / June 2026 / Journal of Optical Communications and Networking ",
+        "bbox": [
+            388,
+            28,
+            858,
+            39
+        ],
+        "page_idx": 11
+    },
+    {
+        "type": "page_number",
+        "text": "613 ",
+        "bbox": [
+            880,
+            29,
+            905,
+            39
+        ],
+        "page_idx": 11
+    }
+]

@@ -30,6 +30,14 @@ LIB_ID = 12146168
 API_BASE = "http://localhost:23119"
 
 
+def set_zotero_api(api_base: str | None = None, library_id: int | str | None = None) -> None:
+    global API_BASE, LIB_ID
+    if api_base:
+        API_BASE = str(api_base).rstrip("/")
+    if library_id not in (None, ""):
+        LIB_ID = int(library_id)
+
+
 def get_json(path: str, params: dict | None = None) -> list | dict:
     if params:
         path = path + "?" + urllib.parse.urlencode(params)
@@ -292,7 +300,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--state",
-        default=r"C:\Users\Administrator\zotero-mineru\state.json",
+        default=str(Path(__file__).with_name("state.json")),
         help="Path to mineru state.json",
     )
     parser.add_argument(
@@ -300,8 +308,11 @@ def main() -> int:
         default=r"C:\Users\Administrator\Zotero\mineru-mirror\index.json",
         help="Output index path",
     )
+    parser.add_argument("--api-base", default=API_BASE, help="Zotero local API base URL")
+    parser.add_argument("--library-id", default=str(LIB_ID), help="Zotero user/library id")
     args = parser.parse_args()
 
+    set_zotero_api(args.api_base, args.library_id)
     t0 = time.time()
     idx = build_index(Path(args.state))
     out_path = Path(args.out)

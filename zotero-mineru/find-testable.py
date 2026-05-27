@@ -5,7 +5,13 @@ import json
 import urllib.request
 from pathlib import Path
 
-with open(r"C:\Users\Administrator\zotero-mineru\state.json", "r", encoding="utf-8") as f:
+config_path = Path(__file__).with_name("config.json")
+config = json.loads(config_path.read_text(encoding="utf-8")) if config_path.exists() else {}
+state_path = Path(config.get("state_file", str(Path(__file__).with_name("state.json"))))
+api_base = config.get("zotero_api_base", "http://localhost:23119").rstrip("/")
+library_id = config.get("zotero_library_id", 12146168)
+
+with state_path.open("r", encoding="utf-8") as f:
     state = json.load(f)
 
 ok_keys = [k for k, v in state.items() if v.get("status") == "ok"]
@@ -15,7 +21,7 @@ testable: list[tuple[str, str, str]] = []
 for k in ok_keys:
     try:
         with urllib.request.urlopen(
-            f"http://localhost:23119/api/users/12146168/items/{k}?format=json", timeout=5
+            f"{api_base}/api/users/{library_id}/items/{k}?format=json", timeout=5
         ) as r:
             d = json.load(r)
     except Exception:

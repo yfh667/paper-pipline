@@ -64,6 +64,7 @@ URL_TAG = [
     (re.compile(r"dl\.acm\.org", re.I), "acm"),
     (re.compile(r"ieeexplore\.ieee\.org", re.I), "ieee"),
     (re.compile(r"sciencedirect\.com", re.I), "elsevier"),
+    (re.compile(r"opg\.optica\.org", re.I), "optica"),
     (re.compile(r"link\.springer\.com", re.I), "springer"),
     (re.compile(r"onlinelibrary\.wiley\.com", re.I), "wiley"),
     (re.compile(r"frontiersin\.org", re.I), "frontiers"),
@@ -298,6 +299,7 @@ def classify_doi(doi: str, publisher: str = "") -> str:
         if "ieee" in low: return "ieee"
         if "elsevier" in low: return "elsevier"
         if "acm" in low or "association for computing" in low: return "acm"
+        if "optica" in low or "optical society" in low: return "optica"
         if "springer" in low: return "springer"
         if "wiley" in low: return "wiley"
     return "unknown"

@@ -15,14 +15,15 @@ from collections import Counter
 from datetime import datetime, timedelta
 from pathlib import Path
 
-ROOT = Path(r"C:\Users\Administrator\zotero-mineru")
-MIRROR = Path(r"C:\Users\Administrator\Zotero\mineru-mirror")
-STORAGE = Path(r"C:\Users\Administrator\Zotero\storage")
-
-STATE_FILE = ROOT / "state.json"
-INDEX_FILE = MIRROR / "index.json"
-LOG_DIR = ROOT / "logs"
+ROOT = Path(__file__).resolve().parent
 CONFIG_FILE = ROOT / "config.json"
+CONFIG = json.loads(CONFIG_FILE.read_text(encoding="utf-8")) if CONFIG_FILE.exists() else {}
+MIRROR = Path(CONFIG.get("mirror_dir", r"C:\Users\Administrator\Zotero\mineru-mirror"))
+STORAGE = Path(CONFIG.get("zotero_storage", r"C:\Users\Administrator\Zotero\storage"))
+
+STATE_FILE = Path(CONFIG.get("state_file", str(ROOT / "state.json")))
+INDEX_FILE = Path(CONFIG.get("index_file", str(MIRROR / "index.json")))
+LOG_DIR = Path(CONFIG.get("log_dir", str(ROOT / "logs")))
 
 
 def fmt_age(ts: datetime) -> str:
@@ -107,7 +108,7 @@ def index_section(state: dict) -> None:
     banner("INDEX (AI's view of Zotero)")
     if not INDEX_FILE.exists():
         print("  index.json not built yet. Run:")
-        print(r"    python C:\Users\Administrator\zotero-mineru\build_index.py")
+        print(r"    python C:\paper-pipline\zotero-mineru\build_index.py")
         return
 
     with INDEX_FILE.open("r", encoding="utf-8") as f:
@@ -142,7 +143,7 @@ def index_section(state: dict) -> None:
         if len(new_since_index) > 5:
             print(f"      ... and {len(new_since_index) - 5} more")
         print(f"    -> rebuild index to expose them to AI:")
-        print(r"      python C:\Users\Administrator\zotero-mineru\build_index.py")
+        print(r"      python C:\paper-pipline\zotero-mineru\build_index.py")
     else:
         print("  [OK] index is in sync with mineru state")
 

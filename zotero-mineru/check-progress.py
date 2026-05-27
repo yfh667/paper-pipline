@@ -5,7 +5,9 @@ import json
 from collections import Counter
 from pathlib import Path
 
-state_path = Path(r"C:\Users\Administrator\zotero-mineru\state.json")
+config_path = Path(__file__).with_name("config.json")
+config = json.loads(config_path.read_text(encoding="utf-8")) if config_path.exists() else {}
+state_path = Path(config.get("state_file", str(Path(__file__).with_name("state.json"))))
 with state_path.open("r", encoding="utf-8") as f:
     state = json.load(f)
 
