@@ -1,0 +1,5 @@
+{
+  "_doc": "Example: copy this to config.local.json and edit to redirect data outside the repo. config.local.json is gitignored.",
+  "input_dir": "C:\\paper-pipeline-data\\paper-fetcher\\input",
+  "output_dir": "C:\\paper-pipeline-data\\paper-fetcher\\output"
+}

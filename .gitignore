@@ -9,25 +9,32 @@ __pycache__/
 node_modules/
 npm-debug.log*
 
-# --- paper-fetcher runtime ---
+# --- paper-fetcher runtime data ---
+# Ignore everything under input/ and output/ by default. Whitelist:
+#   - .gitkeep (so the dirs ship in the repo as placeholders)
+#   - small curated example files at output/ top level
+# Anything else (PDFs, intermediate dirs, UUID dirs, logs, etc.) stays local.
 paper-fetcher/input/*
 !paper-fetcher/input/.gitkeep
-paper-fetcher/output/ieee/
-paper-fetcher/output/acm/
-paper-fetcher/output/sd/
-paper-fetcher/output/manual/
-paper-fetcher/output/logs/
-paper-fetcher/output/_acm_dl_tmp/
-paper-fetcher/output/*.log
-# Keep curated examples committed (small + useful as reference):
-#   output/paperlist_clean.txt
-#   output/paperlist_review.json
-#   output/decisions.json
 
-# --- zotero-mineru runtime ---
+paper-fetcher/output/*
+!paper-fetcher/output/.gitkeep
+!paper-fetcher/output/paperlist_clean.txt
+!paper-fetcher/output/paperlist_review.json
+!paper-fetcher/output/decisions.json
+
+# Local override of paper-fetcher path config (each machine has its own)
+paper-fetcher/config.local.json
+
+# --- zotero-mineru runtime data ---
+# Everything under output/ is generated data — never track.
+zotero-mineru/output/
 zotero-mineru/logs/
 zotero-mineru/state.json
 zotero-mineru/state.json.tmp
+
+# Local override of zotero-mineru config (each machine has its own paths)
+zotero-mineru/config.local.json
 
 # --- scratch / probes ---
 _smoke_pdfs/

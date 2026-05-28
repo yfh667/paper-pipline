@@ -1,0 +1,5 @@
+{
+  "_doc": "Path config for paper-fetcher. Relative paths resolve against this directory. To override per-machine without touching git, create config.local.json with the same keys (it's gitignored).",
+  "input_dir": "./input",
+  "output_dir": "./output"
+}
